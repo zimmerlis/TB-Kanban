@@ -1,0 +1,85 @@
+{
+    "manifest_version": 3,
+    "default_locale" : "en",
+    "name": "__MSG_extensionName__",
+    "description": "__MSG_extensionDescription__",
+    "version": "0.1.0",
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "tb-kanban@local",
+            "strict_min_version": "128.0",
+            "strict_max_version": "145.*"
+        }
+    },
+    "action": {
+        "default_title": "Kanban",
+        "default_icon": "images/icanban_32x32.png",
+        "allowed_spaces": []
+    },
+    "background": {
+        "scripts": [
+            "scripts/background.js"
+        ],
+        "type": "module"
+    },
+    "icons": {
+        "32" : "images/icanban_32x32.png",
+        "16" : "images/icanban_16x16.png"
+    },
+    "experiment_apis" : {
+        "calendar_calendars" : {
+            "schema" : "experiments/calendar/schema/calendar-calendars.json",
+            "parent" : {
+                "scopes" : ["addon_parent"],
+                "script": "experiments/calendar/parent/ext-calendar-calendars.js",
+                "paths":  [ [ "calendar", "calendars"] ]
+            }
+        },
+        "calendar_items" : {
+            "schema" : "experiments/calendar/schema/calendar-items.json",
+            "parent" : {
+                "scopes" : ["addon_parent"],
+                "script": "experiments/calendar/parent/ext-calendar-items.js",
+                "paths":  [ [ "calendar", "items"] ]
+            }
+        },
+        "calendar_provider" : {
+            "schema" : "experiments/calendar/schema/calendar-provider.json",
+            "parent" : {
+                "scopes" : ["addon_parent"],
+                "script": "experiments/calendar/parent/ext-calendar-provider.js",
+                "events": ["startup"],
+                "paths":  [ [ "calendar", "provider"] ]
+            }
+        },
+        "calendarItemAction" : {
+            "schema" : "experiments/calendar/schema/calendarItemAction.json",
+            "parent" : {
+                "scopes" : ["addon_parent"],
+                "script": "experiments/calendar/parent/ext-calendarItemAction.js",
+                "events": ["startup"],
+                "paths":  [ [ "calendarItemAction"] ]
+            }
+        },
+        "calendarItemDetails" : {
+            "schema" : "experiments/calendar/schema/calendarItemDetails.json",
+            "parent" : {
+                "scopes" : ["addon_parent"],
+                "script": "experiments/calendar/parent/ext-calendarItemDetails.js",
+                "events": ["startup"],
+                "paths":  [ [ "calendarItemDetails"] ]
+            }
+        }
+    },
+    "permissions": [
+        "tabs",
+        "contextualIdentities",
+        "menus",
+        "menus.overrideContext",
+        "cookies",
+        "storage",
+        "theme"
+      ]
+
+
+}
