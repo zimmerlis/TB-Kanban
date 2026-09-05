@@ -10,8 +10,8 @@ let kanbanMenuItem = await browser.menus.create({
         "contexts": ["tools_menu"],
         "visible": true,
         "icons": {
-            "16": "images/icanban_16x16.png",
-            "32": "images/icanban_32x32.png"
+            "16": "images/tb-kanban_16x16.ico",
+            "32": "images/tb-kanban_32x32.ico"
         }
     }
 );

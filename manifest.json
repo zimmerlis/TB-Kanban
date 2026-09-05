@@ -13,7 +13,7 @@
     },
     "action": {
         "default_title": "Kanban",
-        "default_icon": "images/icanban_32x32.png",
+        "default_icon": "images/tb-kanban_32x32.ico",
         "allowed_spaces": []
     },
     "background": {
@@ -23,8 +23,8 @@
         "type": "module"
     },
     "icons": {
-        "32" : "images/icanban_32x32.png",
-        "16" : "images/icanban_16x16.png"
+        "32" : "images/tb-kanban_32x32.ico",
+        "16" : "images/tb-kanban_16x16.ico"
     },
     "experiment_apis" : {
         "calendar_calendars" : {
