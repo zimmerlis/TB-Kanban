@@ -285,11 +285,7 @@ function renderPriorityField(card, task) {
     return wrapper;
 }
 
-// Neutral pill style for category badges on the card itself - keeps the board visually calm even
-// with many differently-colored Thunderbird categories; the assignment menu still shows real colors.
-const CATEGORY_PILL_STYLE = { bg: '#f1f5f9', color: '#475569' };
-
-// Applies a category's real Thunderbird color, used only in the assignment menu (see showMenu below).
+// Applies a category's Thunderbird color to a badge, falling back to a neutral style when unknown.
 function styleCategoryBadge(badge, name) {
     const color = getCategoryColor(name);
     if (color) {
@@ -301,7 +297,6 @@ function styleCategoryBadge(badge, name) {
 }
 
 // A badge that, on click, expands into a menu of Thunderbird's configured categories plus a field to add a new one.
-// Hidden entirely on the card when no category is set - use the edit dialog to assign one.
 function renderCategoryField(card, task) {
     const wrapper = document.createElement('div');
     wrapper.className = 'position-relative';
@@ -309,15 +304,10 @@ function renderCategoryField(card, task) {
     function showBadge() {
         wrapper.replaceChildren();
 
-        if (!task.categories) {
-            return;
-        }
-
         const badge = document.createElement('span');
         badge.className = 'badge badge-lg editable-field';
-        badge.style.backgroundColor = CATEGORY_PILL_STYLE.bg;
-        badge.style.color = CATEGORY_PILL_STYLE.color;
-        badge.textContent = task.categories;
+        badge.textContent = task.categories || browser.i18n.getMessage('noCategoryLabel');
+        styleCategoryBadge(badge, task.categories);
         badge.addEventListener('click', showMenu);
         wrapper.append(badge);
     }
