@@ -78,6 +78,9 @@ calendar/task backend, read and written directly as jCal.
 - **Three entry points**: its own icon in Thunderbird's **Spaces Toolbar**
   (next to Mail/Calendar/Tasks/Chat), a toolbar button, and a
   *Tools → Display Kanban board* menu item.
+- **Standard/Kanban toggle inside the native Tasks pane**, right above its
+  search/add-task bar — switching to "Kanban" shows the board in place of
+  Thunderbird's own task list and details pane.
 - **Runs in its own contextual identity** (isolated container tab) and reuses
   the existing board tab instead of opening duplicates.
 - **Live sync** — the board listens to the calendar's create/update/remove

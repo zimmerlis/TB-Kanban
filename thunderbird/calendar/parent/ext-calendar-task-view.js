@@ -6,64 +6,71 @@ var { ExtensionCommon: { ExtensionAPI } } = ChromeUtils.importESModule("resource
 var { ExtensionSupport } = ChromeUtils.importESModule("resource:///modules/ExtensionSupport.sys.mjs");
 
 const KANBAN_VALUE = "kanban";
-const KANBAN_RADIO_ID = "kanban-task-filter-radio";
-const KANBAN_PANEL_ID = "kanban-task-view-panel";
+const STANDARD_VALUE = "standard";
+const TOGGLE_ID = "kanban-task-view-toggle";
+const PANEL_ID = "kanban-task-view-panel";
 
-// Adds a "Kanban" entry to the native task pane's "Anzeigen"/display filter list (#task-tree-filtergroup),
-// and shows our board in place of the native task list/details while it is selected.
+// Adds a "Standard"/"Kanban" view switch above the task pane's search/add-task bar
+// (#task-addition-box), showing our board in place of the native list+details while selected.
 function injectKanbanView(win, extension) {
   const doc = win.document;
-  const filterGroup = doc.getElementById("task-tree-filtergroup");
   const taskBox = doc.getElementById("calendar-task-box");
-  if (!filterGroup || !taskBox || doc.getElementById(KANBAN_RADIO_ID)) {
+  if (!taskBox || doc.getElementById(TOGGLE_ID)) {
     return;
   }
 
-  const radio = doc.createXULElement("radio");
-  radio.id = KANBAN_RADIO_ID;
-  radio.setAttribute("label", "Kanban");
-  radio.setAttribute("value", KANBAN_VALUE);
-  filterGroup.appendChild(radio);
-
-  // Everything Thunderbird normally shows in the task pane (toolbar, tree, details) is hidden while ours is visible.
+  // Everything Thunderbird normally shows in the task pane (notifications, search/add-task bar,
+  // tree + details) is hidden while our board is visible.
   const nativePanels = [...taskBox.children];
 
+  const toggleRow = doc.createXULElement("hbox");
+  toggleRow.id = TOGGLE_ID;
+  toggleRow.setAttribute("align", "center");
+  toggleRow.setAttribute("pack", "center");
+  toggleRow.style.padding = "2px";
+
+  const radiogroup = doc.createXULElement("radiogroup");
+  radiogroup.setAttribute("orient", "horizontal");
+
+  const standardRadio = doc.createXULElement("radio");
+  standardRadio.id = "kanban-task-view-standard-radio";
+  standardRadio.setAttribute("label", "Standard");
+  standardRadio.setAttribute("value", STANDARD_VALUE);
+  standardRadio.setAttribute("selected", "true");
+
+  const kanbanRadio = doc.createXULElement("radio");
+  kanbanRadio.id = "kanban-task-view-kanban-radio";
+  kanbanRadio.setAttribute("label", "Kanban");
+  kanbanRadio.setAttribute("value", KANBAN_VALUE);
+
+  radiogroup.append(standardRadio, kanbanRadio);
+  toggleRow.append(radiogroup);
+  taskBox.prepend(toggleRow);
+
   const panel = doc.createXULElement("vbox");
-  panel.id = KANBAN_PANEL_ID;
+  panel.id = PANEL_ID;
   panel.setAttribute("flex", "1");
   panel.hidden = true;
 
   const frame = doc.createElementNS("http://www.w3.org/1999/xhtml", "iframe");
   frame.setAttribute("src", extension.getURL("ui/board.html"));
   frame.style.cssText = "width: 100%; height: 100%; border: none;";
-  panel.appendChild(frame);
-  taskBox.appendChild(panel);
+  panel.append(frame);
+  taskBox.append(panel);
 
-  // Runs in the capturing phase so it can veto Thunderbird's own handler (bound in the bubbling phase),
-  // since that one doesn't know what to do with our custom filter value.
-  filterGroup.addEventListener(
-    "command",
-    event => {
-      if (!event.target.matches("radio")) {
-        return;
-      }
-      const showKanban = event.target.getAttribute("value") === KANBAN_VALUE;
-      panel.hidden = !showKanban;
-      for (const nativePanel of nativePanels) {
-        nativePanel.hidden = showKanban;
-      }
-      if (showKanban) {
-        event.stopImmediatePropagation();
-      }
-    },
-    true
-  );
+  radiogroup.addEventListener("command", () => {
+    const showKanban = radiogroup.value === KANBAN_VALUE;
+    panel.hidden = !showKanban;
+    for (const nativePanel of nativePanels) {
+      nativePanel.hidden = showKanban;
+    }
+  });
 }
 
 function removeKanbanView(win) {
   const doc = win.document;
-  doc.getElementById(KANBAN_RADIO_ID)?.remove();
-  doc.getElementById(KANBAN_PANEL_ID)?.remove();
+  doc.getElementById(TOGGLE_ID)?.remove();
+  doc.getElementById(PANEL_ID)?.remove();
 }
 
 this.calendarTaskView = class extends ExtensionAPI {
