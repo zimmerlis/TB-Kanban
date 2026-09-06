@@ -41,9 +41,12 @@ Useful options:
   end up inside the .xpi. If you add new tooling/CI files, exclude them the
   same way.
 - **Thunderbird version support**: `manifest.json` pins `strict_min_version`
-  under `browser_specific_settings.gecko` (no `strict_max_version`, so newer
-  Thunderbird releases are allowed by default). Raise `strict_min_version` if
-  a change starts relying on a newer Thunderbird API.
+  and `strict_max_version` under `browser_specific_settings.gecko`.
+  `strict_max_version` is required for Mail Experiments (validation fails
+  without it) and is kept as `<major>.*` so any point release of the
+  supported major version works. Raise `strict_min_version`/
+  `strict_max_version` if a change starts relying on a newer Thunderbird API
+  or targets a new major version.
 - **Experiment APIs require review.** This add-on uses privileged
   [experiment APIs](thunderbird/calendar) to access Thunderbird's calendar
   backend. Add-ons using experiments cannot be auto-signed like regular
