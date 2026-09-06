@@ -299,6 +299,10 @@
         "message" : "Möchtest du diesen Dialog nicht jeden Tag sehen? Kauf mir einen Kaffee — das reicht schon, damit er dauerhaft verschwindet.",
         "description" : "Hint shown above the credits, nudging towards a donation"
     },
+    "aboutDonatedCheckboxLabel" : {
+        "message" : "Ich habe gespendet — diesen Dialog nicht mehr automatisch anzeigen",
+        "description" : "Label of the checkbox that permanently disables the daily about/donate prompt"
+    },
     "aboutCredits" : {
         "message" : "Lizenziert unter der Mozilla Public License 2.0.",
         "description" : "Credits shown in the about dialog"

@@ -1045,18 +1045,25 @@ function initAbout() {
         }
     });
 
-    // Clicking through to the donation page is treated as "thanks, no need to keep asking" -
-    // this is an honor system, not a verified purchase (the extension is open source anyway).
     const donateLink = document.getElementById('aboutDonateLink');
     donateLink.href = DONATE_URL || '#';
-    donateLink.addEventListener('click', async event => {
+    donateLink.addEventListener('click', event => {
         event.preventDefault();
         if (DONATE_URL) {
             browser.tabs.create({ url: DONATE_URL });
         }
+    });
+
+    // The checkbox is the single source of truth for permanently disabling the daily prompt -
+    // this is an honor system, not a verified purchase (the extension is open source anyway).
+    const donatedCheckbox = document.getElementById('aboutDonatedCheckbox');
+    browser.storage.local.get(ABOUT_PROMPT_STORAGE_KEY).then(stored => {
+        donatedCheckbox.checked = Boolean(stored[ABOUT_PROMPT_STORAGE_KEY]?.dismissedForGood);
+    });
+    donatedCheckbox.addEventListener('change', async () => {
         const stored = await browser.storage.local.get(ABOUT_PROMPT_STORAGE_KEY);
         await browser.storage.local.set({
-            [ABOUT_PROMPT_STORAGE_KEY]: { ...stored[ABOUT_PROMPT_STORAGE_KEY], dismissedForGood: true },
+            [ABOUT_PROMPT_STORAGE_KEY]: { ...stored[ABOUT_PROMPT_STORAGE_KEY], dismissedForGood: donatedCheckbox.checked },
         });
     });
 
