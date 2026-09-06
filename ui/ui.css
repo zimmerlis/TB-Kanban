@@ -61,3 +61,13 @@ body {
     font-weight: 600;
     font-size: 0.95rem;
 }
+
+/* Settings dialog: pickers shrink to their content, label column takes the rest. */
+#settingsForm table td:first-child {
+    width: 1%;
+    white-space: nowrap;
+}
+
+#settingsForm input[type="number"] {
+    width: 5rem;
+}
