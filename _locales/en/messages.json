@@ -255,6 +255,10 @@
         "message" : "Card border width (px)",
         "description" : "Label of the card border width setting"
     },
+    "settingsCardTextColor" : {
+        "message" : "Card text color",
+        "description" : "Label of the card text color setting"
+    },
     "settingsHeaderColor" : {
         "message" : "Column header color",
         "description" : "Label of the column header background color setting"

@@ -255,6 +255,10 @@
         "message" : "Rahmenstärke der Karten (px)",
         "description" : "Label of the card border width setting"
     },
+    "settingsCardTextColor" : {
+        "message" : "Schriftfarbe der Karten",
+        "description" : "Label of the card text color setting"
+    },
     "settingsHeaderColor" : {
         "message" : "Farbe der Spaltenköpfe",
         "description" : "Label of the column header background color setting"

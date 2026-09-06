@@ -48,6 +48,7 @@ body {
 .card {
     border-color: var(--kanban-card-border-color, var(--bs-border-color-translucent));
     border-width: var(--kanban-card-border-width, var(--bs-border-width));
+    color: var(--kanban-card-color, var(--bs-body-color));
 }
 
 .column-header {
