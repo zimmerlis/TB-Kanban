@@ -57,6 +57,15 @@ browser.runtime.onInstalled.addListener(details => {
     }
 });
 
+// Also shows it again on every Thunderbird restart, not just once per calendar day: clears
+// only "last shown" (keeps the "I've donated" opt-out, set via the about dialog's checkbox).
+browser.runtime.onStartup.addListener(async () => {
+    const stored = await browser.storage.local.get('aboutPromptState');
+    const state = stored.aboutPromptState ?? {};
+    delete state.lastShownDate;
+    await browser.storage.local.set({ aboutPromptState: state });
+});
+
 browser.action.onClicked.addListener(async (...args) => {
     openKanbanBoard();
  });
