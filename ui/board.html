@@ -3,9 +3,9 @@
     <head>
         <title data-i18n="boardTitle"></title>
         <meta charset="utf-8"/>
-        <link rel="stylesheet" type="text/css" href="ui.css"/>
         <link rel="stylesheet" type="text/css" href="../vendor/bootstrap.min.css"/>
         <link rel="stylesheet" type="text/css" href="../vendor/bootstrap-icons.min.css"/>
+        <link rel="stylesheet" type="text/css" href="ui.css"/>
     </head>
     <body style="font-size: 80%;">
         <div class="d-flex justify-content-end align-items-center gap-2 mb-2">
@@ -15,6 +15,12 @@
                 <option value="category" data-i18n="categoriesField"></option>
                 <option value="priority" data-i18n="priorityField"></option>
             </select>
+            <button type="button" class="btn btn-sm btn-outline-secondary" id="themeToggleButton" data-i18n="themeToggleLabel|title">
+                <i class="bi bi-moon-stars" id="themeToggleIcon"></i>
+            </button>
+            <button type="button" class="btn btn-sm btn-outline-secondary" id="settingsButton" data-i18n="settingsButtonLabel|title">
+                <i class="bi bi-gear"></i>
+            </button>
         </div>
 
         <div class="container-fluid h-100" id="board"></div>
@@ -71,6 +77,63 @@
                         </div>
                     </div>
                     <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-i18n="closeButton"></button>
+                        <button type="submit" class="btn btn-primary" data-i18n="saveButton"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="modal" id="settingsModal" tabindex="-1">
+            <div class="modal-dialog">
+                <form class="modal-content" id="settingsForm">
+                    <div class="modal-header">
+                        <h5 class="modal-title" data-i18n="settingsHeader"></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h6 data-i18n="settingsLightSection"></h6>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label class="form-label" data-i18n="settingsBackgroundColor" for="settingsLightBackground"></label>
+                                <input type="color" class="form-control form-control-color" id="settingsLightBackground" name="lightBackground">
+                            </div>
+                            <div class="col">
+                                <label class="form-label" data-i18n="settingsCardBorderColor" for="settingsLightBorderColor"></label>
+                                <input type="color" class="form-control form-control-color" id="settingsLightBorderColor" name="lightBorderColor">
+                            </div>
+                            <div class="col">
+                                <label class="form-label" data-i18n="settingsCardBorderWidth" for="settingsLightBorderWidth"></label>
+                                <input type="number" class="form-control" id="settingsLightBorderWidth" name="lightBorderWidth" min="0" max="10">
+                            </div>
+                            <div class="col">
+                                <label class="form-label" data-i18n="settingsHeaderColor" for="settingsLightHeaderBackground"></label>
+                                <input type="color" class="form-control form-control-color" id="settingsLightHeaderBackground" name="lightHeaderBackground">
+                            </div>
+                        </div>
+                        <hr>
+                        <h6 data-i18n="settingsDarkSection"></h6>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label class="form-label" data-i18n="settingsBackgroundColor" for="settingsDarkBackground"></label>
+                                <input type="color" class="form-control form-control-color" id="settingsDarkBackground" name="darkBackground">
+                            </div>
+                            <div class="col">
+                                <label class="form-label" data-i18n="settingsCardBorderColor" for="settingsDarkBorderColor"></label>
+                                <input type="color" class="form-control form-control-color" id="settingsDarkBorderColor" name="darkBorderColor">
+                            </div>
+                            <div class="col">
+                                <label class="form-label" data-i18n="settingsCardBorderWidth" for="settingsDarkBorderWidth"></label>
+                                <input type="number" class="form-control" id="settingsDarkBorderWidth" name="darkBorderWidth" min="0" max="10">
+                            </div>
+                            <div class="col">
+                                <label class="form-label" data-i18n="settingsHeaderColor" for="settingsDarkHeaderBackground"></label>
+                                <input type="color" class="form-control form-control-color" id="settingsDarkHeaderBackground" name="darkHeaderBackground">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary me-auto" id="settingsResetButton" data-i18n="resetButton"></button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-i18n="closeButton"></button>
                         <button type="submit" class="btn btn-primary" data-i18n="saveButton"></button>
                     </div>

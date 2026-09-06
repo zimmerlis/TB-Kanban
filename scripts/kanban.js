@@ -544,7 +544,8 @@ function createColumnsRow(tasksByColumn) {
         const col = document.createElement('div');
         col.className = 'col d-flex flex-column';
 
-        const heading = document.createElement('h5');
+        const heading = document.createElement('div');
+        heading.className = 'column-header';
         heading.textContent = browser.i18n.getMessage(messageKey);
         col.append(heading);
 
@@ -864,12 +865,116 @@ function initGroupBySelect() {
     });
 }
 
+// Defaults reproduce Bootstrap's own light/dark card look, until the user overrides them in Settings.
+const DEFAULT_APPEARANCE = {
+    light: { background: '#ffffff', cardBorderColor: '#dee2e6', cardBorderWidth: 1, headerBackground: '#f1f3f5' },
+    dark: { background: '#212529', cardBorderColor: '#495057', cardBorderWidth: 1, headerBackground: '#343a40' },
+};
+const APPEARANCE_STORAGE_KEY = 'boardAppearance';
+const THEME_STORAGE_KEY = 'boardTheme';
+
+let appearance = structuredClone(DEFAULT_APPEARANCE);
+// null = follow the system/Thunderbird color scheme; 'light'/'dark' = explicit user override.
+let themePreference = null;
+
+async function loadAppearance() {
+    const stored = await browser.storage.local.get([APPEARANCE_STORAGE_KEY, THEME_STORAGE_KEY]);
+    const storedAppearance = stored[APPEARANCE_STORAGE_KEY] ?? {};
+    appearance = {
+        light: { ...DEFAULT_APPEARANCE.light, ...storedAppearance.light },
+        dark: { ...DEFAULT_APPEARANCE.dark, ...storedAppearance.dark },
+    };
+    themePreference = stored[THEME_STORAGE_KEY] ?? null;
+}
+
+function resolveTheme() {
+    return themePreference ?? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+}
+
+// Pushes the resolved theme's colors into Bootstrap's own variable (body bg) and our own
+// (card border / column header), so plain `.card`/body styling picks them up automatically.
+function applyTheme() {
+    const theme = resolveTheme();
+    const themeAppearance = appearance[theme];
+
+    document.documentElement.setAttribute('data-bs-theme', theme);
+    document.getElementById('themeToggleIcon').className = theme === 'dark' ? 'bi bi-sun' : 'bi bi-moon-stars';
+
+    const root = document.documentElement.style;
+    root.setProperty('--bs-body-bg', themeAppearance.background);
+    root.setProperty('--kanban-card-border-color', themeAppearance.cardBorderColor);
+    root.setProperty('--kanban-card-border-width', `${themeAppearance.cardBorderWidth}px`);
+    root.setProperty('--kanban-header-bg', themeAppearance.headerBackground);
+}
+
+function initThemeToggle() {
+    document.getElementById('themeToggleButton').addEventListener('click', async () => {
+        themePreference = resolveTheme() === 'dark' ? 'light' : 'dark';
+        await browser.storage.local.set({ [THEME_STORAGE_KEY]: themePreference });
+        applyTheme();
+    });
+
+    // Only react to system/OS theme changes while no explicit override has been chosen.
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        if (themePreference === null) {
+            applyTheme();
+        }
+    });
+}
+
+const settingsForm = document.getElementById('settingsForm');
+let settingsModal = null;
+
+function fillSettingsForm() {
+    for (const theme of ['light', 'dark']) {
+        settingsForm.elements[`${theme}Background`].value = appearance[theme].background;
+        settingsForm.elements[`${theme}BorderColor`].value = appearance[theme].cardBorderColor;
+        settingsForm.elements[`${theme}BorderWidth`].value = appearance[theme].cardBorderWidth;
+        settingsForm.elements[`${theme}HeaderBackground`].value = appearance[theme].headerBackground;
+    }
+}
+
+function openSettingsModal() {
+    fillSettingsForm();
+    settingsModal ??= new bootstrap.Modal(document.getElementById('settingsModal'));
+    settingsModal.show();
+}
+
+async function saveSettingsForm() {
+    appearance = Object.fromEntries(['light', 'dark'].map(theme => [theme, {
+        background: settingsForm.elements[`${theme}Background`].value,
+        cardBorderColor: settingsForm.elements[`${theme}BorderColor`].value,
+        cardBorderWidth: Number(settingsForm.elements[`${theme}BorderWidth`].value) || 0,
+        headerBackground: settingsForm.elements[`${theme}HeaderBackground`].value,
+    }]));
+
+    await browser.storage.local.set({ [APPEARANCE_STORAGE_KEY]: appearance });
+    applyTheme();
+    settingsModal.hide();
+}
+
+function initSettings() {
+    document.getElementById('settingsButton').addEventListener('click', openSettingsModal);
+    document.getElementById('settingsResetButton').addEventListener('click', () => {
+        appearance = structuredClone(DEFAULT_APPEARANCE);
+        fillSettingsForm();
+    });
+    settingsForm.addEventListener('submit', event => {
+        event.preventDefault();
+        saveSettingsForm();
+    });
+}
+
 async function init() {
     await loadOrder();
     await loadCategories();
+    await loadAppearance();
     initDragAndDrop();
     initTaskActions();
     initGroupBySelect();
+    initThemeToggle();
+    initSettings();
+    applyTheme();
     await refreshBoard();
 }
 

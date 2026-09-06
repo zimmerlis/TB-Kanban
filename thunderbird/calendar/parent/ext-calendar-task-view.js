@@ -25,29 +25,33 @@ async function injectKanbanView(win, extension) {
   // tree + details) is hidden while our board is visible.
   const nativePanels = [...taskBox.children];
 
-  const toggleRow = doc.createXULElement("hbox");
-  toggleRow.id = TOGGLE_ID;
-  toggleRow.setAttribute("align", "center");
-  toggleRow.setAttribute("pack", "center");
-  toggleRow.style.padding = "2px";
+  const toggleBar = doc.createXULElement("hbox");
+  toggleBar.id = TOGGLE_ID;
+  toggleBar.setAttribute("align", "center");
+  toggleBar.setAttribute("pack", "start");
+  toggleBar.style.cssText = "background-color: light-dark(#e9ecef, #38383b); padding: 4px 6px;";
 
-  const radiogroup = doc.createXULElement("radiogroup");
-  radiogroup.setAttribute("orient", "horizontal");
+  // Reuses Thunderbird's own "calview-toggle" tab styling (see the Day/Week/Month/Multiweek
+  // switcher), instead of inventing custom CSS, so it fits right in.
+  const tablist = doc.createElementNS("http://www.w3.org/1999/xhtml", "div");
+  tablist.setAttribute("role", "tablist");
+  tablist.className = "calview-toggle";
 
-  const standardRadio = doc.createXULElement("radio");
-  standardRadio.id = "kanban-task-view-standard-radio";
-  standardRadio.setAttribute("label", "Standard");
-  standardRadio.setAttribute("value", STANDARD_VALUE);
-  standardRadio.setAttribute("selected", "true");
+  function makeTab(value, label, selected) {
+    const button = doc.createElementNS("http://www.w3.org/1999/xhtml", "button");
+    button.className = "calview-toggle-item";
+    button.setAttribute("role", "tab");
+    button.setAttribute("value", value);
+    button.setAttribute("aria-selected", String(selected));
+    button.textContent = label;
+    return button;
+  }
 
-  const kanbanRadio = doc.createXULElement("radio");
-  kanbanRadio.id = "kanban-task-view-kanban-radio";
-  kanbanRadio.setAttribute("label", "Kanban");
-  kanbanRadio.setAttribute("value", KANBAN_VALUE);
-
-  radiogroup.append(standardRadio, kanbanRadio);
-  toggleRow.append(radiogroup);
-  taskBox.prepend(toggleRow);
+  const standardTab = makeTab(STANDARD_VALUE, "Standard", true);
+  const kanbanTab = makeTab(KANBAN_VALUE, "Kanban", false);
+  tablist.append(standardTab, kanbanTab);
+  toggleBar.append(tablist);
+  taskBox.prepend(toggleBar);
 
   const panel = doc.createXULElement("vbox");
   panel.id = PANEL_ID;
@@ -62,13 +66,18 @@ async function injectKanbanView(win, extension) {
   await setupE10sBrowser(extension, browserElement, panel, { maxWidth: null, maxHeight: null });
   browserElement.fixupAndLoadURIString(extension.getURL("ui/board.html"), { triggeringPrincipal: extension.principal });
 
-  radiogroup.addEventListener("command", () => {
-    const showKanban = radiogroup.value === KANBAN_VALUE;
+  function selectTab(value) {
+    const showKanban = value === KANBAN_VALUE;
+    standardTab.setAttribute("aria-selected", String(!showKanban));
+    kanbanTab.setAttribute("aria-selected", String(showKanban));
     panel.hidden = !showKanban;
     for (const nativePanel of nativePanels) {
       nativePanel.hidden = showKanban;
     }
-  });
+  }
+
+  standardTab.addEventListener("click", () => selectTab(STANDARD_VALUE));
+  kanbanTab.addEventListener("click", () => selectTab(KANBAN_VALUE));
 }
 
 
@@ -77,6 +86,7 @@ function removeKanbanView(win) {
   doc.getElementById(TOGGLE_ID)?.remove();
   doc.getElementById(PANEL_ID)?.remove();
 }
+
 
 this.calendarTaskView = class extends ExtensionAPI {
   onStartup() {

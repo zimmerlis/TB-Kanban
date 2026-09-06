@@ -222,5 +222,45 @@
     "help3" : {
         "message" : "Du kannst Aufgaben nach Kalender und Priorität filtern. Du kannst Aufgaben nach Fälligkeitsdatum, Priorität und Fortschritt sortieren.",
         "description" : "Third paragraph of help modal dialog"
+    },
+    "themeToggleLabel" : {
+        "message" : "Hell-/Dunkelmodus umschalten",
+        "description" : "Title of the theme toggle button"
+    },
+    "settingsButtonLabel" : {
+        "message" : "Board-Einstellungen",
+        "description" : "Title of the settings button"
+    },
+    "settingsHeader" : {
+        "message" : "Board-Einstellungen",
+        "description" : "Header of the settings modal dialog"
+    },
+    "settingsLightSection" : {
+        "message" : "Helles Design",
+        "description" : "Section header for light theme settings"
+    },
+    "settingsDarkSection" : {
+        "message" : "Dunkles Design",
+        "description" : "Section header for dark theme settings"
+    },
+    "settingsBackgroundColor" : {
+        "message" : "Hintergrundfarbe",
+        "description" : "Label of the background color setting"
+    },
+    "settingsCardBorderColor" : {
+        "message" : "Rahmenfarbe der Karten",
+        "description" : "Label of the card border color setting"
+    },
+    "settingsCardBorderWidth" : {
+        "message" : "Rahmenstärke der Karten (px)",
+        "description" : "Label of the card border width setting"
+    },
+    "settingsHeaderColor" : {
+        "message" : "Farbe der Spaltenköpfe",
+        "description" : "Label of the column header background color setting"
+    },
+    "resetButton" : {
+        "message" : "Zurücksetzen",
+        "description" : "Name of the reset button"
     }
 }

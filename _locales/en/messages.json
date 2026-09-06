@@ -222,5 +222,45 @@
     "help3" : {
         "message" : "You can filter tasks by calendar and priority. You can sort tasks by due date, priority, and percent complete.",
         "description" : "Third paragraph of help modal dialog"
+    },
+    "themeToggleLabel" : {
+        "message" : "Toggle dark/light theme",
+        "description" : "Title of the theme toggle button"
+    },
+    "settingsButtonLabel" : {
+        "message" : "Board settings",
+        "description" : "Title of the settings button"
+    },
+    "settingsHeader" : {
+        "message" : "Board settings",
+        "description" : "Header of the settings modal dialog"
+    },
+    "settingsLightSection" : {
+        "message" : "Light theme",
+        "description" : "Section header for light theme settings"
+    },
+    "settingsDarkSection" : {
+        "message" : "Dark theme",
+        "description" : "Section header for dark theme settings"
+    },
+    "settingsBackgroundColor" : {
+        "message" : "Background color",
+        "description" : "Label of the background color setting"
+    },
+    "settingsCardBorderColor" : {
+        "message" : "Card border color",
+        "description" : "Label of the card border color setting"
+    },
+    "settingsCardBorderWidth" : {
+        "message" : "Card border width (px)",
+        "description" : "Label of the card border width setting"
+    },
+    "settingsHeaderColor" : {
+        "message" : "Column header color",
+        "description" : "Label of the column header background color setting"
+    },
+    "resetButton" : {
+        "message" : "Reset to defaults",
+        "description" : "Name of the reset button"
     }
 }
