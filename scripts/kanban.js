@@ -46,7 +46,7 @@ function getCategoryColor(name) {
     return knownCategories.find(category => category.name === name)?.color ?? null;
 }
 
-// Mirrors Thunderbird's own view.getContrastingTextColor() so badges stay readable on any category color.
+// Mirrors Thunderbird's own view.getContrastingTextColor() so category picker items stay readable on any color.
 function getContrastingTextColor(hexColor) {
     const hex = hexColor.replace('#', '');
     const r = parseInt(hex.substring(0, 2), 16);
@@ -54,16 +54,6 @@ function getContrastingTextColor(hexColor) {
     const b = parseInt(hex.substring(4, 6), 16);
     const brightness = 0.299 * r + 0.587 * g + 0.114 * b;
     return brightness < 144 ? 'white' : '#222';
-}
-
-// Blends a category color with white so it works as a subtle card background instead of a strong badge color.
-function toPastel(hexColor, mixRatio = 0.25) {
-    const hex = hexColor.replace('#', '');
-    const channel = offset => {
-        const value = parseInt(hex.substring(offset, offset + 2), 16);
-        return Math.round(value * mixRatio + 255 * (1 - mixRatio));
-    };
-    return `rgb(${channel(0)}, ${channel(2)}, ${channel(4)})`;
 }
 
 // Swimlane grouping selected in the toolbar: 'none', 'category' or 'priority'.
@@ -217,12 +207,12 @@ async function saveTaskField(taskId, field, value) {
     await refreshBoard();
 }
 
-// value, badge class, none has its own neutral style since the badge is always shown (clickable to assign a priority).
+// value, soft-tone bg/text pair; "none" has no color since its card badge is hidden entirely (see renderPriorityField).
 const PRIORITY_OPTIONS = [
-    { value: 0, messageKey: 'nonePriority', badgeClass: 'text-bg-light' },
-    { value: 1, messageKey: 'highPriority', badgeClass: 'text-bg-danger' },
-    { value: 5, messageKey: 'mediumPriority', badgeClass: 'text-bg-warning' },
-    { value: 9, messageKey: 'lowPriority', badgeClass: 'text-bg-secondary' },
+    { value: 0, messageKey: 'nonePriority', bg: null, color: null },
+    { value: 1, messageKey: 'highPriority', bg: '#fee2e2', color: '#991b1b' },
+    { value: 5, messageKey: 'mediumPriority', bg: '#fef3c7', color: '#92400e' },
+    { value: 9, messageKey: 'lowPriority', bg: '#e0f2fe', color: '#0369a1' },
 ];
 
 function getPriorityOption(priority) {
@@ -244,6 +234,7 @@ function closeMenuOnOutsideClick(wrapper, showBadge) {
 }
 
 // A badge that, on click, expands into a small menu of all priority options to pick from.
+// Hidden entirely on the card when priority is "None" - use the edit dialog to assign one.
 function renderPriorityField(card, task) {
     const wrapper = document.createElement('div');
     wrapper.className = 'position-relative';
@@ -252,8 +243,14 @@ function renderPriorityField(card, task) {
         wrapper.replaceChildren();
 
         const option = getPriorityOption(task.priority);
+        if (!option.color) {
+            return;
+        }
+
         const badge = document.createElement('span');
-        badge.className = `badge badge-lg editable-field ${option.badgeClass}`;
+        badge.className = 'badge badge-lg editable-field';
+        badge.style.backgroundColor = option.bg;
+        badge.style.color = option.color;
         badge.textContent = browser.i18n.getMessage(option.messageKey);
         badge.addEventListener('click', showMenu);
         wrapper.append(badge);
@@ -268,7 +265,13 @@ function renderPriorityField(card, task) {
 
         for (const option of PRIORITY_OPTIONS) {
             const item = document.createElement('span');
-            item.className = `badge badge-lg editable-field ${option.badgeClass}`;
+            item.className = 'badge badge-lg editable-field';
+            if (option.color) {
+                item.style.backgroundColor = option.bg;
+                item.style.color = option.color;
+            } else {
+                item.classList.add('text-bg-light');
+            }
             item.textContent = browser.i18n.getMessage(option.messageKey);
             item.addEventListener('click', () => saveTaskField(task.id, 'priority', option.value));
             menu.append(item);
@@ -282,7 +285,11 @@ function renderPriorityField(card, task) {
     return wrapper;
 }
 
-// Applies a category's Thunderbird color to a badge, falling back to a neutral style when unknown.
+// Neutral pill style for category badges on the card itself - keeps the board visually calm even
+// with many differently-colored Thunderbird categories; the assignment menu still shows real colors.
+const CATEGORY_PILL_STYLE = { bg: '#f1f5f9', color: '#475569' };
+
+// Applies a category's real Thunderbird color, used only in the assignment menu (see showMenu below).
 function styleCategoryBadge(badge, name) {
     const color = getCategoryColor(name);
     if (color) {
@@ -294,6 +301,7 @@ function styleCategoryBadge(badge, name) {
 }
 
 // A badge that, on click, expands into a menu of Thunderbird's configured categories plus a field to add a new one.
+// Hidden entirely on the card when no category is set - use the edit dialog to assign one.
 function renderCategoryField(card, task) {
     const wrapper = document.createElement('div');
     wrapper.className = 'position-relative';
@@ -301,10 +309,15 @@ function renderCategoryField(card, task) {
     function showBadge() {
         wrapper.replaceChildren();
 
+        if (!task.categories) {
+            return;
+        }
+
         const badge = document.createElement('span');
         badge.className = 'badge badge-lg editable-field';
-        badge.textContent = task.categories || browser.i18n.getMessage('noCategoryLabel');
-        styleCategoryBadge(badge, task.categories);
+        badge.style.backgroundColor = CATEGORY_PILL_STYLE.bg;
+        badge.style.color = CATEGORY_PILL_STYLE.color;
+        badge.textContent = task.categories;
         badge.addEventListener('click', showMenu);
         wrapper.append(badge);
     }
@@ -380,7 +393,8 @@ function renderProgressField(card, task) {
 
         const progress = document.createElement('div');
         progress.className = 'progress editable-field';
-        progress.style.height = '6px';
+        progress.style.height = '4px';
+        progress.style.borderRadius = '2px';
         progress.title = `${task.percentComplete}%`;
 
         const bar = document.createElement('div');
@@ -452,30 +466,28 @@ function renderTaskCard(task) {
     card.draggable = true;
     card.dataset.taskId = task.id;
 
-    const categoryColor = getCategoryColor(task.categories);
-    if (categoryColor) {
-        card.style.backgroundColor = toPastel(categoryColor);
+    // A colored left accent replaces the old full-card pastel tint, driven by priority (not category).
+    const priorityOption = getPriorityOption(task.priority);
+    if (priorityOption.color) {
+        card.style.setProperty('--kanban-card-accent', priorityOption.color);
+        card.style.setProperty('--kanban-card-accent-width', '3px');
     }
 
     const body = document.createElement('div');
-    body.className = 'card-body';
+    body.className = 'card-body d-flex flex-column';
 
-    const header = document.createElement('div');
-    header.className = 'd-flex justify-content-between align-items-start gap-2';
+    // Top: badges/categories (left) and hover-revealed edit/delete actions (right).
+    const topRow = document.createElement('div');
+    topRow.className = 'd-flex justify-content-between align-items-start gap-2 mb-2';
 
-    header.append(renderEditableField(card, task, 'title', {
-        wrapperClass: 'flex-grow-1 min-w-0',
-        displayTag: 'h6',
-        displayClass: 'card-title mb-1 fw-bold text-truncate',
-        editTag: 'input',
-    }));
-
-    const actions = document.createElement('div');
-    actions.className = 'd-flex align-items-center gap-2 flex-shrink-0';
+    const badgeRow = document.createElement('div');
+    badgeRow.className = 'd-flex flex-wrap gap-1';
+    badgeRow.append(renderPriorityField(card, task), renderCategoryField(card, task));
+    topRow.append(badgeRow);
 
     // Hidden until the mouse hovers the card (see .card-actions in ui.css).
     const iconActions = document.createElement('div');
-    iconActions.className = 'card-actions d-flex align-items-center gap-2';
+    iconActions.className = 'card-actions d-flex align-items-center gap-2 flex-shrink-0';
 
     const editButton = document.createElement('button');
     editButton.type = 'button';
@@ -492,37 +504,45 @@ function renderTaskCard(task) {
     deleteButton.innerHTML = '<i class="bi bi-trash"></i>';
     iconActions.append(deleteButton);
 
-    actions.append(iconActions);
+    topRow.append(iconActions);
+    body.append(topRow);
 
-    const badgeRow = document.createElement('div');
-    badgeRow.className = 'd-flex gap-1';
-    badgeRow.append(renderPriorityField(card, task), renderCategoryField(card, task));
-    actions.append(badgeRow);
-
-    header.append(actions);
-    body.append(header);
-
-    body.append(renderEditableField(card, task, 'description', {
+    // Middle: the card's title.
+    body.append(renderEditableField(card, task, 'title', {
         wrapperClass: 'mb-1',
-        displayTag: 'div',
-        displayClass: 'card-description',
-        editTag: 'textarea',
-        tooltip: true,
-        placeholder: '-',
+        displayTag: 'h6',
+        displayClass: 'card-title mb-0 text-truncate',
+        editTag: 'input',
     }));
+
+    // Only rendered when there is actual content - use the edit dialog to add a description.
+    if (task.description) {
+        body.append(renderEditableField(card, task, 'description', {
+            wrapperClass: 'mb-1',
+            displayTag: 'div',
+            displayClass: 'card-description',
+            editTag: 'textarea',
+            tooltip: true,
+        }));
+    }
+
+    // Bottom: due date and progress, pushed to the bottom of the card.
+    const footer = document.createElement('div');
+    footer.className = 'mt-auto pt-1';
 
     if (task.due) {
         const due = document.createElement('div');
-        due.className = 'text-muted small mb-1';
+        due.className = 'text-muted small mb-1 d-flex align-items-center gap-1';
 
         const icon = document.createElement('i');
-        icon.className = 'bi bi-calendar-event me-1';
+        icon.className = 'bi bi-calendar-event';
 
         due.append(icon, formatDate(task.due));
-        body.append(due);
+        footer.append(due);
     }
 
-    body.append(renderProgressField(card, task));
+    footer.append(renderProgressField(card, task));
+    body.append(footer);
 
     card.append(body);
     return card;
@@ -552,20 +572,43 @@ function createColumnsRow(tasksByColumn) {
         const col = document.createElement('div');
         col.className = 'col d-flex flex-column';
 
+        // Dedicated slate surface (see .kanban-column in ui.css) distinct from the page background.
+        const columnBox = document.createElement('div');
+        columnBox.className = 'kanban-column d-flex flex-column flex-grow-1';
+
+        const columnTasks = sortTasksByOrder(tasksByColumn[id] ?? [], columnOrder[id]);
+
         const heading = document.createElement('div');
-        heading.className = 'column-header';
-        heading.textContent = browser.i18n.getMessage(messageKey);
-        col.append(heading);
+        heading.className = 'column-header d-flex align-items-center justify-content-between';
+
+        const title = document.createElement('span');
+        title.textContent = browser.i18n.getMessage(messageKey);
+        heading.append(title);
+
+        const countBadge = document.createElement('span');
+        countBadge.className = 'badge column-count-badge';
+        countBadge.textContent = String(columnTasks.length);
+        heading.append(countBadge);
+
+        columnBox.append(heading);
 
         const columnBody = document.createElement('div');
         columnBody.className = 'flex-grow-1';
         columnBody.dataset.column = id;
 
-        for (const task of sortTasksByOrder(tasksByColumn[id] ?? [], columnOrder[id])) {
-            columnBody.append(renderTaskCard(task));
+        if (columnTasks.length === 0) {
+            const emptyState = document.createElement('div');
+            emptyState.className = 'kanban-empty-column';
+            emptyState.textContent = browser.i18n.getMessage('emptyColumnLabel');
+            columnBody.append(emptyState);
+        } else {
+            for (const task of columnTasks) {
+                columnBody.append(renderTaskCard(task));
+            }
         }
 
-        col.append(columnBody);
+        columnBox.append(columnBody);
+        col.append(columnBox);
         row.append(col);
     }
 
@@ -732,6 +775,7 @@ function openEditModal(taskId) {
     editForm.elements.start.value = toDateInputValue(task.start);
     editForm.elements.due.value = toDateInputValue(task.due);
     editForm.elements.percentComplete.value = task.percentComplete || 0;
+    editForm.elements.categories.value = task.categories;
     editForm.elements.description.value = task.description;
 
     editModal ??= new bootstrap.Modal(editModalElement);
@@ -749,6 +793,7 @@ async function saveEditForm() {
     setPropertyValue(vtodo, 'status', editForm.elements.status.value);
     setPropertyValue(vtodo, 'priority', Number(editForm.elements.priority.value), 'integer');
     setPropertyValue(vtodo, 'percent-complete', Number(editForm.elements.percentComplete.value) || 0, 'integer');
+    setPropertyValue(vtodo, 'categories', editForm.elements.categories.value);
     setPropertyValue(vtodo, 'description', editForm.elements.description.value);
     if (editForm.elements.start.value) {
         setPropertyValue(vtodo, 'dtstart', editForm.elements.start.value, 'date');
@@ -873,11 +918,13 @@ function initGroupBySelect() {
     });
 }
 
-// Defaults reproduce Bootstrap's own light/dark card look, until the user overrides them in Settings.
+// Defaults reproduce a modern, neutral card look, until the user overrides them in Settings.
 const DEFAULT_APPEARANCE = {
-    light: { background: '#ffffff', cardBackground: '#ffffff', cardTextColor: '#212529', cardBorderColor: '#dee2e6', cardBorderWidth: 1, headerBackground: '#f1f3f5', headerTextColor: '#212529' },
+    light: { background: '#ffffff', cardBackground: '#ffffff', cardTextColor: '#0f172a', cardBorderColor: '#e2e8f0', cardBorderWidth: 1, headerBackground: '#e2e8f0', headerTextColor: '#475569' },
     dark: { background: '#212529', cardBackground: '#2b3035', cardTextColor: '#dee2e6', cardBorderColor: '#495057', cardBorderWidth: 1, headerBackground: '#343a40', headerTextColor: '#f8f9fa' },
 };
+// Column surface background, not user-configurable (keeps the Settings dialog focused on card content).
+const COLUMN_BACKGROUND = { light: '#f8fafc', dark: '#1e2530' };
 const APPEARANCE_STORAGE_KEY = 'boardAppearance';
 const THEME_STORAGE_KEY = 'boardTheme';
 
@@ -910,6 +957,7 @@ function applyTheme() {
 
     const root = document.documentElement.style;
     root.setProperty('--bs-body-bg', themeAppearance.background);
+    root.setProperty('--kanban-column-bg', COLUMN_BACKGROUND[theme]);
     root.setProperty('--kanban-card-bg', themeAppearance.cardBackground);
     root.setProperty('--kanban-card-color', themeAppearance.cardTextColor);
     root.setProperty('--kanban-card-border-color', themeAppearance.cardBorderColor);

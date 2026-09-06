@@ -127,6 +127,10 @@
         "message" : "None",
         "description" : "Label shown on the category badge when a task has no category"
     },
+    "emptyColumnLabel" : {
+        "message" : "No tasks",
+        "description" : "Placeholder shown in a column with no tasks"
+    },
     "allCategoriesLabel" : {
         "message" : "All categories",
         "description" : "Name of the all categories label"
