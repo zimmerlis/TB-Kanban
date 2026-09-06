@@ -1027,8 +1027,7 @@ function makeModalDraggable(modalElement) {
     });
 }
 
-// TODO: replace with the project's real donation link.
-const DONATE_URL = 'https://www.buymeacoffee.com/';
+const DONATE_URL = 'https://buymeacoffee.com/oxekklfcg';
 // TODO: replace with the project's real source code URL once one exists again.
 const HOMEPAGE_URL = '';
 
