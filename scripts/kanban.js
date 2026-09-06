@@ -201,6 +201,14 @@ async function saveTaskField(taskId, field, value) {
     const vtodo = findComponent(calendarItem.item, 'vtodo');
     setPropertyValue(vtodo, property.name, property.type === 'integer' ? Number(value) : value, property.type);
 
+    // Moving the progress slider implies a status change: 0% -> Needs action, 100% -> Completed,
+    // anything in between -> In process.
+    if (field === 'percentComplete') {
+        const percent = Number(value);
+        const status = percent === 0 ? 'NEEDS-ACTION' : percent === 100 ? 'COMPLETED' : 'IN-PROCESS';
+        setPropertyValue(vtodo, 'status', status);
+    }
+
     await browser.calendar.items.update(calendarItem.calendarId, taskId, {
         format: 'jcal',
         item: calendarItem.item,
