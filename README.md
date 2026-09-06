@@ -17,10 +17,6 @@ items) into a drag-and-drop Kanban board, right inside the mail client. No
 external service, no duplicated data — every card *is* a task stored in your
 calendar/task backend, read and written directly as jCal.
 
-> Fork of [iCanban](https://github.com/jydidier/icanban-thunderbird) by
-> Jean-Yves Didier, rebuilt from the ground up. See [LICENSE.md](LICENSE.md)
-> for attribution details.
-
 ![TB-Kanban board preview](images/tb-kanban.jpg)
 
 ## Table of contents

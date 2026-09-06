@@ -1,5 +1,5 @@
 let kanbanContext = await browser.contextualIdentities.create({
-    "name": "icanban",
+    "name": "tbkanban",
     "color": "blue",
     "icon": "tree"
 });
