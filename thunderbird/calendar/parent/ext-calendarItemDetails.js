@@ -50,14 +50,14 @@ this.calendarItemDetails = class extends ExtensionAPI {
         tabpanel.setAttribute("id", widgetId + "-calendarItemDetails-tabpanel");
         tabpanel.setAttribute("flex", "1");
 
-        const browser = document.createXULElement("browser");
-        browser.setAttribute("flex", "1");
+        const browserEl = document.createXULElement("browser");
+        browserEl.setAttribute("flex", "1");
 
         const options = { maxWidth: null, fixedWidth: true };
-        setupE10sBrowser(this.extension, browser, tabpanel, options).then(() => {
+        setupE10sBrowser(this.extension, browserEl, tabpanel, options).then(() => {
           const target = new URL(this.extension.manifest.calendar_item_details.default_content);
           target.searchParams.set("area", "secondary");
-          browser.fixupAndLoadURIString(target.href, { triggeringPrincipal: this.extension.principal });
+          browserEl.fixupAndLoadURIString(target.href, { triggeringPrincipal: this.extension.principal });
         });
       } else if (areas.includes("inline")) {
         const tabbox = document.getElementById("event-grid");
@@ -72,22 +72,22 @@ this.calendarItemDetails = class extends ExtensionAPI {
         const separatorCell = separator.appendChild(document.createElementNS("http://www.w3.org/1999/xhtml", "td"));
         separatorCell.setAttribute("colspan", "2");
 
-        const browser = document.createXULElement("browser");
-        browser.setAttribute("flex", "1");
+        const browserEl = document.createXULElement("browser");
+        browserEl.setAttribute("flex", "1");
 
         // TODO The real version will need a max-height and auto-resizing
-        browser.style.height = "200px";
-        browser.style.width = "100%";
-        browser.style.display = "block";
+        browserEl.style.height = "200px";
+        browserEl.style.width = "100%";
+        browserEl.style.display = "block";
 
         // Fix an annoying bug, this should be part of a different patch
         document.getElementById("url-link").style.maxWidth = "42em";
 
         const options = { maxWidth: null, fixedWidth: true };
-        setupE10sBrowser(this.extension, browser, browserCell, options).then(() => {
+        setupE10sBrowser(this.extension, browserEl, browserCell, options).then(() => {
           const target = new URL(this.extension.manifest.calendar_item_details.default_content);
           target.searchParams.set("area", "inline");
-          browser.fixupAndLoadURIString(target.href, { triggeringPrincipal: this.extension.principal });
+          browserEl.fixupAndLoadURIString(target.href, { triggeringPrincipal: this.extension.principal });
         });
       }
     });
@@ -112,10 +112,10 @@ this.calendarItemDetails = class extends ExtensionAPI {
     if (areas.includes("summary")) {
       const summaryBox = document.querySelector(".item-summary-box");
 
-      const browser = document.createXULElement("browser");
-      browser.id = "ext-calendar-item-details-" + this.extension.id;
-      browser.style.minHeight = "150px";
-      document.getElementById(browser.id)?.remove();
+      const browserEl = document.createXULElement("browser");
+      browserEl.id = "ext-calendar-item-details-" + this.extension.id;
+      browserEl.style.minHeight = "150px";
+      document.getElementById(browserEl.id)?.remove();
 
       const separator = document.createXULElement("separator");
       separator.id = "ext-calendar-item-details-separator-" + this.extension.id;
@@ -125,10 +125,10 @@ this.calendarItemDetails = class extends ExtensionAPI {
       summaryBox.appendChild(separator);
 
       const options = { maxWidth: null, fixedWidth: true };
-      setupE10sBrowser(this.extension, browser, summaryBox, options).then(() => {
+      setupE10sBrowser(this.extension, browserEl, summaryBox, options).then(() => {
         const target = new URL(this.extension.manifest.calendar_item_details.default_content);
         target.searchParams.set("area", "summary");
-        browser.fixupAndLoadURIString(target.href, { triggeringPrincipal: this.extension.principal });
+        browserEl.fixupAndLoadURIString(target.href, { triggeringPrincipal: this.extension.principal });
       });
     }
   }
