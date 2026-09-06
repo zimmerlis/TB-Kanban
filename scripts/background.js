@@ -49,21 +49,11 @@ browser.menus.onClicked.addListener(async (info, tab) => {
     }
 });
 
-// Resets the daily about/donate prompt on a genuine fresh install (not on updates/reloads), so
-// it always shows once even when testing repeated installs on the same day.
+// Resets the permanent "I've donated" opt-out on a genuine fresh install (not on updates/reloads).
 browser.runtime.onInstalled.addListener(details => {
     if (details.reason === 'install') {
         browser.storage.local.remove('aboutPromptState');
     }
-});
-
-// Also shows it again on every Thunderbird restart, not just once per calendar day: clears
-// only "last shown" (keeps the "I've donated" opt-out, set via the about dialog's checkbox).
-browser.runtime.onStartup.addListener(async () => {
-    const stored = await browser.storage.local.get('aboutPromptState');
-    const state = stored.aboutPromptState ?? {};
-    delete state.lastShownDate;
-    await browser.storage.local.set({ aboutPromptState: state });
 });
 
 browser.action.onClicked.addListener(async (...args) => {

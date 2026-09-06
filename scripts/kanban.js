@@ -1110,21 +1110,21 @@ function initAbout() {
     });
 }
 
-// Shows the About dialog (with its donate nudge) once per calendar day, unless the user has
-// already clicked through to the donation page once (see initAbout's donate click handler).
+// Shows the About dialog (with its donate nudge) once per Thunderbird session - storage.session is
+// cleared automatically on every restart (and starts empty on a fresh install), so no manual reset
+// is needed. Only the permanent "I've donated" flag (storage.local) can stop it for good.
 async function maybeAutoShowAbout() {
     const stored = await browser.storage.local.get(ABOUT_PROMPT_STORAGE_KEY);
-    const state = stored[ABOUT_PROMPT_STORAGE_KEY] ?? {};
-    if (state.dismissedForGood) {
+    if (stored[ABOUT_PROMPT_STORAGE_KEY]?.dismissedForGood) {
         return;
     }
 
-    const today = new Date().toISOString().slice(0, 10);
-    if (state.lastShownDate === today) {
+    const session = await browser.storage.session.get('aboutPromptShown');
+    if (session.aboutPromptShown) {
         return;
     }
 
-    await browser.storage.local.set({ [ABOUT_PROMPT_STORAGE_KEY]: { ...state, lastShownDate: today } });
+    await browser.storage.session.set({ aboutPromptShown: true });
     bootstrap.Modal.getOrCreateInstance(document.getElementById('aboutModal')).show();
 }
 
