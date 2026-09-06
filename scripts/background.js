@@ -49,6 +49,14 @@ browser.menus.onClicked.addListener(async (info, tab) => {
     }
 });
 
+// Resets the daily about/donate prompt on a genuine fresh install (not on updates/reloads), so
+// it always shows once even when testing repeated installs on the same day.
+browser.runtime.onInstalled.addListener(details => {
+    if (details.reason === 'install') {
+        browser.storage.local.remove('aboutPromptState');
+    }
+});
+
 browser.action.onClicked.addListener(async (...args) => {
     openKanbanBoard();
  });
