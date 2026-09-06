@@ -12,12 +12,14 @@ const PANEL_ID = "kanban-task-view-panel";
 
 // Adds a "Standard"/"Kanban" view switch above the task pane's search/add-task bar
 // (#task-addition-box), showing our board in place of the native list+details while selected.
-function injectKanbanView(win, extension) {
+async function injectKanbanView(win, extension) {
   const doc = win.document;
   const taskBox = doc.getElementById("calendar-task-box");
   if (!taskBox || doc.getElementById(TOGGLE_ID)) {
     return;
   }
+
+  const { setupE10sBrowser } = ChromeUtils.importESModule("resource://kanban-thunderbird-calendar/thunderbird/calendar/ext-calendar-utils.sys.mjs");
 
   // Everything Thunderbird normally shows in the task pane (notifications, search/add-task bar,
   // tree + details) is hidden while our board is visible.
@@ -51,12 +53,14 @@ function injectKanbanView(win, extension) {
   panel.id = PANEL_ID;
   panel.setAttribute("flex", "1");
   panel.hidden = true;
-
-  const frame = doc.createElementNS("http://www.w3.org/1999/xhtml", "iframe");
-  frame.setAttribute("src", extension.getURL("ui/board.html"));
-  frame.style.cssText = "width: 100%; height: 100%; border: none;";
-  panel.append(frame);
   taskBox.append(panel);
+
+  // A plain html:iframe can't load a moz-extension:// page inside this privileged chrome document;
+  // a XUL <browser> set up the same way WebExtension popups are (see ext-calendarItemDetails.js) can.
+  const browserElement = doc.createXULElement("browser");
+  browserElement.setAttribute("flex", "1");
+  await setupE10sBrowser(extension, browserElement, panel, { maxWidth: null, maxHeight: null });
+  browserElement.fixupAndLoadURIString(extension.getURL("ui/board.html"), { triggeringPrincipal: extension.principal });
 
   radiogroup.addEventListener("command", () => {
     const showKanban = radiogroup.value === KANBAN_VALUE;
@@ -66,6 +70,7 @@ function injectKanbanView(win, extension) {
     }
   });
 }
+
 
 function removeKanbanView(win) {
   const doc = win.document;
