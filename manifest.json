@@ -28,44 +28,61 @@
     },
     "experiment_apis" : {
         "calendar_calendars" : {
-            "schema" : "experiments/calendar/schema/calendar-calendars.json",
+            "schema" : "thunderbird/calendar/schema/calendar-calendars.json",
             "parent" : {
                 "scopes" : ["addon_parent"],
-                "script": "experiments/calendar/parent/ext-calendar-calendars.js",
+                "script": "thunderbird/calendar/parent/ext-calendar-calendars.js",
                 "paths":  [ [ "calendar", "calendars"] ]
             }
         },
         "calendar_items" : {
-            "schema" : "experiments/calendar/schema/calendar-items.json",
+            "schema" : "thunderbird/calendar/schema/calendar-items.json",
             "parent" : {
                 "scopes" : ["addon_parent"],
-                "script": "experiments/calendar/parent/ext-calendar-items.js",
+                "script": "thunderbird/calendar/parent/ext-calendar-items.js",
                 "paths":  [ [ "calendar", "items"] ]
             }
         },
-        "calendar_provider" : {
-            "schema" : "experiments/calendar/schema/calendar-provider.json",
+        "calendar_categories" : {
+            "schema" : "thunderbird/calendar/schema/calendar-categories.json",
             "parent" : {
                 "scopes" : ["addon_parent"],
-                "script": "experiments/calendar/parent/ext-calendar-provider.js",
+                "script": "thunderbird/calendar/parent/ext-calendar-categories.js",
+                "paths":  [ [ "calendar", "categories"] ]
+            }
+        },
+        "calendar_provider" : {
+            "schema" : "thunderbird/calendar/schema/calendar-provider.json",
+            "parent" : {
+                "scopes" : ["addon_parent"],
+                "script": "thunderbird/calendar/parent/ext-calendar-provider.js",
                 "events": ["startup"],
                 "paths":  [ [ "calendar", "provider"] ]
             }
         },
-        "calendarItemAction" : {
-            "schema" : "experiments/calendar/schema/calendarItemAction.json",
+        "calendarTaskView" : {
+            "schema" : "thunderbird/calendar/schema/calendar-task-view.json",
             "parent" : {
                 "scopes" : ["addon_parent"],
-                "script": "experiments/calendar/parent/ext-calendarItemAction.js",
+                "script": "thunderbird/calendar/parent/ext-calendar-task-view.js",
+                "events": ["startup"],
+                "paths":  [ [ "calendarTaskView"] ]
+            }
+        },
+        "calendarItemAction" : {
+            "schema" : "thunderbird/calendar/schema/calendarItemAction.json",
+            "parent" : {
+                "scopes" : ["addon_parent"],
+                "script": "thunderbird/calendar/parent/ext-calendarItemAction.js",
                 "events": ["startup"],
                 "paths":  [ [ "calendarItemAction"] ]
             }
         },
         "calendarItemDetails" : {
-            "schema" : "experiments/calendar/schema/calendarItemDetails.json",
+            "schema" : "thunderbird/calendar/schema/calendarItemDetails.json",
             "parent" : {
                 "scopes" : ["addon_parent"],
-                "script": "experiments/calendar/parent/ext-calendarItemDetails.js",
+                "script": "thunderbird/calendar/parent/ext-calendarItemDetails.js",
                 "events": ["startup"],
                 "paths":  [ [ "calendarItemDetails"] ]
             }

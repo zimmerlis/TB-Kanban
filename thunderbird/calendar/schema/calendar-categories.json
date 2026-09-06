@@ -1,0 +1,25 @@
+[
+  {
+    "namespace": "calendar.categories",
+    "types": [
+      {
+        "id": "Category",
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "color": { "type": "string" }
+        }
+      }
+    ],
+    "functions": [
+      {
+        "name": "query",
+        "async": true,
+        "type": "function",
+        "description": "Returns the categories configured in Thunderbird/Betterbird, with their color.",
+        "parameters": []
+      }
+    ],
+    "events": []
+  }
+]

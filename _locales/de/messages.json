@@ -4,91 +4,91 @@
         "description" : "Name of the extension"
     },
     "extensionDescription" : {
-        "message" : "ICAL's todo have status that are just perfect for a basic Kanban board. This extension provides it so that you can manage your tasks visually. There are two ways to display the Kanban board once the extension has been installed. The first one is through the 'Kanban' button displayed in the top window bar when consulting emails. The second one is through the 'Tools' menu in which you can find an item named 'Display Kanban board'.",
+        "message" : "Aufgaben in ICAL-Kalendern haben Status, die sich perfekt für ein einfaches Kanban-Board eignen. Diese Erweiterung stellt dieses Board bereit, damit du deine Aufgaben visuell verwalten kannst. Es gibt zwei Wege, das Kanban-Board nach der Installation der Erweiterung anzuzeigen. Der erste führt über die Schaltfläche 'Kanban' in der oberen Fensterleiste beim Lesen von E-Mails. Der zweite führt über das Menü 'Extras', in dem sich ein Eintrag namens 'Kanban-Board anzeigen' befindet.",
         "description" : "Description of the extension"
     },
     "menuItem" : {
-        "message" : "Display kanban board",
+        "message" : "Kanban-Board anzeigen",
         "description" : "Menu item to start the kanban board"
     },
     "boardTitle" : {
-        "message" : "Kanban board",
+        "message" : "Kanban-Board",
         "description" : "Name of the HTML page displaying the Kanban board"
     },
     "compactModeSwitchLabel" : {
-        "message" : "Compact mode",
+        "message" : "Kompaktmodus",
         "description" : "Name of the compact mode switch"
     },
     "filterButton": {
-        "message" : " Filters",
+        "message" : " Filter",
         "description" : "Name of the filter button"
     },
     "sortButton": {
-        "message" : " Sort settings",
+        "message" : " Sortierung",
         "description" : "Name of the sort setting button"
     },
     "newTaskButton": {
-        "message" : " New task...",
+        "message" : " Neue Aufgabe...",
         "description" : "Name of the new task button"
     },
     "refreshButton": {
-        "message" : " Refresh",
+        "message" : " Aktualisieren",
         "description" : "Name of the refresh button"
     },
     "helpButton": {
-        "message" : " Help",
+        "message" : " Hilfe",
         "description" : "Name of the help button"
     },
     "needsActionStatus" : {
-        "message" : " Needs action",
+        "message" : " To Do",
         "description" : "Status for a task that needs action "
     },
     "inProcessStatus" : {
-        "message" : " In process",
+        "message" : " In Arbeit",
         "description" : "Status for a task in process"
     },
     "completedStatus" : {
-        "message" : " Completed",
+        "message" : " Erledigt",
         "description" : "Status for a completed task"
     },
     "cancelledStatus" : {
-        "message" : " Cancelled",
+        "message" : " Abgebrochen",
         "description" : "Status for a cancelled task"
     },
     "groupByLabel" : {
-        "message" : "Grouped by:",
+        "message" : "Gruppiert nach:",
         "description" : "Label of the swimlane grouping selector"
     },
     "confirmDeletionMessage" : {
-        "message" : "Are you sure you want to delete this item?",
+        "message" : "Möchtest du diesen Eintrag wirklich löschen?",
         "description" : "Message displayed when a task is deleted"
     },
     "titleField" : {
-        "message" : "Title",
+        "message" : "Titel",
         "description" : "Name of the title field of a task"
     },
     "calendarField": {
-        "message" : "Calendar",
+        "message" : "Kalender",
         "description" : "Name of the calendar field of a task"
     },
     "parentField": {
-        "message": "Parent task",
+        "message": "Übergeordnete Aufgabe",
         "description": "Selection of the parent task"
     },
     "noParentTask" : {
-        "message" : "None",
+        "message" : "Keine",
         "description" : "No parent task"
     },
     "startDateField": {
         "message": "Start",
         "description": "Name of the task start date field"
-    },    
+    },
     "dueDateField" : {
-        "message" : "Due date",
+        "message" : "Fälligkeitsdatum",
         "description" : "Name of the due date field of a task"
     },
     "percentCompleteField" : {
-        "message" : "Percent complete",
+        "message" : "Fortschritt",
         "description" : "Name of the percent complete field of a task"
     },
     "statusField" : {
@@ -96,131 +96,131 @@
         "description" : "Name of the status field of a task"
     },
     "priorityField" : {
-        "message" : "Priority",
+        "message" : "Priorität",
         "description" : "Name of the priority field of a task"
     },
     "nonePriority" : {
-        "message" : "None",
+        "message" : "Keine",
         "description" : "Name of none priority"
     },
     "lowPriority" : {
-        "message" : "Low",
+        "message" : "Niedrig",
         "description" : "Name of low priority"
     },
     "mediumPriority" : {
-        "message" : "Medium",
+        "message" : "Mittel",
         "description" : "Name of normal priority"
     },
     "highPriority" : {
-        "message" : "High",
+        "message" : "Hoch",
         "description" : "Name of high priority"
     },
     "descriptionField" : {
-        "message" : "Description",
+        "message" : "Beschreibung",
         "description" : "Name of the description field"
     },
     "categoriesField" : {
-        "message" : "Categories",
+        "message" : "Kategorien",
         "description" : "Name of the categories field"
     },
     "noCategoryLabel" : {
-        "message" : "None",
+        "message" : "Keine",
         "description" : "Label shown on the category badge when a task has no category"
     },
     "allCategoriesLabel" : {
-        "message" : "All categories",
+        "message" : "Alle Kategorien",
         "description" : "Name of the all categories label"
     },
     "withoutAny" : {
-        "message" : "Without any",
+        "message" : "Ohne Angabe",
         "description" : "Label for selecting empty categories"
     },
     "closeButton" : {
-        "message" : "Close",
+        "message" : "Schließen",
         "description" : "Name of the close button"
     },
     "saveButton" : {
-        "message" : "Save",
+        "message" : "Speichern",
         "description" : "Name of the save button"
     },
     "applyButton" : {
-        "message" : "Apply",
+        "message" : "Übernehmen",
         "description" : "Name of the apply button"
     },
     "alertTask" : {
-        "message" : "You must fill required field before submitting a new task.",
+        "message" : "Bitte fülle die Pflichtfelder aus, bevor du eine neue Aufgabe speicherst.",
         "description" : "Alert message displayed when a task is not well defined"
     },
     "editTaskHeader" : {
-        "message" : "Edit task",
+        "message" : "Aufgabe bearbeiten",
         "description" : "Header of the task edit modal dialog"
     },
     "filterHeader" : {
-        "message" : "Filter settings",
+        "message" : "Filtereinstellungen",
         "description" : "Header of the filter modal dialog"
     },
     "calendarsFilter" : {
-        "message" : "Calendars",
+        "message" : "Kalender",
         "description" : "Filter by calendar"
     },
     "calendarCapabilityLabel" : {
-        "message" : "Only calendars managing tasks",
+        "message" : "Nur Kalender mit Aufgabenverwaltung",
         "description" : "Label for checking calendar capabilities"
     },
     "allCalendarsLabel" : {
-        "message" : "All calendars below",
+        "message" : "Alle unten aufgeführten Kalender",
         "description" : "Label for all calendars switch"
     },
     "allPrioritiesLabel" : {
-        "message" : "All",
+        "message" : "Alle",
         "description" : "Label for all priorities switch"
     },
     "sortHeader" : {
-        "message" : "Sort by",
+        "message" : "Sortieren nach",
         "description" : "Header of the sort modal dialog"
     },
     "noneSort" : {
-        "message" : "None",
+        "message" : "Keine",
         "description" : "None sort option"
     },
     "dueDateASort" : {
-        "message" : "Due date ascending",
+        "message" : "Fälligkeitsdatum aufsteigend",
         "description" : "Due date ascending sort option"
     },
     "dueDateDSort" : {
-        "message" : "Due date descending",
+        "message" : "Fälligkeitsdatum absteigend",
         "description" : "Due date descending sort option"
     },
     "priorityASort" : {
-        "message" : "Priority ascending",
+        "message" : "Priorität aufsteigend",
         "description" : "Priority ascending sort option"
     },
     "priorityDSort" : {
-        "message" : "Priority descending",
+        "message" : "Priorität absteigend",
         "description" : "Priority descending sort option"
     },
     "percentCompleteASort" : {
-        "message" : "Percent complete ascending",
+        "message" : "Fortschritt aufsteigend",
         "description" : "Percent complete ascending sort option"
     },
     "percentCompleteDSort" : {
-        "message" : "Percent complete descending",
+        "message" : "Fortschritt absteigend",
         "description" : "Percent complete descending sort option"
     },
     "helpHeader" : {
-        "message" : "How to use the Kanban board",
+        "message" : "So benutzt du das Kanban-Board",
         "description" : "Header of the help modal dialog"
     },
     "help1" : {
-        "message" : "The Kanban board is a tool for visualizing work, which helps you to manage tasks and projects. The board is divided into four columns: \"Needs action\", \"In process\", \"Completed\", and \"Cancelled\". Each column represents a stage of the work process. You can move tasks between columns by dragging and dropping them.",
+        "message" : "Das Kanban-Board ist ein Werkzeug zur Visualisierung von Arbeit, das dir hilft, Aufgaben und Projekte zu verwalten. Das Board ist in vier Spalten unterteilt: \"To Do\", \"In Arbeit\", \"Erledigt\" und \"Abgebrochen\". Jede Spalte steht für eine Phase des Arbeitsprozesses. Du kannst Aufgaben zwischen den Spalten per Drag & Drop verschieben.",
         "description" : "First paragraph of help modal dialog"
     },
     "help2" : {
-        "message" : "To create a new task, click on the \"New task...\" button. Fill in the form and click on the \"Save \" button. To edit a task, click on the pen icon in the task card.",
+        "message" : "Um eine neue Aufgabe zu erstellen, klicke auf die Schaltfläche \"Neue Aufgabe...\". Fülle das Formular aus und klicke auf \"Speichern\". Um eine Aufgabe zu bearbeiten, klicke auf das Stift-Symbol auf der Aufgabenkarte.",
         "description" : "Second paragraph of help modal dialog"
     },
     "help3" : {
-        "message" : "You can filter tasks by calendar and priority. You can sort tasks by due date, priority, and percent complete.",
+        "message" : "Du kannst Aufgaben nach Kalender und Priorität filtern. Du kannst Aufgaben nach Fälligkeitsdatum, Priorität und Fortschritt sortieren.",
         "description" : "Third paragraph of help modal dialog"
     }
 }

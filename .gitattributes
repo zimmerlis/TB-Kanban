@@ -1,0 +1,7 @@
+# Files below are useful for the repo but must not end up inside the .xpi
+# produced by `git archive` (see build.ps1 / BUILD.md).
+.gitattributes export-ignore
+.gitignore export-ignore
+.github export-ignore
+BUILD.md export-ignore
+build.ps1 export-ignore

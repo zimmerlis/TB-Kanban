@@ -8,8 +8,74 @@
         <link rel="stylesheet" type="text/css" href="../vendor/bootstrap-icons.min.css"/>
     </head>
     <body style="font-size: 80%;">
-        <div class="container h-100">
-            <!-- TODO: rebuild kanban board UI here -->
+        <div class="d-flex justify-content-end align-items-center gap-2 mb-2">
+            <label class="col-form-label col-form-label-sm mb-0" data-i18n="groupByLabel" for="groupBySelect"></label>
+            <select class="form-select form-select-sm w-auto" id="groupBySelect">
+                <option value="none" data-i18n="noneSort"></option>
+                <option value="category" data-i18n="categoriesField"></option>
+                <option value="priority" data-i18n="priorityField"></option>
+            </select>
+        </div>
+
+        <div class="container-fluid h-100" id="board"></div>
+
+        <div class="modal" id="taskEditModal" tabindex="-1">
+            <div class="modal-dialog">
+                <form class="modal-content" id="taskEditForm">
+                    <div class="modal-header">
+                        <h5 class="modal-title" data-i18n="editTaskHeader"></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label" data-i18n="titleField" for="taskEditTitle"></label>
+                            <input type="text" class="form-control" id="taskEditTitle" name="title" required>
+                        </div>
+                        <div class="row">
+                            <div class="col mb-3">
+                                <label class="form-label" data-i18n="statusField" for="taskEditStatus"></label>
+                                <select class="form-select" id="taskEditStatus" name="status">
+                                    <option value="NEEDS-ACTION" data-i18n="needsActionStatus"></option>
+                                    <option value="IN-PROCESS" data-i18n="inProcessStatus"></option>
+                                    <option value="COMPLETED" data-i18n="completedStatus"></option>
+                                    <option value="CANCELLED" data-i18n="cancelledStatus"></option>
+                                </select>
+                            </div>
+                            <div class="col mb-3">
+                                <label class="form-label" data-i18n="priorityField" for="taskEditPriority"></label>
+                                <select class="form-select" id="taskEditPriority" name="priority">
+                                    <option value="0" data-i18n="nonePriority"></option>
+                                    <option value="1" data-i18n="highPriority"></option>
+                                    <option value="5" data-i18n="mediumPriority"></option>
+                                    <option value="9" data-i18n="lowPriority"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col mb-3">
+                                <label class="form-label" data-i18n="startDateField" for="taskEditStart"></label>
+                                <input type="date" class="form-control" id="taskEditStart" name="start">
+                            </div>
+                            <div class="col mb-3">
+                                <label class="form-label" data-i18n="dueDateField" for="taskEditDue"></label>
+                                <input type="date" class="form-control" id="taskEditDue" name="due">
+                            </div>
+                            <div class="col mb-3">
+                                <label class="form-label" data-i18n="percentCompleteField" for="taskEditPercentComplete"></label>
+                                <input type="number" class="form-control" id="taskEditPercentComplete" name="percentComplete" min="0" max="100">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" data-i18n="descriptionField" for="taskEditDescription"></label>
+                            <textarea class="form-control" id="taskEditDescription" name="description" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-i18n="closeButton"></button>
+                        <button type="submit" class="btn btn-primary" data-i18n="saveButton"></button>
+                    </div>
+                </form>
+            </div>
         </div>
 
         <script src="../vendor/bootstrap.bundle.min.js" defer></script>

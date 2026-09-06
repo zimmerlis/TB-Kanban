@@ -6,3 +6,40 @@ body {
     width: 100%;
     height: 100vh;
 }
+
+.card.dragging {
+    opacity: 0.5;
+}
+
+.drop-indicator {
+    height: 3px;
+    border-radius: 2px;
+    background-color: var(--bs-primary);
+    margin: 2px 0;
+}
+
+.card-actions {
+    opacity: 0;
+    transition: opacity 0.15s ease-in-out;
+}
+
+.card:hover .card-actions {
+    opacity: 1;
+}
+
+.editable-field {
+    cursor: pointer;
+}
+
+.badge-lg {
+    font-size: 0.8rem;
+    padding: 0.4em 0.65em;
+}
+
+.card-description {
+    font-size: 100%;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}

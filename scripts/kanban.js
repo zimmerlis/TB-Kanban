@@ -5,5 +5,876 @@
  */
 
 import './i18n.js';
+import { getTaskFromCalendarItem, findComponent, setPropertyValue } from './jcal.js';
 
-// TODO: rebuild kanban board logic here
+// Maps iCal VTODO STATUS values to the board's four columns, and back.
+const STATUS_COLUMNS = {
+    'NEEDS-ACTION': 'needsAction',
+    'IN-PROCESS': 'inProcess',
+    'COMPLETED': 'completed',
+    'CANCELLED': 'cancelled',
+};
+const COLUMN_STATUS = {
+    needsAction: 'NEEDS-ACTION',
+    inProcess: 'IN-PROCESS',
+    completed: 'COMPLETED',
+    cancelled: 'CANCELLED',
+};
+
+// Maps the click-to-edit fields to their VTODO property name/type.
+const FIELD_PROPERTY_MAP = {
+    title: { name: 'summary', type: 'text' },
+    description: { name: 'description', type: 'text' },
+    percentComplete: { name: 'percent-complete', type: 'integer' },
+    priority: { name: 'priority', type: 'integer' },
+    categories: { name: 'categories', type: 'text' },
+};
+
+// Raw calendar.items.query() results (with jCal payload), keyed by task id, needed to save drag & drop changes.
+let calendarItemById = new Map();
+// Parsed tasks, keyed by id, used to know the previous status/percent-complete during drag & drop.
+let taskById = new Map();
+
+// Categories configured in Thunderbird/Betterbird itself (name + original color), loaded once at startup.
+let knownCategories = [];
+
+async function loadCategories() {
+    knownCategories = await browser.calendar.categories.query();
+}
+
+function getCategoryColor(name) {
+    return knownCategories.find(category => category.name === name)?.color ?? null;
+}
+
+// Mirrors Thunderbird's own view.getContrastingTextColor() so badges stay readable on any category color.
+function getContrastingTextColor(hexColor) {
+    const hex = hexColor.replace('#', '');
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
+    const brightness = 0.299 * r + 0.587 * g + 0.114 * b;
+    return brightness < 144 ? 'white' : '#222';
+}
+
+// Blends a category color with white so it works as a subtle card background instead of a strong badge color.
+function toPastel(hexColor, mixRatio = 0.25) {
+    const hex = hexColor.replace('#', '');
+    const channel = offset => {
+        const value = parseInt(hex.substring(offset, offset + 2), 16);
+        return Math.round(value * mixRatio + 255 * (1 - mixRatio));
+    };
+    return `rgb(${channel(0)}, ${channel(2)}, ${channel(4)})`;
+}
+
+// Swimlane grouping selected in the toolbar: 'none', 'category' or 'priority'.
+let groupBy = 'none';
+
+// Manual card order per column (task ids), since VTODO items have no native position field.
+const ORDER_STORAGE_KEY = 'columnOrder';
+let columnOrder = { needsAction: [], inProcess: [], completed: [], cancelled: [] };
+
+async function loadOrder() {
+    const stored = await browser.storage.local.get(ORDER_STORAGE_KEY);
+    columnOrder = stored[ORDER_STORAGE_KEY] ?? columnOrder;
+    for (const columnId of Object.keys(COLUMN_STATUS)) {
+        columnOrder[columnId] ??= [];
+    }
+}
+
+async function saveOrder() {
+    await browser.storage.local.set({ [ORDER_STORAGE_KEY]: columnOrder });
+}
+
+// Removes the task from whichever column it was previously ordered in, then inserts it right before `beforeTaskId`
+// (or at the end when null). Using a sibling id instead of a numeric index keeps this correct even when only a
+// filtered subset of a column's cards is visible (e.g. inside a swimlane).
+function moveTaskInOrder(targetColumnId, taskId, beforeTaskId) {
+    for (const ids of Object.values(columnOrder)) {
+        const existingIndex = ids.indexOf(taskId);
+        if (existingIndex !== -1) {
+            ids.splice(existingIndex, 1);
+        }
+    }
+    const targetIds = columnOrder[targetColumnId];
+    const insertIndex = beforeTaskId ? targetIds.indexOf(beforeTaskId) : -1;
+    if (insertIndex === -1) {
+        targetIds.push(taskId);
+    } else {
+        targetIds.splice(insertIndex, 0, taskId);
+    }
+}
+
+// Tasks without a stored position keep their (stable) original order, appended after ordered ones.
+function sortTasksByOrder(tasks, orderIds) {
+    const rank = new Map(orderIds.map((id, index) => [id, index]));
+    return [...tasks].sort((a, b) => (rank.get(a.id) ?? Infinity) - (rank.get(b.id) ?? Infinity));
+}
+
+function formatDate(value) {
+    const date = new Date(value);
+    return Number.isNaN(date.getTime()) ? value : date.toLocaleDateString();
+}
+
+// yyyy-mm-dd for <input type="date">, since editing always stores dates without a time component.
+function toDateInputValue(value) {
+    const date = new Date(value);
+    return value && !Number.isNaN(date.getTime()) ? date.toISOString().slice(0, 10) : '';
+}
+
+// A click-to-edit field (title/description) shown inline on a card, with a save (check) and cancel (cross) button.
+// Disables the card's draggable attribute while editing so selecting text doesn't start a drag.
+function renderEditableField(card, task, field, { wrapperClass, displayTag, displayClass, editTag, tooltip, placeholder }) {
+    const wrapper = document.createElement('div');
+    wrapper.className = wrapperClass;
+
+    function showDisplay() {
+        card.draggable = true;
+        wrapper.replaceChildren();
+
+        const display = document.createElement(displayTag);
+        display.className = `${displayClass} editable-field`;
+        display.textContent = task[field] || placeholder || '';
+        if (tooltip && task[field]) {
+            display.title = task[field];
+        }
+        display.addEventListener('click', showEdit);
+        wrapper.append(display);
+    }
+
+    function showEdit() {
+        card.draggable = false;
+        wrapper.replaceChildren();
+
+        const input = document.createElement(editTag);
+        input.className = 'form-control form-control-sm';
+        input.value = task[field];
+        if (editTag === 'textarea') {
+            input.rows = 2;
+        }
+
+        const saveButton = document.createElement('button');
+        saveButton.type = 'button';
+        saveButton.className = 'btn btn-sm btn-link text-success p-0';
+        saveButton.innerHTML = '<i class="bi bi-check-lg"></i>';
+        saveButton.addEventListener('click', () => saveTaskField(task.id, field, input.value));
+
+        const cancelButton = document.createElement('button');
+        cancelButton.type = 'button';
+        cancelButton.className = 'btn btn-sm btn-link text-danger p-0';
+        cancelButton.innerHTML = '<i class="bi bi-x-lg"></i>';
+        cancelButton.addEventListener('click', showDisplay);
+
+        input.addEventListener('keydown', event => {
+            if (event.key === 'Enter' && editTag !== 'textarea') {
+                event.preventDefault();
+                saveButton.click();
+            } else if (event.key === 'Escape') {
+                event.preventDefault();
+                cancelButton.click();
+            }
+        });
+
+        const editRow = document.createElement('div');
+        editRow.className = 'd-flex align-items-start gap-1';
+
+        const buttons = document.createElement('div');
+        buttons.className = 'd-flex flex-column';
+        buttons.append(saveButton, cancelButton);
+
+        editRow.append(input, buttons);
+        wrapper.append(editRow);
+        input.focus();
+        input.select();
+    }
+
+    showDisplay();
+    return wrapper;
+}
+
+async function saveTaskField(taskId, field, value) {
+    const calendarItem = calendarItemById.get(taskId);
+    if (!calendarItem) {
+        return;
+    }
+
+    const property = FIELD_PROPERTY_MAP[field];
+    const vtodo = findComponent(calendarItem.item, 'vtodo');
+    setPropertyValue(vtodo, property.name, property.type === 'integer' ? Number(value) : value, property.type);
+
+    await browser.calendar.items.update(calendarItem.calendarId, taskId, {
+        format: 'jcal',
+        item: calendarItem.item,
+    });
+
+    await refreshBoard();
+}
+
+// value, badge class, none has its own neutral style since the badge is always shown (clickable to assign a priority).
+const PRIORITY_OPTIONS = [
+    { value: 0, messageKey: 'nonePriority', badgeClass: 'text-bg-light' },
+    { value: 1, messageKey: 'highPriority', badgeClass: 'text-bg-danger' },
+    { value: 5, messageKey: 'mediumPriority', badgeClass: 'text-bg-warning' },
+    { value: 9, messageKey: 'lowPriority', badgeClass: 'text-bg-secondary' },
+];
+
+function getPriorityOption(priority) {
+    return PRIORITY_OPTIONS.find(option => option.value === priority)
+        ?? (priority >= 1 && priority <= 4 ? PRIORITY_OPTIONS[1]
+            : priority >= 6 && priority <= 9 ? PRIORITY_OPTIONS[3]
+                : PRIORITY_OPTIONS[0]);
+}
+
+// Closes an open badge menu as soon as a click lands outside of it.
+function closeMenuOnOutsideClick(wrapper, showBadge) {
+    const handler = event => {
+        if (!wrapper.contains(event.target)) {
+            document.removeEventListener('click', handler, true);
+            showBadge();
+        }
+    };
+    setTimeout(() => document.addEventListener('click', handler, true));
+}
+
+// A badge that, on click, expands into a small menu of all priority options to pick from.
+function renderPriorityField(card, task) {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'position-relative';
+
+    function showBadge() {
+        wrapper.replaceChildren();
+
+        const option = getPriorityOption(task.priority);
+        const badge = document.createElement('span');
+        badge.className = `badge badge-lg editable-field ${option.badgeClass}`;
+        badge.textContent = browser.i18n.getMessage(option.messageKey);
+        badge.addEventListener('click', showMenu);
+        wrapper.append(badge);
+    }
+
+    function showMenu() {
+        wrapper.replaceChildren();
+
+        const menu = document.createElement('div');
+        menu.className = 'position-absolute top-100 end-0 d-flex flex-column gap-1 bg-body border rounded p-1 shadow-sm';
+        menu.style.zIndex = 10;
+
+        for (const option of PRIORITY_OPTIONS) {
+            const item = document.createElement('span');
+            item.className = `badge badge-lg editable-field ${option.badgeClass}`;
+            item.textContent = browser.i18n.getMessage(option.messageKey);
+            item.addEventListener('click', () => saveTaskField(task.id, 'priority', option.value));
+            menu.append(item);
+        }
+
+        wrapper.append(menu);
+        closeMenuOnOutsideClick(wrapper, showBadge);
+    }
+
+    showBadge();
+    return wrapper;
+}
+
+// Applies a category's Thunderbird color to a badge, falling back to a neutral style when unknown.
+function styleCategoryBadge(badge, name) {
+    const color = getCategoryColor(name);
+    if (color) {
+        badge.style.backgroundColor = color;
+        badge.style.color = getContrastingTextColor(color);
+    } else {
+        badge.classList.add('text-bg-light');
+    }
+}
+
+// A badge that, on click, expands into a menu of Thunderbird's configured categories plus a field to add a new one.
+function renderCategoryField(card, task) {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'position-relative';
+
+    function showBadge() {
+        wrapper.replaceChildren();
+
+        const badge = document.createElement('span');
+        badge.className = 'badge badge-lg editable-field';
+        badge.textContent = task.categories || browser.i18n.getMessage('noCategoryLabel');
+        styleCategoryBadge(badge, task.categories);
+        badge.addEventListener('click', showMenu);
+        wrapper.append(badge);
+    }
+
+    function showMenu() {
+        wrapper.replaceChildren();
+
+        const menu = document.createElement('div');
+        menu.className = 'position-absolute top-100 end-0 d-flex flex-column gap-1 bg-body border rounded p-1 shadow-sm';
+        menu.style.zIndex = 10;
+        menu.style.minWidth = '8rem';
+        menu.style.maxHeight = '16rem';
+        menu.style.overflowY = 'auto';
+
+        const noneItem = document.createElement('span');
+        noneItem.className = 'badge badge-lg editable-field text-bg-light';
+        noneItem.textContent = browser.i18n.getMessage('noCategoryLabel');
+        noneItem.addEventListener('click', () => saveTaskField(task.id, 'categories', ''));
+        menu.append(noneItem);
+
+        for (const category of knownCategories) {
+            const item = document.createElement('span');
+            item.className = 'badge badge-lg editable-field';
+            item.textContent = category.name;
+            styleCategoryBadge(item, category.name);
+            item.addEventListener('click', () => saveTaskField(task.id, 'categories', category.name));
+            menu.append(item);
+        }
+
+        const addRow = document.createElement('div');
+        addRow.className = 'd-flex gap-1';
+
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.className = 'form-control form-control-sm';
+        input.placeholder = browser.i18n.getMessage('categoriesField');
+
+        const addButton = document.createElement('button');
+        addButton.type = 'button';
+        addButton.className = 'btn btn-sm btn-link text-success p-0';
+        addButton.innerHTML = '<i class="bi bi-check-lg"></i>';
+        addButton.addEventListener('click', () => {
+            if (input.value.trim()) {
+                saveTaskField(task.id, 'categories', input.value.trim());
+            }
+        });
+        input.addEventListener('keydown', event => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                addButton.click();
+            }
+        });
+
+        addRow.append(input, addButton);
+        menu.append(addRow);
+
+        wrapper.append(menu);
+        closeMenuOnOutsideClick(wrapper, showBadge);
+    }
+
+    showBadge();
+    return wrapper;
+}
+
+// A progress bar that, on click, turns into a range slider confirmed with a check/cross button.
+function renderProgressField(card, task) {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'mb-1';
+
+    function showBar() {
+        card.draggable = true;
+        wrapper.replaceChildren();
+
+        const progress = document.createElement('div');
+        progress.className = 'progress editable-field';
+        progress.style.height = '6px';
+        progress.title = `${task.percentComplete}%`;
+
+        const bar = document.createElement('div');
+        bar.className = `progress-bar${task.percentComplete === 0 ? ' bg-secondary' : ''}`;
+        bar.style.width = `${task.percentComplete}%`;
+        bar.setAttribute('role', 'progressbar');
+        bar.setAttribute('aria-valuenow', String(task.percentComplete));
+        bar.setAttribute('aria-valuemin', '0');
+        bar.setAttribute('aria-valuemax', '100');
+        progress.append(bar);
+
+        progress.addEventListener('click', showSlider);
+        wrapper.append(progress);
+    }
+
+    function showSlider() {
+        card.draggable = false;
+        wrapper.replaceChildren();
+
+        const input = document.createElement('input');
+        input.type = 'range';
+        input.className = 'form-range';
+        input.min = 0;
+        input.max = 100;
+        input.step = 5;
+        input.value = task.percentComplete;
+
+        const valueLabel = document.createElement('span');
+        valueLabel.className = 'small text-muted';
+        valueLabel.textContent = `${input.value}%`;
+        input.addEventListener('input', () => {
+            valueLabel.textContent = `${input.value}%`;
+        });
+
+        const saveButton = document.createElement('button');
+        saveButton.type = 'button';
+        saveButton.className = 'btn btn-sm btn-link text-success p-0';
+        saveButton.innerHTML = '<i class="bi bi-check-lg"></i>';
+        saveButton.addEventListener('click', () => saveTaskField(task.id, 'percentComplete', input.value));
+
+        const cancelButton = document.createElement('button');
+        cancelButton.type = 'button';
+        cancelButton.className = 'btn btn-sm btn-link text-danger p-0';
+        cancelButton.innerHTML = '<i class="bi bi-x-lg"></i>';
+        cancelButton.addEventListener('click', showBar);
+
+        input.addEventListener('keydown', event => {
+            if (event.key === 'Escape') {
+                event.preventDefault();
+                cancelButton.click();
+            }
+        });
+
+        const editRow = document.createElement('div');
+        editRow.className = 'd-flex align-items-center gap-1';
+        editRow.append(input, valueLabel, saveButton, cancelButton);
+
+        wrapper.append(editRow);
+        input.focus();
+    }
+
+    showBar();
+    return wrapper;
+}
+
+function renderTaskCard(task) {
+    const card = document.createElement('div');
+    card.className = 'card mb-2';
+    card.draggable = true;
+    card.dataset.taskId = task.id;
+
+    const categoryColor = getCategoryColor(task.categories);
+    if (categoryColor) {
+        card.style.backgroundColor = toPastel(categoryColor);
+    }
+
+    const body = document.createElement('div');
+    body.className = 'card-body';
+
+    const header = document.createElement('div');
+    header.className = 'd-flex justify-content-between align-items-start gap-2';
+
+    header.append(renderEditableField(card, task, 'title', {
+        wrapperClass: 'flex-grow-1 min-w-0',
+        displayTag: 'h6',
+        displayClass: 'card-title mb-1 fw-bold text-truncate',
+        editTag: 'input',
+    }));
+
+    const actions = document.createElement('div');
+    actions.className = 'd-flex align-items-center gap-2 flex-shrink-0';
+
+    // Hidden until the mouse hovers the card (see .card-actions in ui.css).
+    const iconActions = document.createElement('div');
+    iconActions.className = 'card-actions d-flex align-items-center gap-2';
+
+    const editButton = document.createElement('button');
+    editButton.type = 'button';
+    editButton.className = 'btn btn-sm btn-link text-muted p-0';
+    editButton.dataset.action = 'edit';
+    editButton.innerHTML = '<i class="bi bi-pencil"></i>';
+    iconActions.append(editButton);
+
+    // Moves the task to "Cancelled" first; only deletes for good once it's already there.
+    const deleteButton = document.createElement('button');
+    deleteButton.type = 'button';
+    deleteButton.className = 'btn btn-sm btn-link text-muted p-0';
+    deleteButton.dataset.action = 'delete';
+    deleteButton.innerHTML = '<i class="bi bi-trash"></i>';
+    iconActions.append(deleteButton);
+
+    actions.append(iconActions);
+
+    const badgeRow = document.createElement('div');
+    badgeRow.className = 'd-flex gap-1';
+    badgeRow.append(renderPriorityField(card, task), renderCategoryField(card, task));
+    actions.append(badgeRow);
+
+    header.append(actions);
+    body.append(header);
+
+    body.append(renderEditableField(card, task, 'description', {
+        wrapperClass: 'mb-1',
+        displayTag: 'div',
+        displayClass: 'card-description',
+        editTag: 'textarea',
+        tooltip: true,
+        placeholder: '-',
+    }));
+
+    if (task.due) {
+        const due = document.createElement('div');
+        due.className = 'text-muted small mb-1';
+
+        const icon = document.createElement('i');
+        icon.className = 'bi bi-calendar-event me-1';
+
+        due.append(icon, formatDate(task.due));
+        body.append(due);
+    }
+
+    body.append(renderProgressField(card, task));
+
+    card.append(body);
+    return card;
+}
+
+const COLUMN_DEFINITIONS = [
+    { id: 'needsAction', messageKey: 'needsActionStatus' },
+    { id: 'inProcess', messageKey: 'inProcessStatus' },
+    { id: 'completed', messageKey: 'completedStatus' },
+    { id: 'cancelled', messageKey: 'cancelledStatus' },
+];
+
+function groupTasksByColumn(tasks) {
+    const byColumn = { needsAction: [], inProcess: [], completed: [], cancelled: [] };
+    for (const task of tasks) {
+        byColumn[STATUS_COLUMNS[task.status] ?? 'needsAction'].push(task);
+    }
+    return byColumn;
+}
+
+// Builds one row of the four status columns, used both for the flat board and for each swimlane.
+function createColumnsRow(tasksByColumn) {
+    const row = document.createElement('div');
+    row.className = 'row h-100 flex-nowrap';
+
+    for (const { id, messageKey } of COLUMN_DEFINITIONS) {
+        const col = document.createElement('div');
+        col.className = 'col d-flex flex-column';
+
+        const heading = document.createElement('h5');
+        heading.textContent = browser.i18n.getMessage(messageKey);
+        col.append(heading);
+
+        const columnBody = document.createElement('div');
+        columnBody.className = 'flex-grow-1';
+        columnBody.dataset.column = id;
+
+        for (const task of sortTasksByOrder(tasksByColumn[id] ?? [], columnOrder[id])) {
+            columnBody.append(renderTaskCard(task));
+        }
+
+        col.append(columnBody);
+        row.append(col);
+    }
+
+    return row;
+}
+
+// Splits tasks into swimlane groups for the selected grouping, skipping groups with no tasks.
+function getTaskGroups(tasks) {
+    if (groupBy === 'priority') {
+        // Most important first: high, medium, low, then tasks without a priority.
+        return [PRIORITY_OPTIONS[1], PRIORITY_OPTIONS[2], PRIORITY_OPTIONS[3], PRIORITY_OPTIONS[0]]
+            .map(option => ({
+                label: browser.i18n.getMessage(option.messageKey),
+                color: null,
+                tasks: tasks.filter(task => getPriorityOption(task.priority).value === option.value),
+            }))
+            .filter(group => group.tasks.length > 0);
+    }
+
+    if (groupBy === 'category') {
+        const groups = knownCategories
+            .map(category => ({
+                label: category.name,
+                color: category.color,
+                tasks: tasks.filter(task => task.categories === category.name),
+            }))
+            .filter(group => group.tasks.length > 0);
+
+        const withoutCategory = tasks.filter(task => !task.categories);
+        if (withoutCategory.length > 0) {
+            groups.push({ label: browser.i18n.getMessage('noCategoryLabel'), color: null, tasks: withoutCategory });
+        }
+        return groups;
+    }
+
+    return [];
+}
+
+// An accordion where only one swimlane is expanded at a time (Bootstrap enforces this via data-bs-parent).
+function createSwimlaneAccordion(groups) {
+    const accordion = document.createElement('div');
+    accordion.className = 'accordion';
+    accordion.id = 'swimlaneAccordion';
+
+    groups.forEach((group, index) => {
+        const collapseId = `swimlane-collapse-${index}`;
+
+        const item = document.createElement('div');
+        item.className = 'accordion-item';
+
+        const header = document.createElement('h2');
+        header.className = 'accordion-header';
+
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = `accordion-button${index === 0 ? '' : ' collapsed'}`;
+        button.dataset.bsToggle = 'collapse';
+        button.dataset.bsTarget = `#${collapseId}`;
+        button.textContent = `${group.label} (${group.tasks.length})`;
+        if (group.color) {
+            button.style.borderLeft = `6px solid ${group.color}`;
+        }
+        header.append(button);
+
+        const collapse = document.createElement('div');
+        collapse.id = collapseId;
+        collapse.className = `accordion-collapse collapse${index === 0 ? ' show' : ''}`;
+        collapse.dataset.bsParent = '#swimlaneAccordion';
+
+        const body = document.createElement('div');
+        body.className = 'accordion-body';
+        body.append(createColumnsRow(groupTasksByColumn(group.tasks)));
+        collapse.append(body);
+
+        item.append(header, collapse);
+        accordion.append(item);
+    });
+
+    return accordion;
+}
+
+function renderBoard(tasks) {
+    taskById = new Map(tasks.map(task => [task.id, task]));
+
+    const boardElement = document.getElementById('board');
+    boardElement.replaceChildren();
+
+    if (groupBy === 'none') {
+        boardElement.append(createColumnsRow(groupTasksByColumn(tasks)));
+        return;
+    }
+
+    boardElement.append(createSwimlaneAccordion(getTaskGroups(tasks)));
+}
+
+async function loadTasks() {
+    const items = await browser.calendar.items.query({ type: 'task', returnFormat: 'jcal' });
+    calendarItemById = new Map(items.map(item => [item.id, item]));
+    return items.map(getTaskFromCalendarItem);
+}
+
+async function refreshBoard() {
+    renderBoard(await loadTasks());
+}
+
+async function moveTaskToStatus(taskId, newStatus) {
+    const calendarItem = calendarItemById.get(taskId);
+    const task = taskById.get(taskId);
+    if (!calendarItem || !task || task.status === newStatus) {
+        return;
+    }
+
+    const vtodo = findComponent(calendarItem.item, 'vtodo');
+    setPropertyValue(vtodo, 'status', newStatus);
+    if (newStatus === 'COMPLETED') {
+        setPropertyValue(vtodo, 'percent-complete', 100, 'integer');
+    } else if (task.percentComplete === 100) {
+        setPropertyValue(vtodo, 'percent-complete', 0, 'integer');
+    }
+
+    await browser.calendar.items.update(calendarItem.calendarId, taskId, {
+        format: 'jcal',
+        item: calendarItem.item,
+    });
+}
+
+async function handleDeleteAction(taskId) {
+    const task = taskById.get(taskId);
+    if (!task) {
+        return;
+    }
+
+    // First click retires the task, second click (once it's already cancelled) removes it for good.
+    if (task.status !== 'CANCELLED') {
+        await moveTaskToStatus(taskId, 'CANCELLED');
+        await refreshBoard();
+        return;
+    }
+
+    if (!confirm(browser.i18n.getMessage('confirmDeletionMessage'))) {
+        return;
+    }
+
+    const calendarItem = calendarItemById.get(taskId);
+    await browser.calendar.items.remove(calendarItem.calendarId, taskId);
+    await refreshBoard();
+}
+
+const editModalElement = document.getElementById('taskEditModal');
+const editForm = document.getElementById('taskEditForm');
+let editModal = null;
+let editingTaskId = null;
+
+function openEditModal(taskId) {
+    const task = taskById.get(taskId);
+    if (!task) {
+        return;
+    }
+
+    editingTaskId = taskId;
+    editForm.elements.title.value = task.title;
+    editForm.elements.status.value = task.status;
+    editForm.elements.priority.value = String(task.priority || 0);
+    editForm.elements.start.value = toDateInputValue(task.start);
+    editForm.elements.due.value = toDateInputValue(task.due);
+    editForm.elements.percentComplete.value = task.percentComplete || 0;
+    editForm.elements.description.value = task.description;
+
+    editModal ??= new bootstrap.Modal(editModalElement);
+    editModal.show();
+}
+
+async function saveEditForm() {
+    const calendarItem = calendarItemById.get(editingTaskId);
+    if (!calendarItem) {
+        return;
+    }
+
+    const vtodo = findComponent(calendarItem.item, 'vtodo');
+    setPropertyValue(vtodo, 'summary', editForm.elements.title.value);
+    setPropertyValue(vtodo, 'status', editForm.elements.status.value);
+    setPropertyValue(vtodo, 'priority', Number(editForm.elements.priority.value), 'integer');
+    setPropertyValue(vtodo, 'percent-complete', Number(editForm.elements.percentComplete.value) || 0, 'integer');
+    setPropertyValue(vtodo, 'description', editForm.elements.description.value);
+    if (editForm.elements.start.value) {
+        setPropertyValue(vtodo, 'dtstart', editForm.elements.start.value, 'date');
+    }
+    if (editForm.elements.due.value) {
+        setPropertyValue(vtodo, 'due', editForm.elements.due.value, 'date');
+    }
+
+    await browser.calendar.items.update(calendarItem.calendarId, editingTaskId, {
+        format: 'jcal',
+        item: calendarItem.item,
+    });
+
+    editModal.hide();
+    editingTaskId = null;
+    await refreshBoard();
+}
+
+function initTaskActions() {
+    document.getElementById('board').addEventListener('click', event => {
+        const button = event.target.closest('[data-action]');
+        const taskId = button?.closest('.card')?.dataset.taskId;
+        if (!taskId) {
+            return;
+        }
+
+        if (button.dataset.action === 'edit') {
+            openEditModal(taskId);
+        } else if (button.dataset.action === 'delete') {
+            handleDeleteAction(taskId);
+        }
+    });
+
+    editForm.addEventListener('submit', event => {
+        event.preventDefault();
+        saveEditForm();
+    });
+}
+
+// Shared insertion-line element, moved to the current drop position while dragging over a column.
+let dropIndicator = null;
+
+function getDropIndicator() {
+    dropIndicator ??= document.createElement('div');
+    dropIndicator.className = 'drop-indicator';
+    return dropIndicator;
+}
+
+// Finds the first card (excluding the one being dragged) whose vertical midpoint is below `y`.
+function getCardAfterPoint(column, y) {
+    const cards = [...column.querySelectorAll('.card:not(.dragging)')];
+    return cards.reduce((closest, card) => {
+        const box = card.getBoundingClientRect();
+        const offset = y - box.top - box.height / 2;
+        return offset < 0 && offset > closest.offset ? { offset, element: card } : closest;
+    }, { offset: Number.NEGATIVE_INFINITY, element: null }).element;
+}
+
+function initDragAndDrop() {
+    const board = document.getElementById('board');
+
+    board.addEventListener('dragstart', event => {
+        const card = event.target.closest('.card');
+        if (!card) {
+            return;
+        }
+        event.dataTransfer.effectAllowed = 'move';
+        event.dataTransfer.setData('text/plain', card.dataset.taskId);
+        card.classList.add('dragging');
+    });
+
+    board.addEventListener('dragend', event => {
+        event.target.closest('.card')?.classList.remove('dragging');
+        getDropIndicator().remove();
+    });
+
+    // Delegated (rather than bound per column) since columns are recreated on every render, and
+    // grouped mode can have several instances of the same column spread across swimlanes.
+    board.addEventListener('dragover', event => {
+        const column = event.target.closest('[data-column]');
+        if (!column) {
+            return;
+        }
+        event.preventDefault();
+        event.dataTransfer.dropEffect = 'move';
+
+        const indicator = getDropIndicator();
+        const afterElement = getCardAfterPoint(column, event.clientY);
+        if (afterElement) {
+            column.insertBefore(indicator, afterElement);
+        } else {
+            column.append(indicator);
+        }
+    });
+
+    board.addEventListener('drop', async event => {
+        const column = event.target.closest('[data-column]');
+        if (!column) {
+            return;
+        }
+        event.preventDefault();
+
+        const taskId = event.dataTransfer.getData('text/plain');
+        const afterElement = getCardAfterPoint(column, event.clientY);
+        const columnId = column.dataset.column;
+
+        getDropIndicator().remove();
+
+        moveTaskInOrder(columnId, taskId, afterElement?.dataset.taskId ?? null);
+        await saveOrder();
+        await moveTaskToStatus(taskId, COLUMN_STATUS[columnId]);
+        await refreshBoard();
+    });
+}
+
+function initGroupBySelect() {
+    const select = document.getElementById('groupBySelect');
+    select.value = groupBy;
+    select.addEventListener('change', () => {
+        groupBy = select.value;
+        refreshBoard();
+    });
+}
+
+async function init() {
+    await loadOrder();
+    await loadCategories();
+    initDragAndDrop();
+    initTaskActions();
+    initGroupBySelect();
+    await refreshBoard();
+}
+
+browser.calendar.items.onCreated.addListener(refreshBoard);
+browser.calendar.items.onUpdated.addListener(refreshBoard);
+browser.calendar.items.onRemoved.addListener(refreshBoard);
+
+init();
