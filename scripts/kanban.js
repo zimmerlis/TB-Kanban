@@ -982,6 +982,84 @@ function initSettings() {
     });
 }
 
+// Lets a modal be moved by dragging its header, since Bootstrap modals are centered/fixed by default.
+function makeModalDraggable(modalElement) {
+    const dialog = modalElement.querySelector('.modal-dialog');
+    const header = modalElement.querySelector('.modal-header');
+    if (!dialog || !header) {
+        return;
+    }
+
+    header.style.cursor = 'move';
+    let drag = null;
+
+    header.addEventListener('mousedown', event => {
+        if (event.target.closest('.btn-close')) {
+            return;
+        }
+        const rect = dialog.getBoundingClientRect();
+        drag = { offsetX: event.clientX - rect.left, offsetY: event.clientY - rect.top };
+        dialog.style.position = 'fixed';
+        dialog.style.margin = '0';
+        dialog.style.left = `${rect.left}px`;
+        dialog.style.top = `${rect.top}px`;
+        event.preventDefault();
+    });
+
+    document.addEventListener('mousemove', event => {
+        if (!drag) {
+            return;
+        }
+        dialog.style.left = `${event.clientX - drag.offsetX}px`;
+        dialog.style.top = `${event.clientY - drag.offsetY}px`;
+    });
+
+    document.addEventListener('mouseup', () => {
+        drag = null;
+    });
+
+    // Reset to Bootstrap's default centered position each time the modal is reopened.
+    modalElement.addEventListener('show.bs.modal', () => {
+        dialog.style.position = '';
+        dialog.style.margin = '';
+        dialog.style.left = '';
+        dialog.style.top = '';
+    });
+}
+
+// TODO: replace with the project's real donation link.
+const DONATE_URL = 'https://www.buymeacoffee.com/';
+// TODO: replace with the project's real source code URL once one exists again.
+const HOMEPAGE_URL = '';
+
+function initAbout() {
+    const manifest = browser.runtime.getManifest();
+    document.getElementById('aboutName').textContent = manifest.name;
+    document.getElementById('aboutVersion').textContent = `v${manifest.version}`;
+
+    const homepageLink = document.getElementById('aboutHomepageLink');
+    homepageLink.href = HOMEPAGE_URL || '#';
+    homepageLink.addEventListener('click', event => {
+        event.preventDefault();
+        if (HOMEPAGE_URL) {
+            browser.tabs.create({ url: HOMEPAGE_URL });
+        }
+    });
+
+    const donateLink = document.getElementById('aboutDonateLink');
+    donateLink.href = DONATE_URL || '#';
+    donateLink.addEventListener('click', event => {
+        event.preventDefault();
+        if (DONATE_URL) {
+            browser.tabs.create({ url: DONATE_URL });
+        }
+    });
+
+    document.getElementById('aboutButton').addEventListener('click', () => {
+        (bootstrap.Modal.getOrCreateInstance(document.getElementById('aboutModal'))).show();
+    });
+}
+
 async function init() {
     await loadOrder();
     await loadCategories();
@@ -991,6 +1069,10 @@ async function init() {
     initGroupBySelect();
     initThemeToggle();
     initSettings();
+    initAbout();
+    for (const modalId of ['taskEditModal', 'settingsModal', 'aboutModal']) {
+        makeModalDraggable(document.getElementById(modalId));
+    }
     applyTheme();
     await refreshBoard();
 }

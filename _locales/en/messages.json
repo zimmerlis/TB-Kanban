@@ -274,5 +274,29 @@
     "resetButton" : {
         "message" : "Reset to defaults",
         "description" : "Name of the reset button"
+    },
+    "aboutButtonLabel" : {
+        "message" : "About TB-Kanban",
+        "description" : "Title of the about button"
+    },
+    "aboutHeader" : {
+        "message" : "About TB-Kanban",
+        "description" : "Header of the about modal dialog"
+    },
+    "aboutTagline" : {
+        "message" : "A Kanban board for the tasks you already manage in Thunderbird.",
+        "description" : "Short tagline shown in the about dialog"
+    },
+    "aboutHomepageButton" : {
+        "message" : "Source code",
+        "description" : "Button linking to the project's source code"
+    },
+    "aboutDonateButton" : {
+        "message" : "Buy me a coffee",
+        "description" : "Button linking to the donation page"
+    },
+    "aboutCredits" : {
+        "message" : "Fork of iCanban by Jean-Yves Didier. Licensed under the Mozilla Public License 2.0.",
+        "description" : "Credits shown in the about dialog"
     }
 }
