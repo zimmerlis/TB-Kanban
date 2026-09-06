@@ -1,0 +1,314 @@
+{
+    "extensionName" : {
+        "message" : "TB-Kanban",
+        "description" : "Name of the extension"
+    },
+    "extensionDescription" : {
+        "message" : "As tarefas do iCal têm status perfeitos para um quadro Kanban básico. Esta extensão fornece isso para que você possa gerenciar suas tarefas visualmente. Há duas maneiras de exibir o quadro Kanban depois de instalada a extensão. A primeira é pelo botão 'Kanban' exibido na barra superior da janela ao consultar e-mails. A segunda é pelo menu 'Ferramentas', onde há um item chamado 'Exibir quadro Kanban'.",
+        "description" : "Description of the extension"
+    },
+    "menuItem" : {
+        "message" : "Exibir quadro Kanban",
+        "description" : "Menu item to start the kanban board"
+    },
+    "boardTitle" : {
+        "message" : "Quadro Kanban",
+        "description" : "Name of the HTML page displaying the Kanban board"
+    },
+    "compactModeSwitchLabel" : {
+        "message" : "Modo compacto",
+        "description" : "Name of the compact mode switch"
+    },
+    "filterButton": {
+        "message" : " Filtros",
+        "description" : "Name of the filter button"
+    },
+    "sortButton": {
+        "message" : " Configurações de ordenação",
+        "description" : "Name of the sort setting button"
+    },
+    "newTaskButton": {
+        "message" : " Nova tarefa...",
+        "description" : "Name of the new task button"
+    },
+    "refreshButton": {
+        "message" : " Atualizar",
+        "description" : "Name of the refresh button"
+    },
+    "helpButton": {
+        "message" : " Ajuda",
+        "description" : "Name of the help button"
+    },
+    "needsActionStatus" : {
+        "message" : " A fazer",
+        "description" : "Status for a task that needs action "
+    },
+    "inProcessStatus" : {
+        "message" : " Em andamento",
+        "description" : "Status for a task in process"
+    },
+    "completedStatus" : {
+        "message" : " Concluída",
+        "description" : "Status for a completed task"
+    },
+    "cancelledStatus" : {
+        "message" : " Cancelada",
+        "description" : "Status for a cancelled task"
+    },
+    "groupByLabel" : {
+        "message" : "Agrupar por:",
+        "description" : "Label of the swimlane grouping selector"
+    },
+    "confirmDeletionMessage" : {
+        "message" : "Tem certeza de que deseja excluir este item?",
+        "description" : "Message displayed when a task is deleted"
+    },
+    "titleField" : {
+        "message" : "Título",
+        "description" : "Name of the title field of a task"
+    },
+    "calendarField": {
+        "message" : "Calendário",
+        "description" : "Name of the calendar field of a task"
+    },
+    "parentField": {
+        "message": "Tarefa principal",
+        "description": "Selection of the parent task"
+    },
+    "noParentTask" : {
+        "message" : "Nenhuma",
+        "description" : "No parent task"
+    },
+    "startDateField": {
+        "message": "Início",
+        "description": "Name of the task start date field"
+    },
+    "dueDateField" : {
+        "message" : "Data de vencimento",
+        "description" : "Name of the due date field of a task"
+    },
+    "percentCompleteField" : {
+        "message" : "Percentual concluído",
+        "description" : "Name of the percent complete field of a task"
+    },
+    "statusField" : {
+        "message" : "Status",
+        "description" : "Name of the status field of a task"
+    },
+    "priorityField" : {
+        "message" : "Prioridade",
+        "description" : "Name of the priority field of a task"
+    },
+    "nonePriority" : {
+        "message" : "Nenhuma",
+        "description" : "Name of none priority"
+    },
+    "lowPriority" : {
+        "message" : "Baixa",
+        "description" : "Name of low priority"
+    },
+    "mediumPriority" : {
+        "message" : "Média",
+        "description" : "Name of normal priority"
+    },
+    "highPriority" : {
+        "message" : "Alta",
+        "description" : "Name of high priority"
+    },
+    "descriptionField" : {
+        "message" : "Descrição",
+        "description" : "Name of the description field"
+    },
+    "categoriesField" : {
+        "message" : "Categorias",
+        "description" : "Name of the categories field"
+    },
+    "noCategoryLabel" : {
+        "message" : "Nenhuma",
+        "description" : "Label shown on the category badge when a task has no category"
+    },
+    "emptyColumnLabel" : {
+        "message" : "Nenhuma tarefa",
+        "description" : "Placeholder shown in a column with no tasks"
+    },
+    "allCategoriesLabel" : {
+        "message" : "Todas as categorias",
+        "description" : "Name of the all categories label"
+    },
+    "withoutAny" : {
+        "message" : "Sem nenhuma",
+        "description" : "Label for selecting empty categories"
+    },
+    "closeButton" : {
+        "message" : "Fechar",
+        "description" : "Name of the close button"
+    },
+    "saveButton" : {
+        "message" : "Salvar",
+        "description" : "Name of the save button"
+    },
+    "applyButton" : {
+        "message" : "Aplicar",
+        "description" : "Name of the apply button"
+    },
+    "alertTask" : {
+        "message" : "Você deve preencher os campos obrigatórios antes de salvar uma nova tarefa.",
+        "description" : "Alert message displayed when a task is not well defined"
+    },
+    "editTaskHeader" : {
+        "message" : "Editar tarefa",
+        "description" : "Header of the task edit modal dialog"
+    },
+    "filterHeader" : {
+        "message" : "Configurações de filtro",
+        "description" : "Header of the filter modal dialog"
+    },
+    "calendarsFilter" : {
+        "message" : "Calendários",
+        "description" : "Filter by calendar"
+    },
+    "calendarCapabilityLabel" : {
+        "message" : "Somente calendários que gerenciam tarefas",
+        "description" : "Label for checking calendar capabilities"
+    },
+    "allCalendarsLabel" : {
+        "message" : "Todos os calendários abaixo",
+        "description" : "Label for all calendars switch"
+    },
+    "allPrioritiesLabel" : {
+        "message" : "Todas",
+        "description" : "Label for all priorities switch"
+    },
+    "sortHeader" : {
+        "message" : "Ordenar por",
+        "description" : "Header of the sort modal dialog"
+    },
+    "noneSort" : {
+        "message" : "Nenhum",
+        "description" : "None sort option"
+    },
+    "dueDateASort" : {
+        "message" : "Data de vencimento crescente",
+        "description" : "Due date ascending sort option"
+    },
+    "dueDateDSort" : {
+        "message" : "Data de vencimento decrescente",
+        "description" : "Due date descending sort option"
+    },
+    "priorityASort" : {
+        "message" : "Prioridade crescente",
+        "description" : "Priority ascending sort option"
+    },
+    "priorityDSort" : {
+        "message" : "Prioridade decrescente",
+        "description" : "Priority descending sort option"
+    },
+    "percentCompleteASort" : {
+        "message" : "Percentual concluído crescente",
+        "description" : "Percent complete ascending sort option"
+    },
+    "percentCompleteDSort" : {
+        "message" : "Percentual concluído decrescente",
+        "description" : "Percent complete descending sort option"
+    },
+    "helpHeader" : {
+        "message" : "Como usar o quadro Kanban",
+        "description" : "Header of the help modal dialog"
+    },
+    "help1" : {
+        "message" : "O quadro Kanban é uma ferramenta de visualização do trabalho que ajuda a gerenciar tarefas e projetos. O quadro é dividido em quatro colunas: 'A fazer', 'Em andamento', 'Concluída' e 'Cancelada'. Cada coluna representa uma etapa do processo de trabalho. Você pode mover tarefas entre colunas arrastando e soltando.",
+        "description" : "First paragraph of help modal dialog"
+    },
+    "help2" : {
+        "message" : "Para criar uma nova tarefa, clique no botão 'Nova tarefa...'. Preencha o formulário e clique em 'Salvar'. Para editar uma tarefa, clique no ícone de lápis no cartão da tarefa.",
+        "description" : "Second paragraph of help modal dialog"
+    },
+    "help3" : {
+        "message" : "Você pode filtrar tarefas por calendário e prioridade. Você pode ordenar tarefas por data de vencimento, prioridade e percentual concluído.",
+        "description" : "Third paragraph of help modal dialog"
+    },
+    "themeToggleLabel" : {
+        "message" : "Alternar entre tema claro e escuro",
+        "description" : "Title of the theme toggle button"
+    },
+    "settingsButtonLabel" : {
+        "message" : "Configurações do quadro",
+        "description" : "Title of the settings button"
+    },
+    "settingsHeader" : {
+        "message" : "Configurações do quadro",
+        "description" : "Header of the settings modal dialog"
+    },
+    "settingsLightSection" : {
+        "message" : "Tema claro",
+        "description" : "Section header for light theme settings"
+    },
+    "settingsDarkSection" : {
+        "message" : "Tema escuro",
+        "description" : "Section header for dark theme settings"
+    },
+    "settingsBackgroundColor" : {
+        "message" : "Cor de fundo",
+        "description" : "Label of the background color setting"
+    },
+    "settingsCardBackgroundColor" : {
+        "message" : "Fundo padrão dos cartões",
+        "description" : "Label of the default card background color setting"
+    },
+    "settingsCardBorderColor" : {
+        "message" : "Cor da borda dos cartões",
+        "description" : "Label of the card border color setting"
+    },
+    "settingsCardBorderWidth" : {
+        "message" : "Espessura da borda dos cartões (px)",
+        "description" : "Label of the card border width setting"
+    },
+    "settingsCardTextColor" : {
+        "message" : "Cor do texto dos cartões",
+        "description" : "Label of the card text color setting"
+    },
+    "settingsHeaderColor" : {
+        "message" : "Cor do cabeçalho da coluna",
+        "description" : "Label of the column header background color setting"
+    },
+    "settingsHeaderTextColor" : {
+        "message" : "Cor do texto do cabeçalho da coluna",
+        "description" : "Label of the column header text color setting"
+    },
+    "resetButton" : {
+        "message" : "Restaurar padrões",
+        "description" : "Name of the reset button"
+    },
+    "aboutButtonLabel" : {
+        "message" : "Sobre o TB-Kanban",
+        "description" : "Title of the about button"
+    },
+    "aboutHeader" : {
+        "message" : "Sobre o TB-Kanban",
+        "description" : "Header of the about modal dialog"
+    },
+    "aboutTagline" : {
+        "message" : "Um quadro Kanban para as tarefas que você já gerencia no Thunderbird.",
+        "description" : "Short tagline shown in the about dialog"
+    },
+    "aboutHomepageButton" : {
+        "message" : "Código-fonte",
+        "description" : "Button linking to the project's source code"
+    },
+    "aboutDonateButton" : {
+        "message" : "Me pague um café",
+        "description" : "Button linking to the donation page"
+    },
+    "aboutDonateHint" : {
+        "message" : "Não quer ver esta janela todos os dias? Me pague um café — isso já é suficiente para que ela pare de aparecer para sempre.",
+        "description" : "Hint shown above the credits, nudging towards a donation"
+    },
+    "aboutDonatedCheckboxLabel" : {
+        "message" : "Já doei – parar de exibir esta janela automaticamente",
+        "description" : "Label of the checkbox that permanently disables the daily about/donate prompt"
+    },
+    "aboutCredits" : {
+        "message" : "Licenciado sob a Mozilla Public License 2.0.",
+        "description" : "Credits shown in the about dialog"
+    }
+}

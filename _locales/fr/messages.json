@@ -1,0 +1,314 @@
+{
+    "extensionName" : {
+        "message" : "TB-Kanban",
+        "description" : "Name of the extension"
+    },
+    "extensionDescription" : {
+        "message" : "Les tâches iCal ont des statuts parfaitement adaptés à un tableau Kanban simple. Cette extension le propose afin que vous puissiez gérer vos tâches visuellement. Il existe deux façons d'afficher le tableau Kanban une fois l'extension installée. La première est via le bouton « Kanban » affiché dans la barre de fenêtre supérieure lors de la consultation des e-mails. La seconde est via le menu « Outils », dans lequel se trouve un élément nommé « Afficher le tableau Kanban ».",
+        "description" : "Description of the extension"
+    },
+    "menuItem" : {
+        "message" : "Afficher le tableau Kanban",
+        "description" : "Menu item to start the kanban board"
+    },
+    "boardTitle" : {
+        "message" : "Tableau Kanban",
+        "description" : "Name of the HTML page displaying the Kanban board"
+    },
+    "compactModeSwitchLabel" : {
+        "message" : "Mode compact",
+        "description" : "Name of the compact mode switch"
+    },
+    "filterButton": {
+        "message" : " Filtres",
+        "description" : "Name of the filter button"
+    },
+    "sortButton": {
+        "message" : " Paramètres de tri",
+        "description" : "Name of the sort setting button"
+    },
+    "newTaskButton": {
+        "message" : " Nouvelle tâche...",
+        "description" : "Name of the new task button"
+    },
+    "refreshButton": {
+        "message" : " Actualiser",
+        "description" : "Name of the refresh button"
+    },
+    "helpButton": {
+        "message" : " Aide",
+        "description" : "Name of the help button"
+    },
+    "needsActionStatus" : {
+        "message" : " À faire",
+        "description" : "Status for a task that needs action "
+    },
+    "inProcessStatus" : {
+        "message" : " En cours",
+        "description" : "Status for a task in process"
+    },
+    "completedStatus" : {
+        "message" : " Terminé",
+        "description" : "Status for a completed task"
+    },
+    "cancelledStatus" : {
+        "message" : " Annulé",
+        "description" : "Status for a cancelled task"
+    },
+    "groupByLabel" : {
+        "message" : "Grouper par :",
+        "description" : "Label of the swimlane grouping selector"
+    },
+    "confirmDeletionMessage" : {
+        "message" : "Voulez-vous vraiment supprimer cet élément ?",
+        "description" : "Message displayed when a task is deleted"
+    },
+    "titleField" : {
+        "message" : "Titre",
+        "description" : "Name of the title field of a task"
+    },
+    "calendarField": {
+        "message" : "Agenda",
+        "description" : "Name of the calendar field of a task"
+    },
+    "parentField": {
+        "message": "Tâche parente",
+        "description": "Selection of the parent task"
+    },
+    "noParentTask" : {
+        "message" : "Aucune",
+        "description" : "No parent task"
+    },
+    "startDateField": {
+        "message": "Début",
+        "description": "Name of the task start date field"
+    },
+    "dueDateField" : {
+        "message" : "Date d'échéance",
+        "description" : "Name of the due date field of a task"
+    },
+    "percentCompleteField" : {
+        "message" : "Pourcentage terminé",
+        "description" : "Name of the percent complete field of a task"
+    },
+    "statusField" : {
+        "message" : "Statut",
+        "description" : "Name of the status field of a task"
+    },
+    "priorityField" : {
+        "message" : "Priorité",
+        "description" : "Name of the priority field of a task"
+    },
+    "nonePriority" : {
+        "message" : "Aucune",
+        "description" : "Name of none priority"
+    },
+    "lowPriority" : {
+        "message" : "Basse",
+        "description" : "Name of low priority"
+    },
+    "mediumPriority" : {
+        "message" : "Moyenne",
+        "description" : "Name of normal priority"
+    },
+    "highPriority" : {
+        "message" : "Haute",
+        "description" : "Name of high priority"
+    },
+    "descriptionField" : {
+        "message" : "Description",
+        "description" : "Name of the description field"
+    },
+    "categoriesField" : {
+        "message" : "Catégories",
+        "description" : "Name of the categories field"
+    },
+    "noCategoryLabel" : {
+        "message" : "Aucune",
+        "description" : "Label shown on the category badge when a task has no category"
+    },
+    "emptyColumnLabel" : {
+        "message" : "Aucune tâche",
+        "description" : "Placeholder shown in a column with no tasks"
+    },
+    "allCategoriesLabel" : {
+        "message" : "Toutes les catégories",
+        "description" : "Name of the all categories label"
+    },
+    "withoutAny" : {
+        "message" : "Sans aucune",
+        "description" : "Label for selecting empty categories"
+    },
+    "closeButton" : {
+        "message" : "Fermer",
+        "description" : "Name of the close button"
+    },
+    "saveButton" : {
+        "message" : "Enregistrer",
+        "description" : "Name of the save button"
+    },
+    "applyButton" : {
+        "message" : "Appliquer",
+        "description" : "Name of the apply button"
+    },
+    "alertTask" : {
+        "message" : "Vous devez remplir les champs obligatoires avant de soumettre une nouvelle tâche.",
+        "description" : "Alert message displayed when a task is not well defined"
+    },
+    "editTaskHeader" : {
+        "message" : "Modifier la tâche",
+        "description" : "Header of the task edit modal dialog"
+    },
+    "filterHeader" : {
+        "message" : "Paramètres de filtre",
+        "description" : "Header of the filter modal dialog"
+    },
+    "calendarsFilter" : {
+        "message" : "Agendas",
+        "description" : "Filter by calendar"
+    },
+    "calendarCapabilityLabel" : {
+        "message" : "Uniquement les agendas gérant les tâches",
+        "description" : "Label for checking calendar capabilities"
+    },
+    "allCalendarsLabel" : {
+        "message" : "Tous les agendas ci-dessous",
+        "description" : "Label for all calendars switch"
+    },
+    "allPrioritiesLabel" : {
+        "message" : "Toutes",
+        "description" : "Label for all priorities switch"
+    },
+    "sortHeader" : {
+        "message" : "Trier par",
+        "description" : "Header of the sort modal dialog"
+    },
+    "noneSort" : {
+        "message" : "Aucun",
+        "description" : "None sort option"
+    },
+    "dueDateASort" : {
+        "message" : "Date d'échéance croissante",
+        "description" : "Due date ascending sort option"
+    },
+    "dueDateDSort" : {
+        "message" : "Date d'échéance décroissante",
+        "description" : "Due date descending sort option"
+    },
+    "priorityASort" : {
+        "message" : "Priorité croissante",
+        "description" : "Priority ascending sort option"
+    },
+    "priorityDSort" : {
+        "message" : "Priorité décroissante",
+        "description" : "Priority descending sort option"
+    },
+    "percentCompleteASort" : {
+        "message" : "Pourcentage terminé croissant",
+        "description" : "Percent complete ascending sort option"
+    },
+    "percentCompleteDSort" : {
+        "message" : "Pourcentage terminé décroissant",
+        "description" : "Percent complete descending sort option"
+    },
+    "helpHeader" : {
+        "message" : "Comment utiliser le tableau Kanban",
+        "description" : "Header of the help modal dialog"
+    },
+    "help1" : {
+        "message" : "Le tableau Kanban est un outil de visualisation du travail qui vous aide à gérer vos tâches et projets. Le tableau est divisé en quatre colonnes : « À faire », « En cours », « Terminé » et « Annulé ». Chaque colonne représente une étape du processus de travail. Vous pouvez déplacer les tâches entre les colonnes par glisser-déposer.",
+        "description" : "First paragraph of help modal dialog"
+    },
+    "help2" : {
+        "message" : "Pour créer une nouvelle tâche, cliquez sur le bouton « Nouvelle tâche... ». Remplissez le formulaire puis cliquez sur « Enregistrer ». Pour modifier une tâche, cliquez sur l'icône de crayon sur la carte de la tâche.",
+        "description" : "Second paragraph of help modal dialog"
+    },
+    "help3" : {
+        "message" : "Vous pouvez filtrer les tâches par agenda et par priorité. Vous pouvez trier les tâches par date d'échéance, priorité et pourcentage terminé.",
+        "description" : "Third paragraph of help modal dialog"
+    },
+    "themeToggleLabel" : {
+        "message" : "Basculer entre le thème clair et sombre",
+        "description" : "Title of the theme toggle button"
+    },
+    "settingsButtonLabel" : {
+        "message" : "Paramètres du tableau",
+        "description" : "Title of the settings button"
+    },
+    "settingsHeader" : {
+        "message" : "Paramètres du tableau",
+        "description" : "Header of the settings modal dialog"
+    },
+    "settingsLightSection" : {
+        "message" : "Thème clair",
+        "description" : "Section header for light theme settings"
+    },
+    "settingsDarkSection" : {
+        "message" : "Thème sombre",
+        "description" : "Section header for dark theme settings"
+    },
+    "settingsBackgroundColor" : {
+        "message" : "Couleur d'arrière-plan",
+        "description" : "Label of the background color setting"
+    },
+    "settingsCardBackgroundColor" : {
+        "message" : "Arrière-plan par défaut des cartes",
+        "description" : "Label of the default card background color setting"
+    },
+    "settingsCardBorderColor" : {
+        "message" : "Couleur de bordure des cartes",
+        "description" : "Label of the card border color setting"
+    },
+    "settingsCardBorderWidth" : {
+        "message" : "Épaisseur de bordure des cartes (px)",
+        "description" : "Label of the card border width setting"
+    },
+    "settingsCardTextColor" : {
+        "message" : "Couleur du texte des cartes",
+        "description" : "Label of the card text color setting"
+    },
+    "settingsHeaderColor" : {
+        "message" : "Couleur de l'en-tête de colonne",
+        "description" : "Label of the column header background color setting"
+    },
+    "settingsHeaderTextColor" : {
+        "message" : "Couleur du texte de l'en-tête de colonne",
+        "description" : "Label of the column header text color setting"
+    },
+    "resetButton" : {
+        "message" : "Réinitialiser",
+        "description" : "Name of the reset button"
+    },
+    "aboutButtonLabel" : {
+        "message" : "À propos de TB-Kanban",
+        "description" : "Title of the about button"
+    },
+    "aboutHeader" : {
+        "message" : "À propos de TB-Kanban",
+        "description" : "Header of the about modal dialog"
+    },
+    "aboutTagline" : {
+        "message" : "Un tableau Kanban pour les tâches que vous gérez déjà dans Thunderbird.",
+        "description" : "Short tagline shown in the about dialog"
+    },
+    "aboutHomepageButton" : {
+        "message" : "Code source",
+        "description" : "Button linking to the project's source code"
+    },
+    "aboutDonateButton" : {
+        "message" : "Offrez-moi un café",
+        "description" : "Button linking to the donation page"
+    },
+    "aboutDonateHint" : {
+        "message" : "Vous ne voulez pas voir cette fenêtre tous les jours ? Offrez-moi un café — cela suffit pour la faire disparaître définitivement.",
+        "description" : "Hint shown above the credits, nudging towards a donation"
+    },
+    "aboutDonatedCheckboxLabel" : {
+        "message" : "J'ai fait un don – ne plus afficher cette fenêtre automatiquement",
+        "description" : "Label of the checkbox that permanently disables the daily about/donate prompt"
+    },
+    "aboutCredits" : {
+        "message" : "Sous licence Mozilla Public License 2.0.",
+        "description" : "Credits shown in the about dialog"
+    }
+}

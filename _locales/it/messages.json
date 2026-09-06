@@ -1,0 +1,314 @@
+{
+    "extensionName" : {
+        "message" : "TB-Kanban",
+        "description" : "Name of the extension"
+    },
+    "extensionDescription" : {
+        "message" : "Le attività iCal hanno stati perfetti per una semplice bacheca Kanban. Questa estensione lo rende possibile, così puoi gestire le tue attività visivamente. Ci sono due modi per visualizzare la bacheca Kanban una volta installata l'estensione. Il primo è tramite il pulsante 'Kanban' mostrato nella barra superiore della finestra durante la consultazione delle email. Il secondo è tramite il menu 'Strumenti', in cui si trova una voce chiamata 'Mostra bacheca Kanban'.",
+        "description" : "Description of the extension"
+    },
+    "menuItem" : {
+        "message" : "Mostra bacheca Kanban",
+        "description" : "Menu item to start the kanban board"
+    },
+    "boardTitle" : {
+        "message" : "Bacheca Kanban",
+        "description" : "Name of the HTML page displaying the Kanban board"
+    },
+    "compactModeSwitchLabel" : {
+        "message" : "Modalità compatta",
+        "description" : "Name of the compact mode switch"
+    },
+    "filterButton": {
+        "message" : " Filtri",
+        "description" : "Name of the filter button"
+    },
+    "sortButton": {
+        "message" : " Impostazioni di ordinamento",
+        "description" : "Name of the sort setting button"
+    },
+    "newTaskButton": {
+        "message" : " Nuova attività...",
+        "description" : "Name of the new task button"
+    },
+    "refreshButton": {
+        "message" : " Aggiorna",
+        "description" : "Name of the refresh button"
+    },
+    "helpButton": {
+        "message" : " Guida",
+        "description" : "Name of the help button"
+    },
+    "needsActionStatus" : {
+        "message" : " Da fare",
+        "description" : "Status for a task that needs action "
+    },
+    "inProcessStatus" : {
+        "message" : " In corso",
+        "description" : "Status for a task in process"
+    },
+    "completedStatus" : {
+        "message" : " Completata",
+        "description" : "Status for a completed task"
+    },
+    "cancelledStatus" : {
+        "message" : " Annullata",
+        "description" : "Status for a cancelled task"
+    },
+    "groupByLabel" : {
+        "message" : "Raggruppa per:",
+        "description" : "Label of the swimlane grouping selector"
+    },
+    "confirmDeletionMessage" : {
+        "message" : "Vuoi davvero eliminare questo elemento?",
+        "description" : "Message displayed when a task is deleted"
+    },
+    "titleField" : {
+        "message" : "Titolo",
+        "description" : "Name of the title field of a task"
+    },
+    "calendarField": {
+        "message" : "Calendario",
+        "description" : "Name of the calendar field of a task"
+    },
+    "parentField": {
+        "message": "Attività principale",
+        "description": "Selection of the parent task"
+    },
+    "noParentTask" : {
+        "message" : "Nessuna",
+        "description" : "No parent task"
+    },
+    "startDateField": {
+        "message": "Inizio",
+        "description": "Name of the task start date field"
+    },
+    "dueDateField" : {
+        "message" : "Data di scadenza",
+        "description" : "Name of the due date field of a task"
+    },
+    "percentCompleteField" : {
+        "message" : "Percentuale completata",
+        "description" : "Name of the percent complete field of a task"
+    },
+    "statusField" : {
+        "message" : "Stato",
+        "description" : "Name of the status field of a task"
+    },
+    "priorityField" : {
+        "message" : "Priorità",
+        "description" : "Name of the priority field of a task"
+    },
+    "nonePriority" : {
+        "message" : "Nessuna",
+        "description" : "Name of none priority"
+    },
+    "lowPriority" : {
+        "message" : "Bassa",
+        "description" : "Name of low priority"
+    },
+    "mediumPriority" : {
+        "message" : "Media",
+        "description" : "Name of normal priority"
+    },
+    "highPriority" : {
+        "message" : "Alta",
+        "description" : "Name of high priority"
+    },
+    "descriptionField" : {
+        "message" : "Descrizione",
+        "description" : "Name of the description field"
+    },
+    "categoriesField" : {
+        "message" : "Categorie",
+        "description" : "Name of the categories field"
+    },
+    "noCategoryLabel" : {
+        "message" : "Nessuna",
+        "description" : "Label shown on the category badge when a task has no category"
+    },
+    "emptyColumnLabel" : {
+        "message" : "Nessuna attività",
+        "description" : "Placeholder shown in a column with no tasks"
+    },
+    "allCategoriesLabel" : {
+        "message" : "Tutte le categorie",
+        "description" : "Name of the all categories label"
+    },
+    "withoutAny" : {
+        "message" : "Senza alcuna",
+        "description" : "Label for selecting empty categories"
+    },
+    "closeButton" : {
+        "message" : "Chiudi",
+        "description" : "Name of the close button"
+    },
+    "saveButton" : {
+        "message" : "Salva",
+        "description" : "Name of the save button"
+    },
+    "applyButton" : {
+        "message" : "Applica",
+        "description" : "Name of the apply button"
+    },
+    "alertTask" : {
+        "message" : "Devi compilare i campi obbligatori prima di inviare una nuova attività.",
+        "description" : "Alert message displayed when a task is not well defined"
+    },
+    "editTaskHeader" : {
+        "message" : "Modifica attività",
+        "description" : "Header of the task edit modal dialog"
+    },
+    "filterHeader" : {
+        "message" : "Impostazioni filtro",
+        "description" : "Header of the filter modal dialog"
+    },
+    "calendarsFilter" : {
+        "message" : "Calendari",
+        "description" : "Filter by calendar"
+    },
+    "calendarCapabilityLabel" : {
+        "message" : "Solo calendari che gestiscono attività",
+        "description" : "Label for checking calendar capabilities"
+    },
+    "allCalendarsLabel" : {
+        "message" : "Tutti i calendari sottostanti",
+        "description" : "Label for all calendars switch"
+    },
+    "allPrioritiesLabel" : {
+        "message" : "Tutte",
+        "description" : "Label for all priorities switch"
+    },
+    "sortHeader" : {
+        "message" : "Ordina per",
+        "description" : "Header of the sort modal dialog"
+    },
+    "noneSort" : {
+        "message" : "Nessuno",
+        "description" : "None sort option"
+    },
+    "dueDateASort" : {
+        "message" : "Data di scadenza crescente",
+        "description" : "Due date ascending sort option"
+    },
+    "dueDateDSort" : {
+        "message" : "Data di scadenza decrescente",
+        "description" : "Due date descending sort option"
+    },
+    "priorityASort" : {
+        "message" : "Priorità crescente",
+        "description" : "Priority ascending sort option"
+    },
+    "priorityDSort" : {
+        "message" : "Priorità decrescente",
+        "description" : "Priority descending sort option"
+    },
+    "percentCompleteASort" : {
+        "message" : "Percentuale completata crescente",
+        "description" : "Percent complete ascending sort option"
+    },
+    "percentCompleteDSort" : {
+        "message" : "Percentuale completata decrescente",
+        "description" : "Percent complete descending sort option"
+    },
+    "helpHeader" : {
+        "message" : "Come usare la bacheca Kanban",
+        "description" : "Header of the help modal dialog"
+    },
+    "help1" : {
+        "message" : "La bacheca Kanban è uno strumento per visualizzare il lavoro che aiuta a gestire attività e progetti. La bacheca è divisa in quattro colonne: 'Da fare', 'In corso', 'Completata' e 'Annullata'. Ogni colonna rappresenta una fase del processo di lavoro. Puoi spostare le attività tra le colonne trascinandole.",
+        "description" : "First paragraph of help modal dialog"
+    },
+    "help2" : {
+        "message" : "Per creare una nuova attività, fai clic sul pulsante 'Nuova attività...'. Compila il modulo e fai clic su 'Salva'. Per modificare un'attività, fai clic sull'icona a forma di penna sulla scheda.",
+        "description" : "Second paragraph of help modal dialog"
+    },
+    "help3" : {
+        "message" : "Puoi filtrare le attività per calendario e priorità. Puoi ordinare le attività per data di scadenza, priorità e percentuale completata.",
+        "description" : "Third paragraph of help modal dialog"
+    },
+    "themeToggleLabel" : {
+        "message" : "Attiva/disattiva tema chiaro/scuro",
+        "description" : "Title of the theme toggle button"
+    },
+    "settingsButtonLabel" : {
+        "message" : "Impostazioni bacheca",
+        "description" : "Title of the settings button"
+    },
+    "settingsHeader" : {
+        "message" : "Impostazioni bacheca",
+        "description" : "Header of the settings modal dialog"
+    },
+    "settingsLightSection" : {
+        "message" : "Tema chiaro",
+        "description" : "Section header for light theme settings"
+    },
+    "settingsDarkSection" : {
+        "message" : "Tema scuro",
+        "description" : "Section header for dark theme settings"
+    },
+    "settingsBackgroundColor" : {
+        "message" : "Colore di sfondo",
+        "description" : "Label of the background color setting"
+    },
+    "settingsCardBackgroundColor" : {
+        "message" : "Sfondo predefinito delle schede",
+        "description" : "Label of the default card background color setting"
+    },
+    "settingsCardBorderColor" : {
+        "message" : "Colore del bordo delle schede",
+        "description" : "Label of the card border color setting"
+    },
+    "settingsCardBorderWidth" : {
+        "message" : "Spessore del bordo delle schede (px)",
+        "description" : "Label of the card border width setting"
+    },
+    "settingsCardTextColor" : {
+        "message" : "Colore del testo delle schede",
+        "description" : "Label of the card text color setting"
+    },
+    "settingsHeaderColor" : {
+        "message" : "Colore dell'intestazione di colonna",
+        "description" : "Label of the column header background color setting"
+    },
+    "settingsHeaderTextColor" : {
+        "message" : "Colore del testo dell'intestazione di colonna",
+        "description" : "Label of the column header text color setting"
+    },
+    "resetButton" : {
+        "message" : "Ripristina impostazioni predefinite",
+        "description" : "Name of the reset button"
+    },
+    "aboutButtonLabel" : {
+        "message" : "Informazioni su TB-Kanban",
+        "description" : "Title of the about button"
+    },
+    "aboutHeader" : {
+        "message" : "Informazioni su TB-Kanban",
+        "description" : "Header of the about modal dialog"
+    },
+    "aboutTagline" : {
+        "message" : "Una bacheca Kanban per le attività che già gestisci in Thunderbird.",
+        "description" : "Short tagline shown in the about dialog"
+    },
+    "aboutHomepageButton" : {
+        "message" : "Codice sorgente",
+        "description" : "Button linking to the project's source code"
+    },
+    "aboutDonateButton" : {
+        "message" : "Offrimi un caffè",
+        "description" : "Button linking to the donation page"
+    },
+    "aboutDonateHint" : {
+        "message" : "Non vuoi vedere questa finestra ogni giorno? Offrimi un caffè: basta questo per farla sparire per sempre.",
+        "description" : "Hint shown above the credits, nudging towards a donation"
+    },
+    "aboutDonatedCheckboxLabel" : {
+        "message" : "Ho fatto una donazione – non mostrare più questa finestra automaticamente",
+        "description" : "Label of the checkbox that permanently disables the daily about/donate prompt"
+    },
+    "aboutCredits" : {
+        "message" : "Distribuito con licenza Mozilla Public License 2.0.",
+        "description" : "Credits shown in the about dialog"
+    }
+}

@@ -1,0 +1,314 @@
+{
+    "extensionName" : {
+        "message" : "TB-Kanban",
+        "description" : "Name of the extension"
+    },
+    "extensionDescription" : {
+        "message" : "iCal-taken hebben statussen die perfect passen bij een eenvoudig Kanban-bord. Deze extensie biedt dit aan, zodat je je taken visueel kunt beheren. Er zijn twee manieren om het Kanban-bord weer te geven zodra de extensie is geïnstalleerd. De eerste is via de knop 'Kanban' die bovenin het venster wordt weergegeven bij het lezen van e-mails. De tweede is via het menu 'Extra', waarin een item met de naam 'Kanban-bord weergeven' te vinden is.",
+        "description" : "Description of the extension"
+    },
+    "menuItem" : {
+        "message" : "Kanban-bord weergeven",
+        "description" : "Menu item to start the kanban board"
+    },
+    "boardTitle" : {
+        "message" : "Kanban-bord",
+        "description" : "Name of the HTML page displaying the Kanban board"
+    },
+    "compactModeSwitchLabel" : {
+        "message" : "Compacte modus",
+        "description" : "Name of the compact mode switch"
+    },
+    "filterButton": {
+        "message" : " Filters",
+        "description" : "Name of the filter button"
+    },
+    "sortButton": {
+        "message" : " Sorteerinstellingen",
+        "description" : "Name of the sort setting button"
+    },
+    "newTaskButton": {
+        "message" : " Nieuwe taak...",
+        "description" : "Name of the new task button"
+    },
+    "refreshButton": {
+        "message" : " Vernieuwen",
+        "description" : "Name of the refresh button"
+    },
+    "helpButton": {
+        "message" : " Help",
+        "description" : "Name of the help button"
+    },
+    "needsActionStatus" : {
+        "message" : " Te doen",
+        "description" : "Status for a task that needs action "
+    },
+    "inProcessStatus" : {
+        "message" : " In behandeling",
+        "description" : "Status for a task in process"
+    },
+    "completedStatus" : {
+        "message" : " Voltooid",
+        "description" : "Status for a completed task"
+    },
+    "cancelledStatus" : {
+        "message" : " Geannuleerd",
+        "description" : "Status for a cancelled task"
+    },
+    "groupByLabel" : {
+        "message" : "Groeperen op:",
+        "description" : "Label of the swimlane grouping selector"
+    },
+    "confirmDeletionMessage" : {
+        "message" : "Weet je zeker dat je dit item wilt verwijderen?",
+        "description" : "Message displayed when a task is deleted"
+    },
+    "titleField" : {
+        "message" : "Titel",
+        "description" : "Name of the title field of a task"
+    },
+    "calendarField": {
+        "message" : "Agenda",
+        "description" : "Name of the calendar field of a task"
+    },
+    "parentField": {
+        "message": "Bovenliggende taak",
+        "description": "Selection of the parent task"
+    },
+    "noParentTask" : {
+        "message" : "Geen",
+        "description" : "No parent task"
+    },
+    "startDateField": {
+        "message": "Start",
+        "description": "Name of the task start date field"
+    },
+    "dueDateField" : {
+        "message" : "Vervaldatum",
+        "description" : "Name of the due date field of a task"
+    },
+    "percentCompleteField" : {
+        "message" : "Percentage voltooid",
+        "description" : "Name of the percent complete field of a task"
+    },
+    "statusField" : {
+        "message" : "Status",
+        "description" : "Name of the status field of a task"
+    },
+    "priorityField" : {
+        "message" : "Prioriteit",
+        "description" : "Name of the priority field of a task"
+    },
+    "nonePriority" : {
+        "message" : "Geen",
+        "description" : "Name of none priority"
+    },
+    "lowPriority" : {
+        "message" : "Laag",
+        "description" : "Name of low priority"
+    },
+    "mediumPriority" : {
+        "message" : "Gemiddeld",
+        "description" : "Name of normal priority"
+    },
+    "highPriority" : {
+        "message" : "Hoog",
+        "description" : "Name of high priority"
+    },
+    "descriptionField" : {
+        "message" : "Beschrijving",
+        "description" : "Name of the description field"
+    },
+    "categoriesField" : {
+        "message" : "Categorieën",
+        "description" : "Name of the categories field"
+    },
+    "noCategoryLabel" : {
+        "message" : "Geen",
+        "description" : "Label shown on the category badge when a task has no category"
+    },
+    "emptyColumnLabel" : {
+        "message" : "Geen taken",
+        "description" : "Placeholder shown in a column with no tasks"
+    },
+    "allCategoriesLabel" : {
+        "message" : "Alle categorieën",
+        "description" : "Name of the all categories label"
+    },
+    "withoutAny" : {
+        "message" : "Zonder",
+        "description" : "Label for selecting empty categories"
+    },
+    "closeButton" : {
+        "message" : "Sluiten",
+        "description" : "Name of the close button"
+    },
+    "saveButton" : {
+        "message" : "Opslaan",
+        "description" : "Name of the save button"
+    },
+    "applyButton" : {
+        "message" : "Toepassen",
+        "description" : "Name of the apply button"
+    },
+    "alertTask" : {
+        "message" : "Vul de verplichte velden in voordat je een nieuwe taak indient.",
+        "description" : "Alert message displayed when a task is not well defined"
+    },
+    "editTaskHeader" : {
+        "message" : "Taak bewerken",
+        "description" : "Header of the task edit modal dialog"
+    },
+    "filterHeader" : {
+        "message" : "Filterinstellingen",
+        "description" : "Header of the filter modal dialog"
+    },
+    "calendarsFilter" : {
+        "message" : "Agenda's",
+        "description" : "Filter by calendar"
+    },
+    "calendarCapabilityLabel" : {
+        "message" : "Alleen agenda's die taken ondersteunen",
+        "description" : "Label for checking calendar capabilities"
+    },
+    "allCalendarsLabel" : {
+        "message" : "Alle onderstaande agenda's",
+        "description" : "Label for all calendars switch"
+    },
+    "allPrioritiesLabel" : {
+        "message" : "Alle",
+        "description" : "Label for all priorities switch"
+    },
+    "sortHeader" : {
+        "message" : "Sorteren op",
+        "description" : "Header of the sort modal dialog"
+    },
+    "noneSort" : {
+        "message" : "Geen",
+        "description" : "None sort option"
+    },
+    "dueDateASort" : {
+        "message" : "Vervaldatum oplopend",
+        "description" : "Due date ascending sort option"
+    },
+    "dueDateDSort" : {
+        "message" : "Vervaldatum aflopend",
+        "description" : "Due date descending sort option"
+    },
+    "priorityASort" : {
+        "message" : "Prioriteit oplopend",
+        "description" : "Priority ascending sort option"
+    },
+    "priorityDSort" : {
+        "message" : "Prioriteit aflopend",
+        "description" : "Priority descending sort option"
+    },
+    "percentCompleteASort" : {
+        "message" : "Percentage voltooid oplopend",
+        "description" : "Percent complete ascending sort option"
+    },
+    "percentCompleteDSort" : {
+        "message" : "Percentage voltooid aflopend",
+        "description" : "Percent complete descending sort option"
+    },
+    "helpHeader" : {
+        "message" : "Hoe het Kanban-bord te gebruiken",
+        "description" : "Header of the help modal dialog"
+    },
+    "help1" : {
+        "message" : "Het Kanban-bord is een hulpmiddel om werk te visualiseren en helpt je bij het beheren van taken en projecten. Het bord is verdeeld in vier kolommen: 'Te doen', 'In behandeling', 'Voltooid' en 'Geannuleerd'. Elke kolom staat voor een fase van het werkproces. Je kunt taken tussen kolommen verslepen.",
+        "description" : "First paragraph of help modal dialog"
+    },
+    "help2" : {
+        "message" : "Om een nieuwe taak aan te maken, klik je op de knop 'Nieuwe taak...'. Vul het formulier in en klik op 'Opslaan'. Om een taak te bewerken, klik je op het potloodpictogram op de taakkaart.",
+        "description" : "Second paragraph of help modal dialog"
+    },
+    "help3" : {
+        "message" : "Je kunt taken filteren op agenda en prioriteit. Je kunt taken sorteren op vervaldatum, prioriteit en percentage voltooid.",
+        "description" : "Third paragraph of help modal dialog"
+    },
+    "themeToggleLabel" : {
+        "message" : "Schakelen tussen licht/donker thema",
+        "description" : "Title of the theme toggle button"
+    },
+    "settingsButtonLabel" : {
+        "message" : "Bordinstellingen",
+        "description" : "Title of the settings button"
+    },
+    "settingsHeader" : {
+        "message" : "Bordinstellingen",
+        "description" : "Header of the settings modal dialog"
+    },
+    "settingsLightSection" : {
+        "message" : "Licht thema",
+        "description" : "Section header for light theme settings"
+    },
+    "settingsDarkSection" : {
+        "message" : "Donker thema",
+        "description" : "Section header for dark theme settings"
+    },
+    "settingsBackgroundColor" : {
+        "message" : "Achtergrondkleur",
+        "description" : "Label of the background color setting"
+    },
+    "settingsCardBackgroundColor" : {
+        "message" : "Standaard kaartachtergrond",
+        "description" : "Label of the default card background color setting"
+    },
+    "settingsCardBorderColor" : {
+        "message" : "Randkleur van kaarten",
+        "description" : "Label of the card border color setting"
+    },
+    "settingsCardBorderWidth" : {
+        "message" : "Randdikte van kaarten (px)",
+        "description" : "Label of the card border width setting"
+    },
+    "settingsCardTextColor" : {
+        "message" : "Tekstkleur van kaarten",
+        "description" : "Label of the card text color setting"
+    },
+    "settingsHeaderColor" : {
+        "message" : "Kleur van kolomkop",
+        "description" : "Label of the column header background color setting"
+    },
+    "settingsHeaderTextColor" : {
+        "message" : "Tekstkleur van kolomkop",
+        "description" : "Label of the column header text color setting"
+    },
+    "resetButton" : {
+        "message" : "Standaardwaarden herstellen",
+        "description" : "Name of the reset button"
+    },
+    "aboutButtonLabel" : {
+        "message" : "Over TB-Kanban",
+        "description" : "Title of the about button"
+    },
+    "aboutHeader" : {
+        "message" : "Over TB-Kanban",
+        "description" : "Header of the about modal dialog"
+    },
+    "aboutTagline" : {
+        "message" : "Een Kanban-bord voor de taken die je al in Thunderbird beheert.",
+        "description" : "Short tagline shown in the about dialog"
+    },
+    "aboutHomepageButton" : {
+        "message" : "Broncode",
+        "description" : "Button linking to the project's source code"
+    },
+    "aboutDonateButton" : {
+        "message" : "Trakteer me op een koffie",
+        "description" : "Button linking to the donation page"
+    },
+    "aboutDonateHint" : {
+        "message" : "Wil je dit venster niet elke dag zien? Trakteer me op een koffie — dat is genoeg om het voorgoed te laten verdwijnen.",
+        "description" : "Hint shown above the credits, nudging towards a donation"
+    },
+    "aboutDonatedCheckboxLabel" : {
+        "message" : "Ik heb gedoneerd – dit venster niet meer automatisch tonen",
+        "description" : "Label of the checkbox that permanently disables the daily about/donate prompt"
+    },
+    "aboutCredits" : {
+        "message" : "Uitgebracht onder de Mozilla Public License 2.0.",
+        "description" : "Credits shown in the about dialog"
+    }
+}

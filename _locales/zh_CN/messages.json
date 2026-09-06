@@ -1,0 +1,314 @@
+{
+    "extensionName" : {
+        "message" : "TB-Kanban",
+        "description" : "Name of the extension"
+    },
+    "extensionDescription" : {
+        "message" : "iCal 待办事项的状态非常适合基本的看板。此扩展提供了这一功能，让你可以直观地管理任务。安装扩展后，有两种方式可以打开看板。第一种是在查看邮件时点击窗口顶部栏中显示的“看板”按钮。第二种是通过“工具”菜单，其中有一个名为“显示看板”的项目。",
+        "description" : "Description of the extension"
+    },
+    "menuItem" : {
+        "message" : "显示看板",
+        "description" : "Menu item to start the kanban board"
+    },
+    "boardTitle" : {
+        "message" : "看板",
+        "description" : "Name of the HTML page displaying the Kanban board"
+    },
+    "compactModeSwitchLabel" : {
+        "message" : "紧凑模式",
+        "description" : "Name of the compact mode switch"
+    },
+    "filterButton": {
+        "message" : " 筛选",
+        "description" : "Name of the filter button"
+    },
+    "sortButton": {
+        "message" : " 排序设置",
+        "description" : "Name of the sort setting button"
+    },
+    "newTaskButton": {
+        "message" : " 新建任务...",
+        "description" : "Name of the new task button"
+    },
+    "refreshButton": {
+        "message" : " 刷新",
+        "description" : "Name of the refresh button"
+    },
+    "helpButton": {
+        "message" : " 帮助",
+        "description" : "Name of the help button"
+    },
+    "needsActionStatus" : {
+        "message" : " 待处理",
+        "description" : "Status for a task that needs action "
+    },
+    "inProcessStatus" : {
+        "message" : " 进行中",
+        "description" : "Status for a task in process"
+    },
+    "completedStatus" : {
+        "message" : " 已完成",
+        "description" : "Status for a completed task"
+    },
+    "cancelledStatus" : {
+        "message" : " 已取消",
+        "description" : "Status for a cancelled task"
+    },
+    "groupByLabel" : {
+        "message" : "分组依据：",
+        "description" : "Label of the swimlane grouping selector"
+    },
+    "confirmDeletionMessage" : {
+        "message" : "确定要删除此项吗？",
+        "description" : "Message displayed when a task is deleted"
+    },
+    "titleField" : {
+        "message" : "标题",
+        "description" : "Name of the title field of a task"
+    },
+    "calendarField": {
+        "message" : "日历",
+        "description" : "Name of the calendar field of a task"
+    },
+    "parentField": {
+        "message": "父任务",
+        "description": "Selection of the parent task"
+    },
+    "noParentTask" : {
+        "message" : "无",
+        "description" : "No parent task"
+    },
+    "startDateField": {
+        "message": "开始日期",
+        "description": "Name of the task start date field"
+    },
+    "dueDateField" : {
+        "message" : "截止日期",
+        "description" : "Name of the due date field of a task"
+    },
+    "percentCompleteField" : {
+        "message" : "完成百分比",
+        "description" : "Name of the percent complete field of a task"
+    },
+    "statusField" : {
+        "message" : "状态",
+        "description" : "Name of the status field of a task"
+    },
+    "priorityField" : {
+        "message" : "优先级",
+        "description" : "Name of the priority field of a task"
+    },
+    "nonePriority" : {
+        "message" : "无",
+        "description" : "Name of none priority"
+    },
+    "lowPriority" : {
+        "message" : "低",
+        "description" : "Name of low priority"
+    },
+    "mediumPriority" : {
+        "message" : "中",
+        "description" : "Name of normal priority"
+    },
+    "highPriority" : {
+        "message" : "高",
+        "description" : "Name of high priority"
+    },
+    "descriptionField" : {
+        "message" : "描述",
+        "description" : "Name of the description field"
+    },
+    "categoriesField" : {
+        "message" : "分类",
+        "description" : "Name of the categories field"
+    },
+    "noCategoryLabel" : {
+        "message" : "无",
+        "description" : "Label shown on the category badge when a task has no category"
+    },
+    "emptyColumnLabel" : {
+        "message" : "暂无任务",
+        "description" : "Placeholder shown in a column with no tasks"
+    },
+    "allCategoriesLabel" : {
+        "message" : "所有分类",
+        "description" : "Name of the all categories label"
+    },
+    "withoutAny" : {
+        "message" : "无分类",
+        "description" : "Label for selecting empty categories"
+    },
+    "closeButton" : {
+        "message" : "关闭",
+        "description" : "Name of the close button"
+    },
+    "saveButton" : {
+        "message" : "保存",
+        "description" : "Name of the save button"
+    },
+    "applyButton" : {
+        "message" : "应用",
+        "description" : "Name of the apply button"
+    },
+    "alertTask" : {
+        "message" : "提交新任务前，必须填写必填字段。",
+        "description" : "Alert message displayed when a task is not well defined"
+    },
+    "editTaskHeader" : {
+        "message" : "编辑任务",
+        "description" : "Header of the task edit modal dialog"
+    },
+    "filterHeader" : {
+        "message" : "筛选设置",
+        "description" : "Header of the filter modal dialog"
+    },
+    "calendarsFilter" : {
+        "message" : "日历",
+        "description" : "Filter by calendar"
+    },
+    "calendarCapabilityLabel" : {
+        "message" : "仅显示支持任务的日历",
+        "description" : "Label for checking calendar capabilities"
+    },
+    "allCalendarsLabel" : {
+        "message" : "以下所有日历",
+        "description" : "Label for all calendars switch"
+    },
+    "allPrioritiesLabel" : {
+        "message" : "全部",
+        "description" : "Label for all priorities switch"
+    },
+    "sortHeader" : {
+        "message" : "排序依据",
+        "description" : "Header of the sort modal dialog"
+    },
+    "noneSort" : {
+        "message" : "无",
+        "description" : "None sort option"
+    },
+    "dueDateASort" : {
+        "message" : "截止日期升序",
+        "description" : "Due date ascending sort option"
+    },
+    "dueDateDSort" : {
+        "message" : "截止日期降序",
+        "description" : "Due date descending sort option"
+    },
+    "priorityASort" : {
+        "message" : "优先级升序",
+        "description" : "Priority ascending sort option"
+    },
+    "priorityDSort" : {
+        "message" : "优先级降序",
+        "description" : "Priority descending sort option"
+    },
+    "percentCompleteASort" : {
+        "message" : "完成百分比升序",
+        "description" : "Percent complete ascending sort option"
+    },
+    "percentCompleteDSort" : {
+        "message" : "完成百分比降序",
+        "description" : "Percent complete descending sort option"
+    },
+    "helpHeader" : {
+        "message" : "如何使用看板",
+        "description" : "Header of the help modal dialog"
+    },
+    "help1" : {
+        "message" : "看板是一种可视化工作的工具，可帮助你管理任务和项目。看板分为四列：“待处理”“进行中”“已完成”和“已取消”。每列代表工作流程的一个阶段。你可以通过拖放在各列之间移动任务。",
+        "description" : "First paragraph of help modal dialog"
+    },
+    "help2" : {
+        "message" : "要创建新任务，请点击“新建任务...”按钮。填写表单后点击“保存”。要编辑任务，请点击任务卡片上的铅笔图标。",
+        "description" : "Second paragraph of help modal dialog"
+    },
+    "help3" : {
+        "message" : "你可以按日历和优先级筛选任务，也可以按截止日期、优先级和完成百分比对任务排序。",
+        "description" : "Third paragraph of help modal dialog"
+    },
+    "themeToggleLabel" : {
+        "message" : "切换浅色/深色主题",
+        "description" : "Title of the theme toggle button"
+    },
+    "settingsButtonLabel" : {
+        "message" : "看板设置",
+        "description" : "Title of the settings button"
+    },
+    "settingsHeader" : {
+        "message" : "看板设置",
+        "description" : "Header of the settings modal dialog"
+    },
+    "settingsLightSection" : {
+        "message" : "浅色主题",
+        "description" : "Section header for light theme settings"
+    },
+    "settingsDarkSection" : {
+        "message" : "深色主题",
+        "description" : "Section header for dark theme settings"
+    },
+    "settingsBackgroundColor" : {
+        "message" : "背景颜色",
+        "description" : "Label of the background color setting"
+    },
+    "settingsCardBackgroundColor" : {
+        "message" : "卡片默认背景",
+        "description" : "Label of the default card background color setting"
+    },
+    "settingsCardBorderColor" : {
+        "message" : "卡片边框颜色",
+        "description" : "Label of the card border color setting"
+    },
+    "settingsCardBorderWidth" : {
+        "message" : "卡片边框粗细（像素）",
+        "description" : "Label of the card border width setting"
+    },
+    "settingsCardTextColor" : {
+        "message" : "卡片文字颜色",
+        "description" : "Label of the card text color setting"
+    },
+    "settingsHeaderColor" : {
+        "message" : "列标题颜色",
+        "description" : "Label of the column header background color setting"
+    },
+    "settingsHeaderTextColor" : {
+        "message" : "列标题文字颜色",
+        "description" : "Label of the column header text color setting"
+    },
+    "resetButton" : {
+        "message" : "恢复默认设置",
+        "description" : "Name of the reset button"
+    },
+    "aboutButtonLabel" : {
+        "message" : "关于 TB-Kanban",
+        "description" : "Title of the about button"
+    },
+    "aboutHeader" : {
+        "message" : "关于 TB-Kanban",
+        "description" : "Header of the about modal dialog"
+    },
+    "aboutTagline" : {
+        "message" : "为你在 Thunderbird 中已管理的任务提供的看板。",
+        "description" : "Short tagline shown in the about dialog"
+    },
+    "aboutHomepageButton" : {
+        "message" : "源代码",
+        "description" : "Button linking to the project's source code"
+    },
+    "aboutDonateButton" : {
+        "message" : "请我喝杯咖啡",
+        "description" : "Button linking to the donation page"
+    },
+    "aboutDonateHint" : {
+        "message" : "不想每天都看到这个对话框吗？请我喝杯咖啡——这样它就会永久消失。",
+        "description" : "Hint shown above the credits, nudging towards a donation"
+    },
+    "aboutDonatedCheckboxLabel" : {
+        "message" : "我已经捐赠 — 不再自动显示此对话框",
+        "description" : "Label of the checkbox that permanently disables the daily about/donate prompt"
+    },
+    "aboutCredits" : {
+        "message" : "基于 Mozilla Public License 2.0 授权。",
+        "description" : "Credits shown in the about dialog"
+    }
+}

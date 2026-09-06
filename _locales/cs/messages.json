@@ -1,0 +1,314 @@
+{
+    "extensionName" : {
+        "message" : "TB-Kanban",
+        "description" : "Name of the extension"
+    },
+    "extensionDescription" : {
+        "message" : "Úkoly iCal mají stavy, které se skvěle hodí pro jednoduchou Kanban tabuli. Toto rozšíření to umožňuje, takže můžete své úkoly spravovat vizuálně. Po instalaci rozšíření lze Kanban tabuli zobrazit dvěma způsoby. První je pomocí tlačítka „Kanban“ zobrazeného v horní liště okna při prohlížení e-mailů. Druhý je přes nabídku „Nástroje“, kde najdete položku „Zobrazit Kanban tabuli“.",
+        "description" : "Description of the extension"
+    },
+    "menuItem" : {
+        "message" : "Zobrazit Kanban tabuli",
+        "description" : "Menu item to start the kanban board"
+    },
+    "boardTitle" : {
+        "message" : "Kanban tabule",
+        "description" : "Name of the HTML page displaying the Kanban board"
+    },
+    "compactModeSwitchLabel" : {
+        "message" : "Kompaktní režim",
+        "description" : "Name of the compact mode switch"
+    },
+    "filterButton": {
+        "message" : " Filtry",
+        "description" : "Name of the filter button"
+    },
+    "sortButton": {
+        "message" : " Nastavení řazení",
+        "description" : "Name of the sort setting button"
+    },
+    "newTaskButton": {
+        "message" : " Nový úkol...",
+        "description" : "Name of the new task button"
+    },
+    "refreshButton": {
+        "message" : " Obnovit",
+        "description" : "Name of the refresh button"
+    },
+    "helpButton": {
+        "message" : " Nápověda",
+        "description" : "Name of the help button"
+    },
+    "needsActionStatus" : {
+        "message" : " K vyřízení",
+        "description" : "Status for a task that needs action "
+    },
+    "inProcessStatus" : {
+        "message" : " Probíhá",
+        "description" : "Status for a task in process"
+    },
+    "completedStatus" : {
+        "message" : " Dokončeno",
+        "description" : "Status for a completed task"
+    },
+    "cancelledStatus" : {
+        "message" : " Zrušeno",
+        "description" : "Status for a cancelled task"
+    },
+    "groupByLabel" : {
+        "message" : "Seskupit podle:",
+        "description" : "Label of the swimlane grouping selector"
+    },
+    "confirmDeletionMessage" : {
+        "message" : "Opravdu chcete tuto položku smazat?",
+        "description" : "Message displayed when a task is deleted"
+    },
+    "titleField" : {
+        "message" : "Název",
+        "description" : "Name of the title field of a task"
+    },
+    "calendarField": {
+        "message" : "Kalendář",
+        "description" : "Name of the calendar field of a task"
+    },
+    "parentField": {
+        "message": "Nadřazený úkol",
+        "description": "Selection of the parent task"
+    },
+    "noParentTask" : {
+        "message" : "Žádný",
+        "description" : "No parent task"
+    },
+    "startDateField": {
+        "message": "Začátek",
+        "description": "Name of the task start date field"
+    },
+    "dueDateField" : {
+        "message" : "Termín splnění",
+        "description" : "Name of the due date field of a task"
+    },
+    "percentCompleteField" : {
+        "message" : "Procento dokončení",
+        "description" : "Name of the percent complete field of a task"
+    },
+    "statusField" : {
+        "message" : "Stav",
+        "description" : "Name of the status field of a task"
+    },
+    "priorityField" : {
+        "message" : "Priorita",
+        "description" : "Name of the priority field of a task"
+    },
+    "nonePriority" : {
+        "message" : "Žádná",
+        "description" : "Name of none priority"
+    },
+    "lowPriority" : {
+        "message" : "Nízká",
+        "description" : "Name of low priority"
+    },
+    "mediumPriority" : {
+        "message" : "Střední",
+        "description" : "Name of normal priority"
+    },
+    "highPriority" : {
+        "message" : "Vysoká",
+        "description" : "Name of high priority"
+    },
+    "descriptionField" : {
+        "message" : "Popis",
+        "description" : "Name of the description field"
+    },
+    "categoriesField" : {
+        "message" : "Kategorie",
+        "description" : "Name of the categories field"
+    },
+    "noCategoryLabel" : {
+        "message" : "Žádná",
+        "description" : "Label shown on the category badge when a task has no category"
+    },
+    "emptyColumnLabel" : {
+        "message" : "Žádné úkoly",
+        "description" : "Placeholder shown in a column with no tasks"
+    },
+    "allCategoriesLabel" : {
+        "message" : "Všechny kategorie",
+        "description" : "Name of the all categories label"
+    },
+    "withoutAny" : {
+        "message" : "Bez kategorie",
+        "description" : "Label for selecting empty categories"
+    },
+    "closeButton" : {
+        "message" : "Zavřít",
+        "description" : "Name of the close button"
+    },
+    "saveButton" : {
+        "message" : "Uložit",
+        "description" : "Name of the save button"
+    },
+    "applyButton" : {
+        "message" : "Použít",
+        "description" : "Name of the apply button"
+    },
+    "alertTask" : {
+        "message" : "Před uložením nového úkolu musíte vyplnit povinná pole.",
+        "description" : "Alert message displayed when a task is not well defined"
+    },
+    "editTaskHeader" : {
+        "message" : "Upravit úkol",
+        "description" : "Header of the task edit modal dialog"
+    },
+    "filterHeader" : {
+        "message" : "Nastavení filtru",
+        "description" : "Header of the filter modal dialog"
+    },
+    "calendarsFilter" : {
+        "message" : "Kalendáře",
+        "description" : "Filter by calendar"
+    },
+    "calendarCapabilityLabel" : {
+        "message" : "Pouze kalendáře podporující úkoly",
+        "description" : "Label for checking calendar capabilities"
+    },
+    "allCalendarsLabel" : {
+        "message" : "Všechny kalendáře níže",
+        "description" : "Label for all calendars switch"
+    },
+    "allPrioritiesLabel" : {
+        "message" : "Všechny",
+        "description" : "Label for all priorities switch"
+    },
+    "sortHeader" : {
+        "message" : "Řadit podle",
+        "description" : "Header of the sort modal dialog"
+    },
+    "noneSort" : {
+        "message" : "Žádné",
+        "description" : "None sort option"
+    },
+    "dueDateASort" : {
+        "message" : "Termín splnění vzestupně",
+        "description" : "Due date ascending sort option"
+    },
+    "dueDateDSort" : {
+        "message" : "Termín splnění sestupně",
+        "description" : "Due date descending sort option"
+    },
+    "priorityASort" : {
+        "message" : "Priorita vzestupně",
+        "description" : "Priority ascending sort option"
+    },
+    "priorityDSort" : {
+        "message" : "Priorita sestupně",
+        "description" : "Priority descending sort option"
+    },
+    "percentCompleteASort" : {
+        "message" : "Procento dokončení vzestupně",
+        "description" : "Percent complete ascending sort option"
+    },
+    "percentCompleteDSort" : {
+        "message" : "Procento dokončení sestupně",
+        "description" : "Percent complete descending sort option"
+    },
+    "helpHeader" : {
+        "message" : "Jak používat Kanban tabuli",
+        "description" : "Header of the help modal dialog"
+    },
+    "help1" : {
+        "message" : "Kanban tabule je nástroj pro vizualizaci práce, který pomáhá spravovat úkoly a projekty. Tabule je rozdělena do čtyř sloupců: „K vyřízení“, „Probíhá“, „Dokončeno“ a „Zrušeno“. Každý sloupec představuje fázi pracovního procesu. Úkoly můžete mezi sloupci přesouvat přetažením.",
+        "description" : "First paragraph of help modal dialog"
+    },
+    "help2" : {
+        "message" : "Chcete-li vytvořit nový úkol, klikněte na tlačítko „Nový úkol...“. Vyplňte formulář a klikněte na „Uložit“. Chcete-li úkol upravit, klikněte na ikonu tužky na kartě úkolu.",
+        "description" : "Second paragraph of help modal dialog"
+    },
+    "help3" : {
+        "message" : "Úkoly můžete filtrovat podle kalendáře a priority. Úkoly můžete řadit podle termínu splnění, priority a procenta dokončení.",
+        "description" : "Third paragraph of help modal dialog"
+    },
+    "themeToggleLabel" : {
+        "message" : "Přepnout světlý/tmavý motiv",
+        "description" : "Title of the theme toggle button"
+    },
+    "settingsButtonLabel" : {
+        "message" : "Nastavení tabule",
+        "description" : "Title of the settings button"
+    },
+    "settingsHeader" : {
+        "message" : "Nastavení tabule",
+        "description" : "Header of the settings modal dialog"
+    },
+    "settingsLightSection" : {
+        "message" : "Světlý motiv",
+        "description" : "Section header for light theme settings"
+    },
+    "settingsDarkSection" : {
+        "message" : "Tmavý motiv",
+        "description" : "Section header for dark theme settings"
+    },
+    "settingsBackgroundColor" : {
+        "message" : "Barva pozadí",
+        "description" : "Label of the background color setting"
+    },
+    "settingsCardBackgroundColor" : {
+        "message" : "Výchozí pozadí karet",
+        "description" : "Label of the default card background color setting"
+    },
+    "settingsCardBorderColor" : {
+        "message" : "Barva ohraničení karet",
+        "description" : "Label of the card border color setting"
+    },
+    "settingsCardBorderWidth" : {
+        "message" : "Tloušťka ohraničení karet (px)",
+        "description" : "Label of the card border width setting"
+    },
+    "settingsCardTextColor" : {
+        "message" : "Barva textu karet",
+        "description" : "Label of the card text color setting"
+    },
+    "settingsHeaderColor" : {
+        "message" : "Barva záhlaví sloupce",
+        "description" : "Label of the column header background color setting"
+    },
+    "settingsHeaderTextColor" : {
+        "message" : "Barva textu záhlaví sloupce",
+        "description" : "Label of the column header text color setting"
+    },
+    "resetButton" : {
+        "message" : "Obnovit výchozí nastavení",
+        "description" : "Name of the reset button"
+    },
+    "aboutButtonLabel" : {
+        "message" : "O aplikaci TB-Kanban",
+        "description" : "Title of the about button"
+    },
+    "aboutHeader" : {
+        "message" : "O aplikaci TB-Kanban",
+        "description" : "Header of the about modal dialog"
+    },
+    "aboutTagline" : {
+        "message" : "Kanban tabule pro úkoly, které už spravujete v Thunderbirdu.",
+        "description" : "Short tagline shown in the about dialog"
+    },
+    "aboutHomepageButton" : {
+        "message" : "Zdrojový kód",
+        "description" : "Button linking to the project's source code"
+    },
+    "aboutDonateButton" : {
+        "message" : "Kup mi kávu",
+        "description" : "Button linking to the donation page"
+    },
+    "aboutDonateHint" : {
+        "message" : "Nechcete vidět toto okno každý den? Kupte mi kávu — to stačí k tomu, aby zmizelo navždy.",
+        "description" : "Hint shown above the credits, nudging towards a donation"
+    },
+    "aboutDonatedCheckboxLabel" : {
+        "message" : "Přispěl(a) jsem – toto okno už automaticky nezobrazovat",
+        "description" : "Label of the checkbox that permanently disables the daily about/donate prompt"
+    },
+    "aboutCredits" : {
+        "message" : "Licencováno pod Mozilla Public License 2.0.",
+        "description" : "Credits shown in the about dialog"
+    }
+}

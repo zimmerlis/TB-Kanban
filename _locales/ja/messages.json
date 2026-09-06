@@ -1,0 +1,314 @@
+{
+    "extensionName" : {
+        "message" : "TB-Kanban",
+        "description" : "Name of the extension"
+    },
+    "extensionDescription" : {
+        "message" : "iCal のタスクには、シンプルなカンバンボードに最適なステータスがあります。この拡張機能はそれを実現し、タスクを視覚的に管理できるようにします。拡張機能をインストールすると、カンバンボードを表示する方法は2つあります。1つ目は、メールを閲覧しているときにウィンドウ上部に表示される「カンバン」ボタンです。2つ目は「ツール」メニューで、「カンバンボードを表示」という項目があります。",
+        "description" : "Description of the extension"
+    },
+    "menuItem" : {
+        "message" : "カンバンボードを表示",
+        "description" : "Menu item to start the kanban board"
+    },
+    "boardTitle" : {
+        "message" : "カンバンボード",
+        "description" : "Name of the HTML page displaying the Kanban board"
+    },
+    "compactModeSwitchLabel" : {
+        "message" : "コンパクトモード",
+        "description" : "Name of the compact mode switch"
+    },
+    "filterButton": {
+        "message" : " フィルター",
+        "description" : "Name of the filter button"
+    },
+    "sortButton": {
+        "message" : " 並べ替え設定",
+        "description" : "Name of the sort setting button"
+    },
+    "newTaskButton": {
+        "message" : " 新しいタスク...",
+        "description" : "Name of the new task button"
+    },
+    "refreshButton": {
+        "message" : " 更新",
+        "description" : "Name of the refresh button"
+    },
+    "helpButton": {
+        "message" : " ヘルプ",
+        "description" : "Name of the help button"
+    },
+    "needsActionStatus" : {
+        "message" : " 未着手",
+        "description" : "Status for a task that needs action "
+    },
+    "inProcessStatus" : {
+        "message" : " 進行中",
+        "description" : "Status for a task in process"
+    },
+    "completedStatus" : {
+        "message" : " 完了",
+        "description" : "Status for a completed task"
+    },
+    "cancelledStatus" : {
+        "message" : " キャンセル済み",
+        "description" : "Status for a cancelled task"
+    },
+    "groupByLabel" : {
+        "message" : "グループ化:",
+        "description" : "Label of the swimlane grouping selector"
+    },
+    "confirmDeletionMessage" : {
+        "message" : "この項目を削除してもよろしいですか？",
+        "description" : "Message displayed when a task is deleted"
+    },
+    "titleField" : {
+        "message" : "タイトル",
+        "description" : "Name of the title field of a task"
+    },
+    "calendarField": {
+        "message" : "カレンダー",
+        "description" : "Name of the calendar field of a task"
+    },
+    "parentField": {
+        "message": "親タスク",
+        "description": "Selection of the parent task"
+    },
+    "noParentTask" : {
+        "message" : "なし",
+        "description" : "No parent task"
+    },
+    "startDateField": {
+        "message": "開始日",
+        "description": "Name of the task start date field"
+    },
+    "dueDateField" : {
+        "message" : "期限",
+        "description" : "Name of the due date field of a task"
+    },
+    "percentCompleteField" : {
+        "message" : "進捗率",
+        "description" : "Name of the percent complete field of a task"
+    },
+    "statusField" : {
+        "message" : "ステータス",
+        "description" : "Name of the status field of a task"
+    },
+    "priorityField" : {
+        "message" : "優先度",
+        "description" : "Name of the priority field of a task"
+    },
+    "nonePriority" : {
+        "message" : "なし",
+        "description" : "Name of none priority"
+    },
+    "lowPriority" : {
+        "message" : "低",
+        "description" : "Name of low priority"
+    },
+    "mediumPriority" : {
+        "message" : "中",
+        "description" : "Name of normal priority"
+    },
+    "highPriority" : {
+        "message" : "高",
+        "description" : "Name of high priority"
+    },
+    "descriptionField" : {
+        "message" : "説明",
+        "description" : "Name of the description field"
+    },
+    "categoriesField" : {
+        "message" : "カテゴリ",
+        "description" : "Name of the categories field"
+    },
+    "noCategoryLabel" : {
+        "message" : "なし",
+        "description" : "Label shown on the category badge when a task has no category"
+    },
+    "emptyColumnLabel" : {
+        "message" : "タスクなし",
+        "description" : "Placeholder shown in a column with no tasks"
+    },
+    "allCategoriesLabel" : {
+        "message" : "すべてのカテゴリ",
+        "description" : "Name of the all categories label"
+    },
+    "withoutAny" : {
+        "message" : "カテゴリなし",
+        "description" : "Label for selecting empty categories"
+    },
+    "closeButton" : {
+        "message" : "閉じる",
+        "description" : "Name of the close button"
+    },
+    "saveButton" : {
+        "message" : "保存",
+        "description" : "Name of the save button"
+    },
+    "applyButton" : {
+        "message" : "適用",
+        "description" : "Name of the apply button"
+    },
+    "alertTask" : {
+        "message" : "新しいタスクを登録する前に、必須項目を入力してください。",
+        "description" : "Alert message displayed when a task is not well defined"
+    },
+    "editTaskHeader" : {
+        "message" : "タスクを編集",
+        "description" : "Header of the task edit modal dialog"
+    },
+    "filterHeader" : {
+        "message" : "フィルター設定",
+        "description" : "Header of the filter modal dialog"
+    },
+    "calendarsFilter" : {
+        "message" : "カレンダー",
+        "description" : "Filter by calendar"
+    },
+    "calendarCapabilityLabel" : {
+        "message" : "タスクに対応するカレンダーのみ",
+        "description" : "Label for checking calendar capabilities"
+    },
+    "allCalendarsLabel" : {
+        "message" : "以下のすべてのカレンダー",
+        "description" : "Label for all calendars switch"
+    },
+    "allPrioritiesLabel" : {
+        "message" : "すべて",
+        "description" : "Label for all priorities switch"
+    },
+    "sortHeader" : {
+        "message" : "並べ替え",
+        "description" : "Header of the sort modal dialog"
+    },
+    "noneSort" : {
+        "message" : "なし",
+        "description" : "None sort option"
+    },
+    "dueDateASort" : {
+        "message" : "期限（昇順）",
+        "description" : "Due date ascending sort option"
+    },
+    "dueDateDSort" : {
+        "message" : "期限（降順）",
+        "description" : "Due date descending sort option"
+    },
+    "priorityASort" : {
+        "message" : "優先度（昇順）",
+        "description" : "Priority ascending sort option"
+    },
+    "priorityDSort" : {
+        "message" : "優先度（降順）",
+        "description" : "Priority descending sort option"
+    },
+    "percentCompleteASort" : {
+        "message" : "進捗率（昇順）",
+        "description" : "Percent complete ascending sort option"
+    },
+    "percentCompleteDSort" : {
+        "message" : "進捗率（降順）",
+        "description" : "Percent complete descending sort option"
+    },
+    "helpHeader" : {
+        "message" : "カンバンボードの使い方",
+        "description" : "Header of the help modal dialog"
+    },
+    "help1" : {
+        "message" : "カンバンボードは作業を視覚化するツールで、タスクやプロジェクトの管理に役立ちます。ボードは「未着手」「進行中」「完了」「キャンセル済み」の4つの列に分かれています。各列は作業工程の1段階を表します。タスクはドラッグ＆ドロップで列間を移動できます。",
+        "description" : "First paragraph of help modal dialog"
+    },
+    "help2" : {
+        "message" : "新しいタスクを作成するには、「新しいタスク...」ボタンをクリックします。フォームに入力し「保存」をクリックしてください。タスクを編集するには、タスクカードの鉛筆アイコンをクリックします。",
+        "description" : "Second paragraph of help modal dialog"
+    },
+    "help3" : {
+        "message" : "カレンダーと優先度でタスクを絞り込むことができます。期限、優先度、進捗率でタスクを並べ替えることができます。",
+        "description" : "Third paragraph of help modal dialog"
+    },
+    "themeToggleLabel" : {
+        "message" : "ライト/ダークテーマを切り替え",
+        "description" : "Title of the theme toggle button"
+    },
+    "settingsButtonLabel" : {
+        "message" : "ボードの設定",
+        "description" : "Title of the settings button"
+    },
+    "settingsHeader" : {
+        "message" : "ボードの設定",
+        "description" : "Header of the settings modal dialog"
+    },
+    "settingsLightSection" : {
+        "message" : "ライトテーマ",
+        "description" : "Section header for light theme settings"
+    },
+    "settingsDarkSection" : {
+        "message" : "ダークテーマ",
+        "description" : "Section header for dark theme settings"
+    },
+    "settingsBackgroundColor" : {
+        "message" : "背景色",
+        "description" : "Label of the background color setting"
+    },
+    "settingsCardBackgroundColor" : {
+        "message" : "カードの既定の背景色",
+        "description" : "Label of the default card background color setting"
+    },
+    "settingsCardBorderColor" : {
+        "message" : "カードの枠線の色",
+        "description" : "Label of the card border color setting"
+    },
+    "settingsCardBorderWidth" : {
+        "message" : "カードの枠線の太さ (px)",
+        "description" : "Label of the card border width setting"
+    },
+    "settingsCardTextColor" : {
+        "message" : "カードの文字色",
+        "description" : "Label of the card text color setting"
+    },
+    "settingsHeaderColor" : {
+        "message" : "列見出しの色",
+        "description" : "Label of the column header background color setting"
+    },
+    "settingsHeaderTextColor" : {
+        "message" : "列見出しの文字色",
+        "description" : "Label of the column header text color setting"
+    },
+    "resetButton" : {
+        "message" : "既定値に戻す",
+        "description" : "Name of the reset button"
+    },
+    "aboutButtonLabel" : {
+        "message" : "TB-Kanban について",
+        "description" : "Title of the about button"
+    },
+    "aboutHeader" : {
+        "message" : "TB-Kanban について",
+        "description" : "Header of the about modal dialog"
+    },
+    "aboutTagline" : {
+        "message" : "Thunderbird ですでに管理しているタスクのためのカンバンボード。",
+        "description" : "Short tagline shown in the about dialog"
+    },
+    "aboutHomepageButton" : {
+        "message" : "ソースコード",
+        "description" : "Button linking to the project's source code"
+    },
+    "aboutDonateButton" : {
+        "message" : "コーヒーをおごる",
+        "description" : "Button linking to the donation page"
+    },
+    "aboutDonateHint" : {
+        "message" : "このダイアログを毎日表示したくないですか？コーヒーをおごってください — それだけで二度と表示されなくなります。",
+        "description" : "Hint shown above the credits, nudging towards a donation"
+    },
+    "aboutDonatedCheckboxLabel" : {
+        "message" : "寄付しました — このダイアログを自動的に表示しない",
+        "description" : "Label of the checkbox that permanently disables the daily about/donate prompt"
+    },
+    "aboutCredits" : {
+        "message" : "Mozilla Public License 2.0 の下でライセンスされています。",
+        "description" : "Credits shown in the about dialog"
+    }
+}

@@ -141,8 +141,18 @@ UI strings live under [_locales](_locales). Currently available:
 
 - English (`en`) — default
 - German (`de`)
+- French (`fr`)
+- Spanish (`es`)
+- Portuguese, Brazil (`pt_BR`)
+- Italian (`it`)
+- Polish (`pl`)
+- Dutch (`nl`)
+- Ukrainian (`uk`)
+- Czech (`cs`)
+- Japanese (`ja`)
+- Chinese, simplified (`zh_CN`)
 
-Contributions for additional languages are welcome — copy
+Contributions for additional languages — or corrections to existing ones — are welcome. Copy
 [_locales/en/messages.json](_locales/en/messages.json) into a new locale folder and translate
 the `message` values.
 

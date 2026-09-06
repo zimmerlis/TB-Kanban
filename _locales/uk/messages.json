@@ -1,0 +1,314 @@
+{
+    "extensionName" : {
+        "message" : "TB-Kanban",
+        "description" : "Name of the extension"
+    },
+    "extensionDescription" : {
+        "message" : "Завдання iCal мають статуси, які ідеально підходять для простої дошки Kanban. Це розширення надає таку можливість, щоб ви могли візуально керувати своїми завданнями. Після встановлення розширення дошку Kanban можна відкрити двома способами. Перший — за допомогою кнопки «Kanban» у верхній панелі вікна під час перегляду пошти. Другий — через меню «Інструменти», де є пункт «Показати дошку Kanban».",
+        "description" : "Description of the extension"
+    },
+    "menuItem" : {
+        "message" : "Показати дошку Kanban",
+        "description" : "Menu item to start the kanban board"
+    },
+    "boardTitle" : {
+        "message" : "Дошка Kanban",
+        "description" : "Name of the HTML page displaying the Kanban board"
+    },
+    "compactModeSwitchLabel" : {
+        "message" : "Компактний режим",
+        "description" : "Name of the compact mode switch"
+    },
+    "filterButton": {
+        "message" : " Фільтри",
+        "description" : "Name of the filter button"
+    },
+    "sortButton": {
+        "message" : " Параметри сортування",
+        "description" : "Name of the sort setting button"
+    },
+    "newTaskButton": {
+        "message" : " Нове завдання...",
+        "description" : "Name of the new task button"
+    },
+    "refreshButton": {
+        "message" : " Оновити",
+        "description" : "Name of the refresh button"
+    },
+    "helpButton": {
+        "message" : " Довідка",
+        "description" : "Name of the help button"
+    },
+    "needsActionStatus" : {
+        "message" : " Потребує дії",
+        "description" : "Status for a task that needs action "
+    },
+    "inProcessStatus" : {
+        "message" : " У процесі",
+        "description" : "Status for a task in process"
+    },
+    "completedStatus" : {
+        "message" : " Виконано",
+        "description" : "Status for a completed task"
+    },
+    "cancelledStatus" : {
+        "message" : " Скасовано",
+        "description" : "Status for a cancelled task"
+    },
+    "groupByLabel" : {
+        "message" : "Групувати за:",
+        "description" : "Label of the swimlane grouping selector"
+    },
+    "confirmDeletionMessage" : {
+        "message" : "Ви справді хочете видалити цей елемент?",
+        "description" : "Message displayed when a task is deleted"
+    },
+    "titleField" : {
+        "message" : "Назва",
+        "description" : "Name of the title field of a task"
+    },
+    "calendarField": {
+        "message" : "Календар",
+        "description" : "Name of the calendar field of a task"
+    },
+    "parentField": {
+        "message": "Батьківське завдання",
+        "description": "Selection of the parent task"
+    },
+    "noParentTask" : {
+        "message" : "Немає",
+        "description" : "No parent task"
+    },
+    "startDateField": {
+        "message": "Початок",
+        "description": "Name of the task start date field"
+    },
+    "dueDateField" : {
+        "message" : "Термін виконання",
+        "description" : "Name of the due date field of a task"
+    },
+    "percentCompleteField" : {
+        "message" : "Відсоток виконання",
+        "description" : "Name of the percent complete field of a task"
+    },
+    "statusField" : {
+        "message" : "Статус",
+        "description" : "Name of the status field of a task"
+    },
+    "priorityField" : {
+        "message" : "Пріоритет",
+        "description" : "Name of the priority field of a task"
+    },
+    "nonePriority" : {
+        "message" : "Немає",
+        "description" : "Name of none priority"
+    },
+    "lowPriority" : {
+        "message" : "Низький",
+        "description" : "Name of low priority"
+    },
+    "mediumPriority" : {
+        "message" : "Середній",
+        "description" : "Name of normal priority"
+    },
+    "highPriority" : {
+        "message" : "Високий",
+        "description" : "Name of high priority"
+    },
+    "descriptionField" : {
+        "message" : "Опис",
+        "description" : "Name of the description field"
+    },
+    "categoriesField" : {
+        "message" : "Категорії",
+        "description" : "Name of the categories field"
+    },
+    "noCategoryLabel" : {
+        "message" : "Немає",
+        "description" : "Label shown on the category badge when a task has no category"
+    },
+    "emptyColumnLabel" : {
+        "message" : "Немає завдань",
+        "description" : "Placeholder shown in a column with no tasks"
+    },
+    "allCategoriesLabel" : {
+        "message" : "Усі категорії",
+        "description" : "Name of the all categories label"
+    },
+    "withoutAny" : {
+        "message" : "Без жодної",
+        "description" : "Label for selecting empty categories"
+    },
+    "closeButton" : {
+        "message" : "Закрити",
+        "description" : "Name of the close button"
+    },
+    "saveButton" : {
+        "message" : "Зберегти",
+        "description" : "Name of the save button"
+    },
+    "applyButton" : {
+        "message" : "Застосувати",
+        "description" : "Name of the apply button"
+    },
+    "alertTask" : {
+        "message" : "Перед збереженням нового завдання потрібно заповнити обов'язкові поля.",
+        "description" : "Alert message displayed when a task is not well defined"
+    },
+    "editTaskHeader" : {
+        "message" : "Редагувати завдання",
+        "description" : "Header of the task edit modal dialog"
+    },
+    "filterHeader" : {
+        "message" : "Параметри фільтра",
+        "description" : "Header of the filter modal dialog"
+    },
+    "calendarsFilter" : {
+        "message" : "Календарі",
+        "description" : "Filter by calendar"
+    },
+    "calendarCapabilityLabel" : {
+        "message" : "Лише календарі, що підтримують завдання",
+        "description" : "Label for checking calendar capabilities"
+    },
+    "allCalendarsLabel" : {
+        "message" : "Усі календарі нижче",
+        "description" : "Label for all calendars switch"
+    },
+    "allPrioritiesLabel" : {
+        "message" : "Усі",
+        "description" : "Label for all priorities switch"
+    },
+    "sortHeader" : {
+        "message" : "Сортувати за",
+        "description" : "Header of the sort modal dialog"
+    },
+    "noneSort" : {
+        "message" : "Немає",
+        "description" : "None sort option"
+    },
+    "dueDateASort" : {
+        "message" : "Термін виконання зростаючий",
+        "description" : "Due date ascending sort option"
+    },
+    "dueDateDSort" : {
+        "message" : "Термін виконання спадний",
+        "description" : "Due date descending sort option"
+    },
+    "priorityASort" : {
+        "message" : "Пріоритет зростаючий",
+        "description" : "Priority ascending sort option"
+    },
+    "priorityDSort" : {
+        "message" : "Пріоритет спадний",
+        "description" : "Priority descending sort option"
+    },
+    "percentCompleteASort" : {
+        "message" : "Відсоток виконання зростаючий",
+        "description" : "Percent complete ascending sort option"
+    },
+    "percentCompleteDSort" : {
+        "message" : "Відсоток виконання спадний",
+        "description" : "Percent complete descending sort option"
+    },
+    "helpHeader" : {
+        "message" : "Як користуватися дошкою Kanban",
+        "description" : "Header of the help modal dialog"
+    },
+    "help1" : {
+        "message" : "Дошка Kanban — це інструмент візуалізації роботи, який допомагає керувати завданнями та проєктами. Дошка поділена на чотири колонки: «Потребує дії», «У процесі», «Виконано» та «Скасовано». Кожна колонка представляє етап робочого процесу. Ви можете переміщувати завдання між колонками за допомогою перетягування.",
+        "description" : "First paragraph of help modal dialog"
+    },
+    "help2" : {
+        "message" : "Щоб створити нове завдання, натисніть кнопку «Нове завдання...». Заповніть форму та натисніть «Зберегти». Щоб редагувати завдання, натисніть на іконку олівця на картці завдання.",
+        "description" : "Second paragraph of help modal dialog"
+    },
+    "help3" : {
+        "message" : "Ви можете фільтрувати завдання за календарем і пріоритетом. Ви можете сортувати завдання за терміном виконання, пріоритетом і відсотком виконання.",
+        "description" : "Third paragraph of help modal dialog"
+    },
+    "themeToggleLabel" : {
+        "message" : "Перемкнути світлу/темну тему",
+        "description" : "Title of the theme toggle button"
+    },
+    "settingsButtonLabel" : {
+        "message" : "Налаштування дошки",
+        "description" : "Title of the settings button"
+    },
+    "settingsHeader" : {
+        "message" : "Налаштування дошки",
+        "description" : "Header of the settings modal dialog"
+    },
+    "settingsLightSection" : {
+        "message" : "Світла тема",
+        "description" : "Section header for light theme settings"
+    },
+    "settingsDarkSection" : {
+        "message" : "Темна тема",
+        "description" : "Section header for dark theme settings"
+    },
+    "settingsBackgroundColor" : {
+        "message" : "Колір фону",
+        "description" : "Label of the background color setting"
+    },
+    "settingsCardBackgroundColor" : {
+        "message" : "Типовий фон карток",
+        "description" : "Label of the default card background color setting"
+    },
+    "settingsCardBorderColor" : {
+        "message" : "Колір рамки карток",
+        "description" : "Label of the card border color setting"
+    },
+    "settingsCardBorderWidth" : {
+        "message" : "Товщина рамки карток (пікс.)",
+        "description" : "Label of the card border width setting"
+    },
+    "settingsCardTextColor" : {
+        "message" : "Колір тексту карток",
+        "description" : "Label of the card text color setting"
+    },
+    "settingsHeaderColor" : {
+        "message" : "Колір заголовка колонки",
+        "description" : "Label of the column header background color setting"
+    },
+    "settingsHeaderTextColor" : {
+        "message" : "Колір тексту заголовка колонки",
+        "description" : "Label of the column header text color setting"
+    },
+    "resetButton" : {
+        "message" : "Скинути до типових значень",
+        "description" : "Name of the reset button"
+    },
+    "aboutButtonLabel" : {
+        "message" : "Про TB-Kanban",
+        "description" : "Title of the about button"
+    },
+    "aboutHeader" : {
+        "message" : "Про TB-Kanban",
+        "description" : "Header of the about modal dialog"
+    },
+    "aboutTagline" : {
+        "message" : "Дошка Kanban для завдань, якими ви вже керуєте в Thunderbird.",
+        "description" : "Short tagline shown in the about dialog"
+    },
+    "aboutHomepageButton" : {
+        "message" : "Вихідний код",
+        "description" : "Button linking to the project's source code"
+    },
+    "aboutDonateButton" : {
+        "message" : "Пригостіть мене кавою",
+        "description" : "Button linking to the donation page"
+    },
+    "aboutDonateHint" : {
+        "message" : "Не хочете бачити це вікно щодня? Пригостіть мене кавою — цього достатньо, щоб воно зникло назавжди.",
+        "description" : "Hint shown above the credits, nudging towards a donation"
+    },
+    "aboutDonatedCheckboxLabel" : {
+        "message" : "Я вже задонатив(-ла) – більше не показувати це вікно автоматично",
+        "description" : "Label of the checkbox that permanently disables the daily about/donate prompt"
+    },
+    "aboutCredits" : {
+        "message" : "Ліцензовано за Mozilla Public License 2.0.",
+        "description" : "Credits shown in the about dialog"
+    }
+}
