@@ -91,7 +91,7 @@ calendar/task backend, read and written directly as jCal.
 
 Thunderbird's public WebExtension API does not expose task CRUD operations or
 change events, so TB-Kanban ships a set of custom
-[experiment APIs](experiments/calendar) that bridge the internal calendar
+[experiment APIs](thunderbird/calendar) that bridge the internal calendar
 backend to `browser.calendar.*`:
 
 | Experiment API | Purpose |
@@ -157,7 +157,7 @@ See [BUILD.md](BUILD.md) for details.
 ## Project structure
 
 ```
-experiments/calendar/   Experiment APIs bridging Thunderbird's calendar to browser.calendar.*
+thunderbird/calendar/   Experiment APIs bridging Thunderbird's calendar to browser.calendar.*
 scripts/                Background script and board logic (kanban.js, jcal.js, i18n.js)
 ui/                     Board HTML/CSS
 vendor/                 Bundled third-party libraries (Bootstrap, DOMPurify, marked) — see VENDOR.md

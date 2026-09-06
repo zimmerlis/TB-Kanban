@@ -7,8 +7,7 @@
     "browser_specific_settings": {
         "gecko": {
             "id": "tb-kanban@local",
-            "strict_min_version": "128.0",
-            "strict_max_version": "145.*"
+            "strict_min_version": "153.*"
         }
     },
     "action": {

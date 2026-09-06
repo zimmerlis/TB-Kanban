@@ -40,12 +40,12 @@ Useful options:
   `.gitattributes`, `.gitignore`, `.github/`) as `export-ignore` so they don't
   end up inside the .xpi. If you add new tooling/CI files, exclude them the
   same way.
-- **Thunderbird version support**: `manifest.json` pins
-  `strict_min_version`/`strict_max_version` under
-  `browser_specific_settings.gecko`. Update these when a new Thunderbird ESR
-  is released, otherwise the add-on will refuse to install on newer versions.
+- **Thunderbird version support**: `manifest.json` pins `strict_min_version`
+  under `browser_specific_settings.gecko` (no `strict_max_version`, so newer
+  Thunderbird releases are allowed by default). Raise `strict_min_version` if
+  a change starts relying on a newer Thunderbird API.
 - **Experiment APIs require review.** This add-on uses privileged
-  [experiment APIs](experiments/calendar) to access Thunderbird's calendar
+  [experiment APIs](thunderbird/calendar) to access Thunderbird's calendar
   backend. Add-ons using experiments cannot be auto-signed like regular
   WebExtensions:
   - For **self-distribution/testing**, install the unsigned `.xpi` as a
