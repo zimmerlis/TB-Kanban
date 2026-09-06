@@ -867,8 +867,8 @@ function initGroupBySelect() {
 
 // Defaults reproduce Bootstrap's own light/dark card look, until the user overrides them in Settings.
 const DEFAULT_APPEARANCE = {
-    light: { background: '#ffffff', cardTextColor: '#212529', cardBorderColor: '#dee2e6', cardBorderWidth: 1, headerBackground: '#f1f3f5' },
-    dark: { background: '#212529', cardTextColor: '#dee2e6', cardBorderColor: '#495057', cardBorderWidth: 1, headerBackground: '#343a40' },
+    light: { background: '#ffffff', cardBackground: '#ffffff', cardTextColor: '#212529', cardBorderColor: '#dee2e6', cardBorderWidth: 1, headerBackground: '#f1f3f5' },
+    dark: { background: '#212529', cardBackground: '#2b3035', cardTextColor: '#dee2e6', cardBorderColor: '#495057', cardBorderWidth: 1, headerBackground: '#343a40' },
 };
 const APPEARANCE_STORAGE_KEY = 'boardAppearance';
 const THEME_STORAGE_KEY = 'boardTheme';
@@ -902,6 +902,7 @@ function applyTheme() {
 
     const root = document.documentElement.style;
     root.setProperty('--bs-body-bg', themeAppearance.background);
+    root.setProperty('--kanban-card-bg', themeAppearance.cardBackground);
     root.setProperty('--kanban-card-color', themeAppearance.cardTextColor);
     root.setProperty('--kanban-card-border-color', themeAppearance.cardBorderColor);
     root.setProperty('--kanban-card-border-width', `${themeAppearance.cardBorderWidth}px`);
@@ -929,6 +930,7 @@ let settingsModal = null;
 function fillSettingsForm() {
     for (const theme of ['light', 'dark']) {
         settingsForm.elements[`${theme}Background`].value = appearance[theme].background;
+        settingsForm.elements[`${theme}CardBackground`].value = appearance[theme].cardBackground;
         settingsForm.elements[`${theme}TextColor`].value = appearance[theme].cardTextColor;
         settingsForm.elements[`${theme}BorderColor`].value = appearance[theme].cardBorderColor;
         settingsForm.elements[`${theme}BorderWidth`].value = appearance[theme].cardBorderWidth;
@@ -945,6 +947,7 @@ function openSettingsModal() {
 async function saveSettingsForm() {
     appearance = Object.fromEntries(['light', 'dark'].map(theme => [theme, {
         background: settingsForm.elements[`${theme}Background`].value,
+        cardBackground: settingsForm.elements[`${theme}CardBackground`].value,
         cardTextColor: settingsForm.elements[`${theme}TextColor`].value,
         cardBorderColor: settingsForm.elements[`${theme}BorderColor`].value,
         cardBorderWidth: Number(settingsForm.elements[`${theme}BorderWidth`].value) || 0,

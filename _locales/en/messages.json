@@ -247,6 +247,10 @@
         "message" : "Background color",
         "description" : "Label of the background color setting"
     },
+    "settingsCardBackgroundColor" : {
+        "message" : "Default card background",
+        "description" : "Label of the default card background color setting"
+    },
     "settingsCardBorderColor" : {
         "message" : "Card border color",
         "description" : "Label of the card border color setting"

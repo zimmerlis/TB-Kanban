@@ -46,6 +46,7 @@ body {
 
 /* Overrides Bootstrap's own card border variables with the user's configured colors/width. */
 .card {
+    background-color: var(--kanban-card-bg, var(--bs-card-bg, var(--bs-body-bg)));
     border-color: var(--kanban-card-border-color, var(--bs-border-color-translucent));
     border-width: var(--kanban-card-border-width, var(--bs-border-width));
     color: var(--kanban-card-color, var(--bs-body-color));
