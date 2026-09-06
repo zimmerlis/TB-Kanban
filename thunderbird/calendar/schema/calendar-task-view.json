@@ -2,6 +2,15 @@
   {
     "namespace": "calendarTaskView",
     "functions": [],
-    "events": []
+    "events": [
+      {
+        "name": "onSearchChanged",
+        "type": "function",
+        "description": "Fired when the text in the native Tasks pane's search field changes.",
+        "parameters": [
+          { "name": "text", "type": "string" }
+        ]
+      }
+    ]
   }
 ]

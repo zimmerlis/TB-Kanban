@@ -2,13 +2,22 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-var { ExtensionCommon: { ExtensionAPI } } = ChromeUtils.importESModule("resource://gre/modules/ExtensionCommon.sys.mjs");
+var { ExtensionCommon: { ExtensionAPI, EventManager } } = ChromeUtils.importESModule("resource://gre/modules/ExtensionCommon.sys.mjs");
 var { ExtensionSupport } = ChromeUtils.importESModule("resource:///modules/ExtensionSupport.sys.mjs");
 
 const KANBAN_VALUE = "kanban";
 const STANDARD_VALUE = "standard";
 const TOGGLE_ID = "kanban-task-view-toggle";
 const PANEL_ID = "kanban-task-view-panel";
+
+// "fire" callbacks for every browser.calendarTaskView.onSearchChanged listener currently
+// registered (usually just the board itself); notified from every open Tasks pane's search field.
+const searchChangedFires = new Set();
+function notifySearchChanged(text) {
+  for (const fire of searchChangedFires) {
+    fire.async(text);
+  }
+}
 
 // Adds a "Standard"/"Kanban" view switch above the task pane's search/add-task bar
 // (#task-addition-box), showing our board in place of the native list+details while selected.
@@ -78,6 +87,10 @@ async function injectKanbanView(win, extension) {
 
   standardTab.addEventListener("click", () => selectTab(STANDARD_VALUE));
   kanbanTab.addEventListener("click", () => selectTab(KANBAN_VALUE));
+
+  // Forwards the native "search tasks" field to the board, so it keeps filtering while in Kanban mode.
+  const searchInput = doc.getElementById("task-text-filter-field");
+  searchInput?.addEventListener("input", () => notifySearchChanged(searchInput.value));
 }
 
 
@@ -89,6 +102,21 @@ function removeKanbanView(win) {
 
 
 this.calendarTaskView = class extends ExtensionAPI {
+  getAPI(context) {
+    return {
+      calendarTaskView: {
+        onSearchChanged: new EventManager({
+          context,
+          name: "calendarTaskView.onSearchChanged",
+          register: fire => {
+            searchChangedFires.add(fire);
+            return () => searchChangedFires.delete(fire);
+          },
+        }).api(),
+      },
+    };
+  }
+
   onStartup() {
     const { extension } = this;
     this.listenerId = `ext-calendar-task-view-${extension.id}`;

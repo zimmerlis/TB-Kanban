@@ -681,6 +681,7 @@ function createSwimlaneAccordion(groups) {
 }
 
 function renderBoard(tasks) {
+    tasks = tasks.filter(matchesSearchFilter);
     taskById = new Map(tasks.map(task => [task.id, task]));
 
     const boardElement = document.getElementById('board');
@@ -694,10 +695,29 @@ function renderBoard(tasks) {
     boardElement.append(createSwimlaneAccordion(getTaskGroups(tasks)));
 }
 
+// Text typed into the Tasks pane's native search field (see browser.calendarTaskView.onSearchChanged).
+let searchFilter = '';
+// The full, unfiltered task list from the last calendar query, so the filter can re-render instantly.
+let allTasks = [];
+
+function matchesSearchFilter(task) {
+    if (!searchFilter) {
+        return true;
+    }
+    const needle = searchFilter.toLowerCase();
+    return task.title.toLowerCase().includes(needle) || task.description.toLowerCase().includes(needle);
+}
+
+function setSearchFilter(text) {
+    searchFilter = text;
+    renderBoard(allTasks);
+}
+
 async function loadTasks() {
     const items = await browser.calendar.items.query({ type: 'task', returnFormat: 'jcal' });
     calendarItemById = new Map(items.map(item => [item.id, item]));
-    return items.map(getTaskFromCalendarItem);
+    allTasks = items.map(getTaskFromCalendarItem);
+    return allTasks;
 }
 
 async function refreshBoard() {
@@ -1142,6 +1162,8 @@ async function init() {
         makeModalDraggable(document.getElementById(modalId));
     }
     applyTheme();
+    // Only present while the board is embedded in the native Tasks pane (see calendarTaskView).
+    browser.calendarTaskView?.onSearchChanged.addListener(setSearchFilter);
     await refreshBoard();
     await maybeAutoShowAbout();
 }
