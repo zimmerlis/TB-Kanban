@@ -267,6 +267,10 @@
         "message" : "Farbe der Spaltenköpfe",
         "description" : "Label of the column header background color setting"
     },
+    "settingsHeaderTextColor" : {
+        "message" : "Schriftfarbe der Spaltenköpfe",
+        "description" : "Label of the column header text color setting"
+    },
     "resetButton" : {
         "message" : "Zurücksetzen",
         "description" : "Name of the reset button"

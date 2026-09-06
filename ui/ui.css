@@ -54,7 +54,7 @@ body {
 
 .column-header {
     background-color: var(--kanban-header-bg, #f1f3f5);
-    color: var(--bs-body-color);
+    color: var(--kanban-header-color, var(--bs-body-color));
     border-radius: 0.375rem 0.375rem 0 0;
     padding: 0.4rem 0.75rem;
     margin-bottom: 0.5rem;

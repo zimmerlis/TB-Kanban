@@ -867,8 +867,8 @@ function initGroupBySelect() {
 
 // Defaults reproduce Bootstrap's own light/dark card look, until the user overrides them in Settings.
 const DEFAULT_APPEARANCE = {
-    light: { background: '#ffffff', cardBackground: '#ffffff', cardTextColor: '#212529', cardBorderColor: '#dee2e6', cardBorderWidth: 1, headerBackground: '#f1f3f5' },
-    dark: { background: '#212529', cardBackground: '#2b3035', cardTextColor: '#dee2e6', cardBorderColor: '#495057', cardBorderWidth: 1, headerBackground: '#343a40' },
+    light: { background: '#ffffff', cardBackground: '#ffffff', cardTextColor: '#212529', cardBorderColor: '#dee2e6', cardBorderWidth: 1, headerBackground: '#f1f3f5', headerTextColor: '#212529' },
+    dark: { background: '#212529', cardBackground: '#2b3035', cardTextColor: '#dee2e6', cardBorderColor: '#495057', cardBorderWidth: 1, headerBackground: '#343a40', headerTextColor: '#f8f9fa' },
 };
 const APPEARANCE_STORAGE_KEY = 'boardAppearance';
 const THEME_STORAGE_KEY = 'boardTheme';
@@ -907,6 +907,7 @@ function applyTheme() {
     root.setProperty('--kanban-card-border-color', themeAppearance.cardBorderColor);
     root.setProperty('--kanban-card-border-width', `${themeAppearance.cardBorderWidth}px`);
     root.setProperty('--kanban-header-bg', themeAppearance.headerBackground);
+    root.setProperty('--kanban-header-color', themeAppearance.headerTextColor);
 }
 
 function initThemeToggle() {
@@ -935,6 +936,7 @@ function fillSettingsForm() {
         settingsForm.elements[`${theme}BorderColor`].value = appearance[theme].cardBorderColor;
         settingsForm.elements[`${theme}BorderWidth`].value = appearance[theme].cardBorderWidth;
         settingsForm.elements[`${theme}HeaderBackground`].value = appearance[theme].headerBackground;
+        settingsForm.elements[`${theme}HeaderTextColor`].value = appearance[theme].headerTextColor;
     }
 }
 
@@ -952,6 +954,7 @@ async function saveSettingsForm() {
         cardBorderColor: settingsForm.elements[`${theme}BorderColor`].value,
         cardBorderWidth: Number(settingsForm.elements[`${theme}BorderWidth`].value) || 0,
         headerBackground: settingsForm.elements[`${theme}HeaderBackground`].value,
+        headerTextColor: settingsForm.elements[`${theme}HeaderTextColor`].value,
     }]));
 
     await browser.storage.local.set({ [APPEARANCE_STORAGE_KEY]: appearance });
