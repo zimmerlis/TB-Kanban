@@ -296,7 +296,7 @@
         "description" : "Button linking to the donation page"
     },
     "aboutCredits" : {
-        "message" : "Fork von iCanban von Jean-Yves Didier. Lizenziert unter der Mozilla Public License 2.0.",
+        "message" : "Lizenziert unter der Mozilla Public License 2.0.",
         "description" : "Credits shown in the about dialog"
     }
 }

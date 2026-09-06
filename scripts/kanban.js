@@ -1028,8 +1028,7 @@ function makeModalDraggable(modalElement) {
 }
 
 const DONATE_URL = 'https://buymeacoffee.com/oxekklfcg';
-// TODO: replace with the project's real source code URL once one exists again.
-const HOMEPAGE_URL = '';
+const HOMEPAGE_URL = 'https://github.com/zimmerlis/TB-Kanban';
 
 function initAbout() {
     const manifest = browser.runtime.getManifest();
