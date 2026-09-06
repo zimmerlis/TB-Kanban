@@ -295,6 +295,10 @@
         "message" : "Kauf mir einen Kaffee",
         "description" : "Button linking to the donation page"
     },
+    "aboutDonateHint" : {
+        "message" : "Möchtest du diesen Dialog nicht jeden Tag sehen? Kauf mir einen Kaffee — das reicht schon, damit er dauerhaft verschwindet.",
+        "description" : "Hint shown above the credits, nudging towards a donation"
+    },
     "aboutCredits" : {
         "message" : "Lizenziert unter der Mozilla Public License 2.0.",
         "description" : "Credits shown in the about dialog"

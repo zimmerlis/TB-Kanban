@@ -295,6 +295,10 @@
         "message" : "Buy me a coffee",
         "description" : "Button linking to the donation page"
     },
+    "aboutDonateHint" : {
+        "message" : "Don't want to see this dialog every day? Buy me a coffee — that's all it takes to stop it for good.",
+        "description" : "Hint shown above the credits, nudging towards a donation"
+    },
     "aboutCredits" : {
         "message" : "Licensed under the Mozilla Public License 2.0.",
         "description" : "Credits shown in the about dialog"

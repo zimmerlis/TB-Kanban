@@ -1029,6 +1029,7 @@ function makeModalDraggable(modalElement) {
 
 const DONATE_URL = 'https://buymeacoffee.com/oxekklfcg';
 const HOMEPAGE_URL = 'https://github.com/zimmerlis/TB-Kanban';
+const ABOUT_PROMPT_STORAGE_KEY = 'aboutPromptState';
 
 function initAbout() {
     const manifest = browser.runtime.getManifest();
@@ -1044,18 +1045,42 @@ function initAbout() {
         }
     });
 
+    // Clicking through to the donation page is treated as "thanks, no need to keep asking" -
+    // this is an honor system, not a verified purchase (the extension is open source anyway).
     const donateLink = document.getElementById('aboutDonateLink');
     donateLink.href = DONATE_URL || '#';
-    donateLink.addEventListener('click', event => {
+    donateLink.addEventListener('click', async event => {
         event.preventDefault();
         if (DONATE_URL) {
             browser.tabs.create({ url: DONATE_URL });
         }
+        const stored = await browser.storage.local.get(ABOUT_PROMPT_STORAGE_KEY);
+        await browser.storage.local.set({
+            [ABOUT_PROMPT_STORAGE_KEY]: { ...stored[ABOUT_PROMPT_STORAGE_KEY], dismissedForGood: true },
+        });
     });
 
     document.getElementById('aboutButton').addEventListener('click', () => {
         (bootstrap.Modal.getOrCreateInstance(document.getElementById('aboutModal'))).show();
     });
+}
+
+// Shows the About dialog (with its donate nudge) once per calendar day, unless the user has
+// already clicked through to the donation page once (see initAbout's donate click handler).
+async function maybeAutoShowAbout() {
+    const stored = await browser.storage.local.get(ABOUT_PROMPT_STORAGE_KEY);
+    const state = stored[ABOUT_PROMPT_STORAGE_KEY] ?? {};
+    if (state.dismissedForGood) {
+        return;
+    }
+
+    const today = new Date().toISOString().slice(0, 10);
+    if (state.lastShownDate === today) {
+        return;
+    }
+
+    await browser.storage.local.set({ [ABOUT_PROMPT_STORAGE_KEY]: { ...state, lastShownDate: today } });
+    bootstrap.Modal.getOrCreateInstance(document.getElementById('aboutModal')).show();
 }
 
 async function init() {
@@ -1073,6 +1098,7 @@ async function init() {
     }
     applyTheme();
     await refreshBoard();
+    await maybeAutoShowAbout();
 }
 
 browser.calendar.items.onCreated.addListener(refreshBoard);
