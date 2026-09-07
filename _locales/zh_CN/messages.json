@@ -4,7 +4,7 @@
         "description" : "Name of the extension"
     },
     "extensionDescription" : {
-        "message" : "iCal 待办事项的状态非常适合基本的看板。此扩展提供了这一功能，让你可以直观地管理任务。安装扩展后，有两种方式可以打开看板。第一种是在查看邮件时点击窗口顶部栏中显示的“看板”按钮。第二种是通过“工具”菜单，其中有一个名为“显示看板”的项目。",
+        "message" : "将 Thunderbird 任务转变为清晰的看板。轻松掌握状态、截止日期和优先级——通过邮件或菜单一键访问。",
         "description" : "Description of the extension"
     },
     "menuItem" : {

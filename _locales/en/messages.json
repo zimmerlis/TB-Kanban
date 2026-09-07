@@ -4,7 +4,7 @@
         "description" : "Name of the extension"
     },
     "extensionDescription" : {
-        "message" : "ICAL's todo have status that are just perfect for a basic Kanban board. This extension provides it so that you can manage your tasks visually. There are two ways to display the Kanban board once the extension has been installed. The first one is through the 'Kanban' button displayed in the top window bar when consulting emails. The second one is through the 'Tools' menu in which you can find an item named 'Display Kanban board'.",
+        "message" : "Turn your Thunderbird tasks into a clear Kanban board. Keep track of status, due dates and priorities – accessible with a single click from your emails or the menu.",
         "description" : "Description of the extension"
     },
     "menuItem" : {

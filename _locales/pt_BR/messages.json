@@ -4,7 +4,7 @@
         "description" : "Name of the extension"
     },
     "extensionDescription" : {
-        "message" : "As tarefas do iCal têm status perfeitos para um quadro Kanban básico. Esta extensão fornece isso para que você possa gerenciar suas tarefas visualmente. Há duas maneiras de exibir o quadro Kanban depois de instalada a extensão. A primeira é pelo botão 'Kanban' exibido na barra superior da janela ao consultar e-mails. A segunda é pelo menu 'Ferramentas', onde há um item chamado 'Exibir quadro Kanban'.",
+        "message" : "Transforme suas tarefas do Thunderbird em um quadro Kanban organizado. Acompanhe status, prazos e prioridades – acessível com um clique a partir dos e-mails ou do menu.",
         "description" : "Description of the extension"
     },
     "menuItem" : {

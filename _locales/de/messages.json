@@ -4,7 +4,7 @@
         "description" : "Name of the extension"
     },
     "extensionDescription" : {
-        "message" : "Aufgaben in ICAL-Kalendern haben Status, die sich perfekt für ein einfaches Kanban-Board eignen. Diese Erweiterung stellt dieses Board bereit, damit du deine Aufgaben visuell verwalten kannst. Es gibt zwei Wege, das Kanban-Board nach der Installation der Erweiterung anzuzeigen. Der erste führt über die Schaltfläche 'Kanban' in der oberen Fensterleiste beim Lesen von E-Mails. Der zweite führt über das Menü 'Extras', in dem sich ein Eintrag namens 'Kanban-Board anzeigen' befindet.",
+        "message" : "Verwandle deine Thunderbird-Aufgaben in ein übersichtliches Kanban-Board. Behalte den Überblick über Status, Fristen und Prioritäten – direkt per Klick aus deinen Mails oder dem Menü aufrufbar.",
         "description" : "Description of the extension"
     },
     "menuItem" : {

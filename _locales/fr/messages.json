@@ -4,7 +4,7 @@
         "description" : "Name of the extension"
     },
     "extensionDescription" : {
-        "message" : "Les tâches iCal ont des statuts parfaitement adaptés à un tableau Kanban simple. Cette extension le propose afin que vous puissiez gérer vos tâches visuellement. Il existe deux façons d'afficher le tableau Kanban une fois l'extension installée. La première est via le bouton « Kanban » affiché dans la barre de fenêtre supérieure lors de la consultation des e-mails. La seconde est via le menu « Outils », dans lequel se trouve un élément nommé « Afficher le tableau Kanban ».",
+        "message" : "Transforme tes tâches Thunderbird en un tableau Kanban clair. Garde une vue d'ensemble des statuts, échéances et priorités – accessible en un clic depuis tes e-mails ou le menu.",
         "description" : "Description of the extension"
     },
     "menuItem" : {

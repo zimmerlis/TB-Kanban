@@ -4,6 +4,8 @@
 
 # TB-Kanban
 
+https://github.com/zimmerlis/TB-Kanban
+
 **A native Kanban board for Thunderbird/Betterbird Tasks**
 
 [![License: MPL 2.0](https://img.shields.io/badge/license-MPL--2.0-brightgreen.svg)](LICENSE.md)

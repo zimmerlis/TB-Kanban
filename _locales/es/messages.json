@@ -4,7 +4,7 @@
         "description" : "Name of the extension"
     },
     "extensionDescription" : {
-        "message" : "Las tareas de iCal tienen estados perfectos para un tablero Kanban básico. Esta extensión lo ofrece para que puedas gestionar tus tareas visualmente. Hay dos formas de mostrar el tablero Kanban una vez instalada la extensión. La primera es mediante el botón «Kanban» que aparece en la barra superior de la ventana al consultar correos. La segunda es a través del menú «Herramientas», donde encontrarás una opción llamada «Mostrar tablero Kanban».",
+        "message" : "Convierte tus tareas de Thunderbird en un tablero Kanban claro. Controla estados, fechas límite y prioridades, accesible con un clic desde tus correos o el menú.",
         "description" : "Description of the extension"
     },
     "menuItem" : {

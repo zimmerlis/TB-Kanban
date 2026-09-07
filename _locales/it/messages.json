@@ -4,7 +4,7 @@
         "description" : "Name of the extension"
     },
     "extensionDescription" : {
-        "message" : "Le attività iCal hanno stati perfetti per una semplice bacheca Kanban. Questa estensione lo rende possibile, così puoi gestire le tue attività visivamente. Ci sono due modi per visualizzare la bacheca Kanban una volta installata l'estensione. Il primo è tramite il pulsante 'Kanban' mostrato nella barra superiore della finestra durante la consultazione delle email. Il secondo è tramite il menu 'Strumenti', in cui si trova una voce chiamata 'Mostra bacheca Kanban'.",
+        "message" : "Trasforma le tue attività di Thunderbird in una chiara bacheca Kanban. Tieni sotto controllo stato, scadenze e priorità – accessibile con un clic dalle email o dal menu.",
         "description" : "Description of the extension"
     },
     "menuItem" : {

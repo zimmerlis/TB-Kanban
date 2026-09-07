@@ -4,7 +4,7 @@
         "description" : "Name of the extension"
     },
     "extensionDescription" : {
-        "message" : "iCal-taken hebben statussen die perfect passen bij een eenvoudig Kanban-bord. Deze extensie biedt dit aan, zodat je je taken visueel kunt beheren. Er zijn twee manieren om het Kanban-bord weer te geven zodra de extensie is geïnstalleerd. De eerste is via de knop 'Kanban' die bovenin het venster wordt weergegeven bij het lezen van e-mails. De tweede is via het menu 'Extra', waarin een item met de naam 'Kanban-bord weergeven' te vinden is.",
+        "message" : "Zet je Thunderbird-taken om in een overzichtelijk Kanban-bord. Houd status, deadlines en prioriteiten in de gaten – met één klik te openen vanuit je e-mails of het menu.",
         "description" : "Description of the extension"
     },
     "menuItem" : {

@@ -4,7 +4,7 @@
         "description" : "Name of the extension"
     },
     "extensionDescription" : {
-        "message" : "Úkoly iCal mají stavy, které se skvěle hodí pro jednoduchou Kanban tabuli. Toto rozšíření to umožňuje, takže můžete své úkoly spravovat vizuálně. Po instalaci rozšíření lze Kanban tabuli zobrazit dvěma způsoby. První je pomocí tlačítka „Kanban“ zobrazeného v horní liště okna při prohlížení e-mailů. Druhý je přes nabídku „Nástroje“, kde najdete položku „Zobrazit Kanban tabuli“.",
+        "message" : "Proměň své úkoly Thunderbirdu v přehlednou Kanban tabuli. Měj přehled o stavu, termínech a prioritách – dostupné jedním kliknutím z e-mailů nebo z nabídky.",
         "description" : "Description of the extension"
     },
     "menuItem" : {

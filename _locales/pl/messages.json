@@ -4,7 +4,7 @@
         "description" : "Name of the extension"
     },
     "extensionDescription" : {
-        "message" : "Zadania iCal mają statusy idealnie pasujące do prostej tablicy Kanban. To rozszerzenie to umożliwia, dzięki czemu możesz zarządzać zadaniami wizualnie. Po zainstalowaniu rozszerzenia tablicę Kanban można wyświetlić na dwa sposoby. Pierwszy to przycisk „Kanban” widoczny na górnym pasku okna podczas przeglądania wiadomości e-mail. Drugi to menu „Narzędzia”, w którym znajduje się pozycja „Pokaż tablicę Kanban”.",
+        "message" : "Zamień swoje zadania Thunderbird w przejrzystą tablicę Kanban. Miej kontrolę nad statusem, terminami i priorytetami – dostępną jednym kliknięciem z poczty lub menu.",
         "description" : "Description of the extension"
     },
     "menuItem" : {
